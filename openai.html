@@ -494,26 +494,27 @@ $(window).on('keydown', function(e) {
 });
 
 function fakeMessage(text = '') {
-  if ($('.message-input').val() != '') {
+  if ($('.message-input').val() !== '') {
     return false;
   }
-  $('<div class="message loading new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span></span></div>').appendTo($('.mCSB_container'));
+  
+  $('<div class="message loading new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span></span></div>').appendTo($('.messages-content'));
   updateScrollbar();
 
   var xhr = new XMLHttpRequest();
   xhr.open("GET", `https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`, true);
   xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4) {
-      $('.message.loading').remove(); // Pastikan pesan loading dihapus sebelum menambahkan pesan baru
-      if (xhr.status == 200) {
+    if (xhr.readyState === 4) {
+      $('.message.loading').remove(); // Hapus pesan loading sebelum menambahkan pesan baru
+      if (xhr.status === 200) {
         var data = JSON.parse(xhr.responseText);
         if (data && data.response) {
-          $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.mCSB_container')).addClass('new');
+          $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.messages-content')).addClass('new');
         } else {
-          $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, no response from API.</div>').appendTo($('.mCSB_container')).addClass('new');
+          $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, no response from API.</div>').appendTo($('.messages-content')).addClass('new');
         }
       } else {
-        $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, something went wrong. Please try again.</div>').appendTo($('.mCSB_container')).addClass('new');
+        $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, something went wrong. Please try again.</div>').appendTo($('.messages-content')).addClass('new');
       }
       setDate();
       updateScrollbar();
