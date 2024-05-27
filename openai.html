@@ -508,8 +508,8 @@ function fakeMessage(text = '') {
       return response.json();
     })
     .then(data => {
-      $('.message.loading').remove();
-      if (data.response) {
+      $('.message.loading').remove(); // Pastikan pesan loading dihapus sebelum menambahkan pesan baru
+      if (data && data.response) {
         $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.mCSB_container')).addClass('new');
       } else {
         $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, no response from API.</div>').appendTo($('.mCSB_container')).addClass('new');
