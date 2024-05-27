@@ -282,6 +282,7 @@
 
       100% {
         transform: scale(1);
+        opacity: 1;
       }
     }
 
@@ -380,10 +381,22 @@
       $('<div class="message message-personal">' + msg + '</div>').appendTo($('.messages-content')).addClass('new');
       $('.message-box input').val(null);
       updateScrollbar();
-      setTimeout(function() {
-        $('<div class="message new"><figure class="avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" /></figure> ' + msg + '</div>').appendTo($('.messages-content')).addClass('new');
-        updateScrollbar();
-      }, 1000 + (Math.random() * 20) * 100);
+
+      // Send the message to the API
+      $.ajax({
+        url: 'https://aemt.me/v2/gpt4?text=' + encodeURIComponent(msg),
+        method: 'GET',
+        success: function(response) {
+          // Add the API response to the chat
+          $('<div class="message new"><figure class="avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" /></figure>' + response + '</div>').appendTo($('.messages-content')).addClass('new');
+          updateScrollbar();
+        },
+        error: function() {
+          // Handle any errors from the API
+          $('<div class="message new"><figure class="avatar"><img src="https://randomuser.me/api/portraits/men/32.jpg" /></figure>Sorry, there was an error processing your message.</div>').appendTo($('.messages-content')).addClass('new');
+          updateScrollbar();
+        }
+      });
     }
 
     $('.message-box button').click(function() {
