@@ -424,8 +424,8 @@ Bounce
 <body>
 <div class="chat">
   <div class="chat-title">
-    <h1>XC GPT</h1>
-    <h2>( OpenAi )</h2>
+    <h1>XIN Whangcap LLc</h1>
+    <h2>( Random Text )</h2>
     <figure class="avatar">
       <img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" />
     </figure>
@@ -501,7 +501,12 @@ function fakeMessage(text = '') {
   updateScrollbar();
 
   fetch(`https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`)
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
     .then(data => {
       $('.message.loading').remove();
       if (data.response) {
