@@ -500,7 +500,7 @@ function fakeMessage(text = '') {
   $('<div class="message loading new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span></span></div>').appendTo($('.mCSB_container'));
   updateScrollbar();
 
-  fetch(`https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`)
+  pp = fetch(`https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -511,9 +511,7 @@ function fakeMessage(text = '') {
       $('.message.loading').remove();
       if (data.response) {
         $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.mCSB_container')).addClass('new');
-      } else {
-        $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, no response from API.</div>').appendTo($('.mCSB_container')).addClass('new');
-      }
+      } 
       setDate();
       updateScrollbar();
     })
