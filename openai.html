@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,user-scalable=no">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>Direct Messaging</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
@@ -424,10 +424,11 @@ Bounce
 <body>
 <div class="chat">
   <div class="chat-title">
-    <h1>XIN Whangcap LLc</h1>
-    <h2>( Random Text )</h2>
+    <h1>XC GPT</h1>
+    <h2>( OpenAi )</h2>
     <figure class="avatar">
-      <img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>
+      <img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" />
+    </figure>
   </div>
   <div class="messages">
     <div class="messages-content"></div>
@@ -503,7 +504,11 @@ function fakeMessage(text = '') {
     .then(response => response.json())
     .then(data => {
       $('.message.loading').remove();
-      $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.mCSB_container')).addClass('new');
+      if (data.response) {
+        $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + data.response + '</div>').appendTo($('.mCSB_container')).addClass('new');
+      } else {
+        $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, no response from API.</div>').appendTo($('.mCSB_container')).addClass('new');
+      }
       setDate();
       updateScrollbar();
     })
