@@ -439,8 +439,9 @@ Bounce
   </div>
 </div>
 <div class="bg"></div>
-<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.3/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 var $messages = $('.messages-content'),
     d, h, m,
@@ -469,11 +470,11 @@ function setDate(){
 }
 
 function insertMessage() {
-  msg = $('.message-input').val();
+  var msg = $('.message-input').val();
   if ($.trim(msg) == '') {
     return false;
   }
-  $('<div class="message message-personal">' + msg + '</div>').appendTo($('.mCSB_container')).addClass('new');
+  $('<div class="message message-personal">' + msg + '</div>').appendTo($('.messages-content .mCSB_container')).addClass('new');
   setDate();
   $('.message-input').val(null);
   updateScrollbar();
@@ -501,24 +502,32 @@ function fakeMessage(text = '') {
   $('<div class="message loading new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span></span></div>').appendTo($('.messages-content'));
   updateScrollbar();
 
-  var xhr = new XMLHttpRequest();
-  pp = xhr.open("GET", `https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`, true);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      $('.message.loading').remove(); // Hapus pesan loading sebelum menambahkan pesan baru
-      if (xhr.status === 200) {
-        var data = JSON.parse(xhr.responseText);
+  // Using Axios for making GET request
+  axios.get(`https://aemt.me/v2/gpt4?text=${encodeURIComponent(text)}`)
+    .then(function(response) {
+      $('.message.loading').remove(); // Remove the loading message
+      if (response.status === 200) {
+        var data = response.data;
         if (data && data.response) {
-          $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>' + pp + '</div>').appendTo($('.messages-content')).addClass('new');
-        } 
+          var newMessage = $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span>' + data.response + '</span></div>');
+          newMessage.appendTo($('.messages-content')).addClass('new');
+        } else {
+          var errorMessage = $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure><span>Sorry, no response from API.</span></div>');
+          errorMessage.appendTo($('.messages-content')).addClass('new');
+        }
       } else {
         $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, something went wrong. Please try again.</div>').appendTo($('.messages-content')).addClass('new');
       }
       setDate();
       updateScrollbar();
-    }
-  };
-  xhr.send();
+    })
+    .catch(function(error) {
+      console.error('Error fetching data:', error);
+      $('.message.loading').remove(); // Remove the loading message
+      $('<div class="message new"><figure class="avatar"><img src="https://cdn.filestackcontent.com/U8MC978Rsay0KKzDXL0A" /></figure>Sorry, something went wrong. Please try again.</div>').appendTo($('.messages-content')).addClass('new');
+      setDate();
+      updateScrollbar();
+    });
 }
 </script>
 </body>
