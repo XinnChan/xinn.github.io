@@ -94,8 +94,8 @@
         function updateChart() {
             const currentTime = new Date().toLocaleTimeString();
 
-            // Fetch data from dummy API
-            fetch('https://jsonplaceholder.typicode.com/posts')
+            // Fetch data from another domain
+            fetch('https://xcddos.my.id/dstat') // Ganti URL dengan domain yang ingin Anda ambil datanya
             .then(response => response.json())
             .then(data => {
                 const newRequestsPerSecond = Math.floor(Math.random() * data.length); // Use data length as random number
