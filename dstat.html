@@ -139,11 +139,59 @@
             let maxAllowedRequests = 0;
 
             function getRandomBlockedRequests() {
-                return Math.floor(Math.random() * 500); // Example function
+                if (elapsedTime < 5) {
+                    return Math.floor(Math.random() * 10);
+                } else if (elapsedTime < 15) {
+                    return 0;
+                } else if (elapsedTime < 20) {
+                    return Math.floor(Math.random() * 20);
+                } else if (elapsedTime < 50) {
+                    return Math.floor(Math.random() * 700001);
+                } else if (elapsedTime < 60) {
+                    return Math.floor(Math.random() * 2500001);
+                } else if (elapsedTime < 70) {
+                    return Math.floor(Math.random() * 3000001);
+                } else if (elapsedTime < 80) {
+                    return Math.floor(Math.random() * 5001);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 5000001);
+                } else if (elapsedTime < 120) {
+                    return Math.floor(Math.random() * 1010000);
+                } else if (elapsedTime < 126) {
+                    return (1000000 * 10000000);
+                } else if (elapsedTime < 140) {
+                    return Math.floor(Math.random() * 136636847);
+                } else {
+                    return Math.floor(Math.random() * 10);
+                }
             }
 
             function getRandomAllowedRequests() {
-                return Math.floor(Math.random() * 300); // Example function
+                if (elapsedTime < 5) {
+                    return Math.floor(Math.random() * 10);
+                } else if (elapsedTime < 15) {
+                    return 0;
+                } else if (elapsedTime < 20) {
+                    return Math.floor(Math.random() * 20);
+                } else if (elapsedTime < 50) {
+                    return Math.floor(Math.random() * 700001);
+                } else if (elapsedTime < 60) {
+                    return Math.floor(Math.random() * 2500001);
+                } else if (elapsedTime < 70) {
+                    return Math.floor(Math.random() * 3000001);
+                } else if (elapsedTime < 80) {
+                    return Math.floor(Math.random() * 5001);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 5000001);
+                } else if (elapsedTime < 120) {
+                    return Math.floor(Math.random() * 1010000);
+                } else if (elapsedTime < 126) {
+                    return (1000000 * 10000000);
+                } else if (elapsedTime < 140) {
+                    return Math.floor(Math.random() * 136636847);
+                } else {
+                    return Math.floor(Math.random() * 10);
+                }
             }
 
             function getRandomRequestsPerSecond() {
