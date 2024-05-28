@@ -148,15 +148,15 @@
 
             function getRandomRequestsPerSecond() {
                 if (elapsedTime < 5) {
-                    return Math.floor(Math.random() * 101);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 1001);
+                    return Math.floor(Math.random() * 20);
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 700001);
                 } else if (elapsedTime < 60) {
-                    return Math.floor(Math.random() * 25001);
+                    return Math.floor(Math.random() * 2500001);
                 } else if (elapsedTime < 70) {
                     return Math.floor(Math.random() * 3000001);
                 } else if (elapsedTime < 80) {
