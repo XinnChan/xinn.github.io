@@ -100,13 +100,25 @@
                     return 0;
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 501);
-                } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 100000001);
-                } else if (elapsedTime < 90) {
+                } else if (elapsedTime < 70) {
+                    return Math.floor(Math.random() * 10001);
+                } else if (elapsedTime < 80) {
                     return Math.floor(Math.random() * 101);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 100001);
+                } else if (elapsedTime < 100) {
+                    return Math.floor(Math.random() * 5001);
+                } else if (elapsedTime < 130) {
+                    return Math.floor(Math.random() * 500001);
+                } else if (elapsedTime < 150) {
+                    return Math.floor(Math.random() * 1010000);
+                } else if (elapsedTime < 200) {
+                    return (1000000 * 10000000);
+                } else if (elapsedTime < 300) {
+                    return Math.floor(Math.random() * 136636847);
                 } else {
-                    return Math.floor(Math.random() * 101);
-                } 
+                    return Math.floor(Math.random() * 10);
+                }
             }
 
             function updateChart() {
@@ -132,7 +144,7 @@
                 }
             }
 
-            setInterval(updateChart, 1000); // Update chart every second
+            setInterval(updateChart, 8000); // Update chart every second
         });
     </script>
 </body>
