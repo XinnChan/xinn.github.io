@@ -60,6 +60,8 @@
                 <tr>
                     <th>Time</th>
                     <th>Requests per Second</th>
+                    <th>Blocked Requests</th>
+                    <th>Allowed Requests</th>
                 </tr>
             </thead>
             <tbody id="attackData">
@@ -73,25 +75,52 @@
                 type: 'line',
                 data: {
                     labels: [],
-                    datasets: [{
-                        label: 'Requests per Second',
-                        data: [],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1,
-                        fill: true,
-                    }]
+                    datasets: [
+                        {
+                            label: 'Requests per Second',
+                            data: [],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            fill: true,
+                        },
+                        {
+                            label: 'Blocked Requests',
+                            data: [],
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            fill: true,
+                        },
+                        {
+                            label: 'Allowed Requests',
+                            data: [],
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            fill: true,
+                        }
+                    ]
                 },
                 options: {
                     scales: {
                         y: {
                             beginAtZero: true
                         }
+                    },
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const chartElement = elements[0];
+                            const label = ddosChart.data.labels[chartElement.index];
+                            const value = ddosChart.data.datasets[chartElement.datasetIndex].data[chartElement.index];
+                            alert(`Time: ${label}\nValue: ${value}`);
+                        }
                     }
                 }
             });
 
             let elapsedTime = 0;
+            let updateInterval = 3000; // Initial update interval: 3 seconds
 
             function getRandomRequestsPerSecond() {
                 if (elapsedTime < 10) {
@@ -121,30 +150,49 @@
                 }
             }
 
+            function getRandomBlockedRequests() {
+                return Math.floor(Math.random() * 500); // Example function
+            }
+
+            function getRandomAllowedRequests() {
+                return Math.floor(Math.random() * 300); // Example function
+            }
+
             function updateChart() {
                 const currentTime = new Date().toLocaleTimeString();
                 const requestsPerSecond = getRandomRequestsPerSecond();
+                const blockedRequests = getRandomBlockedRequests();
+                const allowedRequests = getRandomAllowedRequests();
                 elapsedTime++;
 
                 if (ddosChart.data.labels.length >= 10) {
                     ddosChart.data.labels.shift();
-                    ddosChart.data.datasets[0].data.shift();
+                    ddosChart.data.datasets.forEach(dataset => dataset.data.shift());
                 }
 
                 ddosChart.data.labels.push(currentTime);
                 ddosChart.data.datasets[0].data.push(requestsPerSecond);
+                ddosChart.data.datasets[1].data.push(blockedRequests);
+                ddosChart.data.datasets[2].data.push(allowedRequests);
                 ddosChart.update();
 
                 const tableBody = document.getElementById('attackData');
                 const newRow = document.createElement('tr');
-                newRow.innerHTML = `<td>${currentTime}</td><td>${requestsPerSecond}</td>`;
+                newRow.innerHTML = `<td>${currentTime}</td><td>${requestsPerSecond}</td><td>${blockedRequests}</td><td>${allowedRequests}</td>`;
                 tableBody.appendChild(newRow);
                 if (tableBody.rows.length > 10) {
                     tableBody.deleteRow(0);
                 }
+
+                // Adjust the update interval
+                if (elapsedTime === 50) {
+                    clearInterval(updateIntervalID);
+                    updateInterval = 5000; // Change update interval to 5 seconds
+                    updateIntervalID = setInterval(updateChart, updateInterval);
+                }
             }
 
-            setInterval(updateChart, 5000); // Update chart every second
+            let updateIntervalID = setInterval(updateChart, updateInterval); // Initial interval set to 3 seconds
         });
     </script>
 </body>
