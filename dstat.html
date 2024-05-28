@@ -91,19 +91,34 @@
                 }
             });
 
+            let elapsedTime = 0;
+
             function getRandomRequestsPerSecond() {
-                return Math.floor(Math.random() * 10000001);
+                if (elapsedTime < 10) {
+                    return Math.floor(Math.random() * 101);
+                } else if (elapsedTime < 20) {
+                    return 0;
+                } else if (elapsedTime < 50) {
+                    return Math.floor(Math.random() * 501);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 100000001);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 101);
+                } else {
+                    return Math.floor(Math.random() * 101);
+                } 
             }
 
             function updateChart() {
                 const currentTime = new Date().toLocaleTimeString();
                 const requestsPerSecond = getRandomRequestsPerSecond();
-                
+                elapsedTime++;
+
                 if (ddosChart.data.labels.length >= 10) {
                     ddosChart.data.labels.shift();
                     ddosChart.data.datasets[0].data.shift();
                 }
-                
+
                 ddosChart.data.labels.push(currentTime);
                 ddosChart.data.datasets[0].data.push(requestsPerSecond);
                 ddosChart.update();
