@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DDoS Statistics (DStat)</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,60 +66,61 @@
             </tbody>
         </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const ctx = document.getElementById('ddosChart').getContext('2d');
-        const ddosChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Requests per Second',
-                    data: [],
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1,
-                    fill: true,
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
+        document.addEventListener("DOMContentLoaded", function() {
+            const ctx = document.getElementById('ddosChart').getContext('2d');
+            const ddosChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Requests per Second',
+                        data: [],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1,
+                        fill: true,
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
                     }
                 }
-            }
-        });
-
-        function updateChart() {
-            const currentTime = new Date().toLocaleTimeString();
-
-            // Fetch data from the attacked domain
-            fetch('https://xcddos.my.id/dstat')
-            .then(response => response.json())
-            .then(data => {
-                const requestsPerSecond = data.requestsPerSecond || 0; // Jumlah permintaan per detik
-                if (ddosChart.data.labels.length >= 10) {
-                    ddosChart.data.labels.shift();
-                    ddosChart.data.datasets[0].data.shift();
-                }
-                ddosChart.data.labels.push(currentTime);
-                ddosChart.data.datasets[0].data.push(requestsPerSecond);
-                ddosChart.update();
-                const tableBody = document.getElementById('attackData');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `<td>${currentTime}</td><td>${requestsPerSecond}</td>`;
-                tableBody.appendChild(newRow);
-                if (tableBody.rows.length > 10) {
-                    tableBody.deleteRow(0);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
             });
-        }
 
-        setInterval(updateChart, 5000); // Perbarui grafik setiap 5 detik
+            function updateChart() {
+                const currentTime = new Date().toLocaleTimeString();
+
+                // Fetch data from the attacked domain
+                fetch('https://xcddos.my.id/dstat')
+                .then(response => response.json())
+                .then(data => {
+                    const requestsPerSecond = data.requestsPerSecond || 0; // Jumlah permintaan per detik
+                    if (ddosChart.data.labels.length >= 10) {
+                        ddosChart.data.labels.shift();
+                        ddosChart.data.datasets[0].data.shift();
+                    }
+                    ddosChart.data.labels.push(currentTime);
+                    ddosChart.data.datasets[0].data.push(requestsPerSecond);
+                    ddosChart.update();
+                    const tableBody = document.getElementById('attackData');
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `<td>${currentTime}</td><td>${requestsPerSecond}</td>`;
+                    tableBody.appendChild(newRow);
+                    if (tableBody.rows.length > 10) {
+                        tableBody.deleteRow(0);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+            }
+
+            setInterval(updateChart, 5000); // Perbarui grafik setiap 5 detik
+        });
     </script>
 </body>
 </html>
