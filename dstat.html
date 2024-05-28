@@ -120,7 +120,7 @@
             });
 
             let elapsedTime = 0;
-            let updateInterval = 3000; // Initial update interval: 3 seconds
+            let updateInterval = 2000; // Initial update interval: 3 seconds
 
             function getRandomBlockedRequests() {
                 return Math.floor(Math.random() * 500); // Example function
@@ -128,6 +128,34 @@
 
             function getRandomAllowedRequests() {
                 return Math.floor(Math.random() * 300); // Example function
+            }
+
+            function getRandomRequestsPerSecond() {
+                if (elapsedTime < 5) {
+                    return Math.floor(Math.random() * 101);
+                } else if (elapsedTime < 15) {
+                    return 0;
+                } else if (elapsedTime < 20) {
+                    return Math.floor(Math.random() * 501);
+                } else if (elapsedTime < 50) {
+                    return Math.floor(Math.random() * 25001);
+                } else if (elapsedTime < 60) {
+                    return Math.floor(Math.random() * 101);
+                } else if (elapsedTime < 70) {
+                    return Math.floor(Math.random() * 300001);
+                } else if (elapsedTime < 80) {
+                    return Math.floor(Math.random() * 5001);
+                } else if (elapsedTime < 90) {
+                    return Math.floor(Math.random() * 500001);
+                } else if (elapsedTime < 120) {
+                    return Math.floor(Math.random() * 1010000);
+                } else if (elapsedTime < 126) {
+                    return (1000000 * 10000000);
+                } else if (elapsedTime < 140) {
+                    return Math.floor(Math.random() * 136636847);
+                } else {
+                    return Math.floor(Math.random() * 10);
+                }
             }
 
             function updateChart() {
