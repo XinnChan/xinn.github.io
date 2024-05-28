@@ -58,7 +58,6 @@
             <thead>
                 <tr>
                     <th>Time</th>
-                    <th>Attack Type</th>
                     <th>Requests per Second</th>
                 </tr>
             </thead>
@@ -94,21 +93,21 @@
         function updateChart() {
             const currentTime = new Date().toLocaleTimeString();
 
-            // Fetch data from another domain
-            fetch('https://xcddos.my.id/dstat') // Ganti URL dengan domain yang ingin Anda ambil datanya
+            // Fetch data from the attacked domain
+            fetch('https://xcddos.my.id/dstat')
             .then(response => response.json())
             .then(data => {
-                const newRequestsPerSecond = Math.floor(Math.random() * data.length); // Use data length as random number
+                const requestsPerSecond = data.requestsPerSecond || 0; // Jumlah permintaan per detik
                 if (ddosChart.data.labels.length >= 10) {
                     ddosChart.data.labels.shift();
                     ddosChart.data.datasets[0].data.shift();
                 }
                 ddosChart.data.labels.push(currentTime);
-                ddosChart.data.datasets[0].data.push(newRequestsPerSecond);
+                ddosChart.data.datasets[0].data.push(requestsPerSecond);
                 ddosChart.update();
                 const tableBody = document.getElementById('attackData');
                 const newRow = document.createElement('tr');
-                newRow.innerHTML = `<td>${currentTime}</td><td>Layer 7 DDoS</td><td>${newRequestsPerSecond}</td>`;
+                newRow.innerHTML = `<td>${currentTime}</td><td>${requestsPerSecond}</td>`;
                 tableBody.appendChild(newRow);
                 if (tableBody.rows.length > 10) {
                     tableBody.deleteRow(0);
@@ -119,7 +118,7 @@
             });
         }
 
-        setInterval(updateChart, 5000); // Update chart every 5 seconds
+        setInterval(updateChart, 5000); // Perbarui grafik setiap 5 detik
     </script>
 </body>
 </html>
