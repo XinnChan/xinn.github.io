@@ -122,34 +122,6 @@
             let elapsedTime = 0;
             let updateInterval = 3000; // Initial update interval: 3 seconds
 
-            function getRandomRequestsPerSecond() {
-                if (elapsedTime < 10) {
-                    return Math.floor(Math.random() * 101);
-                } else if (elapsedTime < 20) {
-                    return 0;
-                } else if (elapsedTime < 50) {
-                    return Math.floor(Math.random() * 501);
-                } else if (elapsedTime < 70) {
-                    return Math.floor(Math.random() * 10001);
-                } else if (elapsedTime < 80) {
-                    return Math.floor(Math.random() * 101);
-                } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 100001);
-                } else if (elapsedTime < 100) {
-                    return Math.floor(Math.random() * 5001);
-                } else if (elapsedTime < 130) {
-                    return Math.floor(Math.random() * 500001);
-                } else if (elapsedTime < 150) {
-                    return Math.floor(Math.random() * 1010000);
-                } else if (elapsedTime < 200) {
-                    return (1000000 * 10000000);
-                } else if (elapsedTime < 300) {
-                    return Math.floor(Math.random() * 136636847);
-                } else {
-                    return Math.floor(Math.random() * 10);
-                }
-            }
-
             function getRandomBlockedRequests() {
                 return Math.floor(Math.random() * 500); // Example function
             }
@@ -160,9 +132,9 @@
 
             function updateChart() {
                 const currentTime = new Date().toLocaleTimeString();
-                const requestsPerSecond = getRandomRequestsPerSecond();
                 const blockedRequests = getRandomBlockedRequests();
                 const allowedRequests = getRandomAllowedRequests();
+                const requestsPerSecond = blockedRequests + allowedRequests; // Sum of blocked and allowed requests
                 elapsedTime++;
 
                 if (ddosChart.data.labels.length >= 10) {
