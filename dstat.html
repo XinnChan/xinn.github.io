@@ -49,6 +49,13 @@
             background-color: #f2f2f2;
             font-weight: bold;
         }
+        .max-values {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .max-values div {
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +74,11 @@
             <tbody id="attackData">
             </tbody>
         </table>
+        <div class="max-values">
+            <div>Max Requests per Second: <span id="maxRequestsPerSecond">0</span></div>
+            <div>Max Blocked Requests: <span id="maxBlockedRequests">0</span></div>
+            <div>Max Allowed Requests: <span id="maxAllowedRequests">0</span></div>
+        </div>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
@@ -120,7 +132,11 @@
             });
 
             let elapsedTime = 0;
-            let updateInterval = 2000; // Initial update interval: 3 seconds
+            let updateInterval = 1000; // Initial update interval: 3 seconds
+
+            let maxRequestsPerSecond = 0;
+            let maxBlockedRequests = 0;
+            let maxAllowedRequests = 0;
 
             function getRandomBlockedRequests() {
                 return Math.floor(Math.random() * 500); // Example function
@@ -136,17 +152,17 @@
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 501);
+                    return Math.floor(Math.random() * 1001);
                 } else if (elapsedTime < 50) {
-                    return Math.floor(Math.random() * 25001);
-                } else if (elapsedTime < 60) {
                     return Math.floor(Math.random() * 101);
+                } else if (elapsedTime < 60) {
+                    return Math.floor(Math.random() * 25001);
                 } else if (elapsedTime < 70) {
                     return Math.floor(Math.random() * 300001);
                 } else if (elapsedTime < 80) {
                     return Math.floor(Math.random() * 5001);
                 } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 500001);
+                    return Math.floor(Math.random() * 5000001);
                 } else if (elapsedTime < 120) {
                     return Math.floor(Math.random() * 1010000);
                 } else if (elapsedTime < 126) {
@@ -158,12 +174,29 @@
                 }
             }
 
+            function updateMaxValues(requestsPerSecond, blockedRequests, allowedRequests) {
+                if (requestsPerSecond > maxRequestsPerSecond) {
+                    maxRequestsPerSecond = requestsPerSecond;
+                    document.getElementById('maxRequestsPerSecond').textContent = maxRequestsPerSecond;
+                }
+                if (blockedRequests > maxBlockedRequests) {
+                    maxBlockedRequests = blockedRequests;
+                    document.getElementById('maxBlockedRequests').textContent = maxBlockedRequests;
+                }
+                if (allowedRequests > maxAllowedRequests) {
+                    maxAllowedRequests = allowedRequests;
+                    document.getElementById('maxAllowedRequests').textContent = maxAllowedRequests;
+                }
+            }
+
             function updateChart() {
                 const currentTime = new Date().toLocaleTimeString();
                 const blockedRequests = getRandomBlockedRequests();
                 const allowedRequests = getRandomAllowedRequests();
                 const requestsPerSecond = blockedRequests + allowedRequests; // Sum of blocked and allowed requests
                 elapsedTime++;
+
+                updateMaxValues(requestsPerSecond, blockedRequests, allowedRequests);
 
                 if (ddosChart.data.labels.length >= 10) {
                     ddosChart.data.labels.shift();
@@ -187,7 +220,7 @@
                 // Adjust the update interval
                 if (elapsedTime === 50) {
                     clearInterval(updateIntervalID);
-                    updateInterval = 5000; // Change update interval to 5 seconds
+                    updateInterval = 3000; // Change update interval to 5 seconds
                     updateIntervalID = setInterval(updateChart, updateInterval);
                 }
             }
