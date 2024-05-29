@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #6F00FF; /* Electric Indigo */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><line x1="0" y1="0" x2="100" y2="100" stroke="white" stroke-width="2"/><line x1="100" y1="0" x2="0" y2="100" stroke="white" stroke-width="2"/><line x1="50" y1="0" x2="50" y2="100" stroke="white" stroke-width="2"/><line x1="0" y1="50" x2="100" y2="50" stroke="white" stroke-width="2"/><line x1="25" y1="0" x2="75" y2="100" stroke="white" stroke-width="2"/><line x1="75" y1="0" x2="25" y2="100" stroke="white" stroke-width="2"/><line x1="0" y1="25" x2="100" y2="75" stroke="white" stroke-width="2"/><line x1="0" y1="75" x2="100" y2="25" stroke="white" stroke-width="2"/></svg>');
+            background-size: 100px 100px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .account {
+            margin-bottom: 15px;
+        }
+        .account button {
+            margin-left: 10px;
+        }
+        .download-image {
+            display: block;
+            margin: 20px 0;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard: ' + text);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function getOriginalText(accountType) {
+            const mappings = {
+                'Bank Jago': '103723167884',
+                'Dana': '082143067466',
+                'Gopay': '082143067466',
+                'Ovo': '082143067466',
+                'Paypal': 'xenji795@gmail.com',
+                'Crypto': 'https://t.me/Xin_Kenji'
+            };
+            return mappings[accountType];
+        }
+
+        function copyFromElement(element) {
+            const accountType = element.getAttribute('data-account-type');
+            const originalText = getOriginalText(accountType);
+            if (accountType === 'Crypto') {
+                window.location.href = originalText;
+            } else {
+                copyToClipboard(originalText);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Payment Information</h2>
+        <div class="account">
+            <strong>Bank Jago:</strong> *****7167884
+            <button data-account-type="Bank Jago" onclick="copyFromElement(this)">Copy</button>
+        </div>
+        <div class="account">
+            <strong>Dana:</strong> *****67466
+            <button data-account-type="Dana" onclick="copyFromElement(this)">Copy</button>
+        </div>
+        <div class="account">
+            <strong>Gopay:</strong> *****67466
+            <button data-account-type="Gopay" onclick="copyFromElement(this)">Copy</button>
+        </div>
+        <div class="account">
+            <strong>Ovo:</strong> *****67466
+            <button data-account-type="Ovo" onclick="copyFromElement(this)">Copy</button>
+        </div>
+        <div class="account">
+            <strong>Paypal:</strong> *****@gmail.com
+            <button data-account-type="Paypal" onclick="copyFromElement(this)">Copy</button>
+        </div>
+        <div class="account">
+            <strong>Crypto:</strong> Minta Ke Admin
+            <button data-account-type="Crypto" onclick="copyFromElement(this)">Chat Admin</button>
+        </div>
+        
+        <h3>Download QRIS Image</h3>
+        <div class="download-image">
+            <img src="https://cdn.filestackcontent.com/XF9J9ptSTPqsTwD4Y6GJ" alt="QRIS Image" style="width: 100%; max-width: 400px;">
+            <a href="https://cdn.filestackcontent.com/XF9J9ptSTPqsTwD4Y6GJ" download class="download-button">Download</a>
+        </div>
+    </div>
+</body>
+</html>
