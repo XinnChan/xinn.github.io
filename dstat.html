@@ -140,57 +140,57 @@
 
             function getRandomBlockedRequests() {
                 if (elapsedTime < 5) {
-                    return Math.floor(Math.random() * 0);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 10);
+                    return 0;
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
-                    return Math.floor(Math.random() * 78661);
+                    return Math.floor(Math.random() * 780661);
                 } else if (elapsedTime < 70) {
-                    return Math.floor(Math.random() * 301);
+                    return Math.floor(Math.random() * 101);
                 } else if (elapsedTime < 80) {
-                    return Math.floor(Math.random() * 501);
+                    return Math.floor(Math.random() * 1);
                 } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 5000001);
+                    return Math.floor(Math.random() * 5);
                 } else if (elapsedTime < 120) {
                     return Math.floor(Math.random() * 1010000);
                 } else if (elapsedTime < 126) {
-                    return (1 * 10000000);
+                    return 0;
                 } else if (elapsedTime < 140) {
                     return Math.floor(Math.random() * 136636847);
                 } else {
-                    return Math.floor(Math.random() * 10);
+                    return Math.floor(Math.random() * 5);
                 }
             }
 
             function getRandomAllowedRequests() {
                 if (elapsedTime < 5) {
-                    return Math.floor(Math.random() * 5);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 10);
+                    return 0;
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
-                    return Math.floor(Math.random() * 78661);
+                    return Math.floor(Math.random() * 780661);
                 } else if (elapsedTime < 70) {
-                    return Math.floor(Math.random() * 301);
+                    return Math.floor(Math.random() * 101);
                 } else if (elapsedTime < 80) {
-                    return Math.floor(Math.random() * 501);
+                    return Math.floor(Math.random() * 1);
                 } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 5000001);
+                    return Math.floor(Math.random() * 5);
                 } else if (elapsedTime < 120) {
                     return Math.floor(Math.random() * 1010000);
                 } else if (elapsedTime < 126) {
-                    return (1 * 10000000);
+                    return 0;
                 } else if (elapsedTime < 140) {
                     return Math.floor(Math.random() * 136636847);
                 } else {
-                    return Math.floor(Math.random() * 10);
+                    return Math.floor(Math.random() * 5);
                 }
             }
 
@@ -200,25 +200,25 @@
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 10);
+                    return 0;
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
-                    return Math.floor(Math.random() * 78661);
+                    return Math.floor(Math.random() * 780661);
                 } else if (elapsedTime < 70) {
-                    return Math.floor(Math.random() * 301);
+                    return Math.floor(Math.random() * 101);
                 } else if (elapsedTime < 80) {
-                    return Math.floor(Math.random() * 501);
+                    return Math.floor(Math.random() * 1);
                 } else if (elapsedTime < 90) {
-                    return Math.floor(Math.random() * 5000001);
+                    return Math.floor(Math.random() * 5);
                 } else if (elapsedTime < 120) {
                     return Math.floor(Math.random() * 1010000);
                 } else if (elapsedTime < 126) {
-                    return (1 * 10000000);
+                    return 0;
                 } else if (elapsedTime < 140) {
                     return Math.floor(Math.random() * 136636847);
                 } else {
-                    return Math.floor(Math.random() * 10);
+                    return Math.floor(Math.random() * 5);
                 }
             }
 
@@ -268,7 +268,7 @@
                 // Adjust the update interval
                 if (elapsedTime === 50) {
                     clearInterval(updateIntervalID);
-                    updateInterval = 3000; // Change update interval to 5 seconds
+                    updateInterval = 8000; // Change update interval to 5 seconds
                     updateIntervalID = setInterval(updateChart, updateInterval);
                 }
             }
