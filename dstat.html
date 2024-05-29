@@ -140,11 +140,11 @@
 
             function getRandomBlockedRequests() {
                 if (elapsedTime < 5) {
-                    return Math.floor(Math.random() * 10);
+                    return Math.floor(Math.random() * 0);
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 20);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
@@ -168,11 +168,11 @@
 
             function getRandomAllowedRequests() {
                 if (elapsedTime < 5) {
-                    return Math.floor(Math.random() * 10);
+                    return Math.floor(Math.random() * 5);
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 20);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
@@ -200,7 +200,7 @@
                 } else if (elapsedTime < 15) {
                     return 0;
                 } else if (elapsedTime < 20) {
-                    return Math.floor(Math.random() * 20);
+                    return Math.floor(Math.random() * 10);
                 } else if (elapsedTime < 50) {
                     return Math.floor(Math.random() * 7001);
                 } else if (elapsedTime < 60) {
