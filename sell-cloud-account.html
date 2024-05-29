@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selling Cloud Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #8A2BE2, #000000);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        .account {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
+        }
+        .account p {
+            margin: 5px 0;
+        }
+        .copy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .copy-btn:hover {
+            background-color: #218838;
+        }
+        .dm-link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selling Cloud Account</h1>
+        
+        <div class="account">
+            <p>DigitalOcean</p>
+            <p>Free Trial</p>
+            <p>billing PayPal 💳</p>
+            <p>3 Droplet</p>
+            <p>belum add promo Code</p>
+            <p>atau $200 2 bulan</p>
+            <p>harga idr 170k</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="account">
+            <p>DigitalOcean</p>
+            <p>Free Trial</p>
+            <p>billing PayPal 💳</p>
+            <p>3 Droplet</p>
+            <p>belum add promo Code</p>
+            <p>Saldo $200 Aktif</p>
+            <p>1 Tahun</p>
+            <p>harga idr 220k</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="account">
+            <p>DigitalOcean</p>
+            <p>Free Trial</p>
+            <p>billing Card 💳💳</p>
+            <p>3 Droplet</p>
+            <p>belum add promo Code</p>
+            <p>atau $200 2 bulan</p>
+            <p>harga idr 150k</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="account">
+            <p>DigitalOcean</p>
+            <p>Free Trial</p>
+            <p>billing Card 💳💳</p>
+            <p>10 Droplet</p>
+            <p>belum add promo Code</p>
+            <p>atau $200 2 bulan</p>
+            <p>harga idr 220k (Limited Stock, please confirm first)</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="account">
+            <p>Vultr</p>
+            <p>Free Trial</p>
+            <p>balance $255</p>
+            <p>Billing PayPal</p>
+            <p>Harga idr 190k</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+
+        <div class="account">
+            <p>Aws Free Tier</p>
+            <p>Default 5core</p>
+            <p>harga idr 120k (Limited Stock, please confirm first)</p>
+            <button class="copy-btn" onclick="copyText(this)">Copy</button>
+        </div>
+        <p>NO Garansi</p>
+        <p>Minat DM: <span class="dm-link" onclick="openTelegram()">@Xin_Kenji</span></p>
+    </div>
+
+    <script>
+        function copyText(button) {
+            var text = button.parentElement.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Text copied to clipboard');
+            }, function(err) {
+                alert('Could not copy text: ', err);
+            });
+        }
+
+        function openTelegram() {
+            window.open('https://t.me/Xin_Kenji', '_blank');
+        }
+    </script>
+</body>
+</html>
