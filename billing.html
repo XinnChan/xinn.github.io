@@ -40,6 +40,20 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .telegram-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #0088cc;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .telegram-button:hover {
+            background-color: #006699;
+        }
     </style>
     <script>
         function copyToClipboard(text) {
@@ -57,8 +71,6 @@
                 'Gopay': '082143067466',
                 'Ovo': '082143067466',
                 'Paypal': 'xenji795@gmail.com',
-                'CryptoUSDTPOLYGON': '0x42702624dfaafD5535Ca2892A54C06A028E980a4',
-                'CryptoLTCBEP20': '0x42702624dfaafD5535Ca2892A54C06A028E980a4'
             };
             return mappings[accountType];
         }
@@ -78,16 +90,8 @@
     <div class="container">
         <h2>Payment Information</h2>
         <div class="account">
-            <strong>Bank Jago:</strong> *****884
-            <button data-account-type="Bank Jago" onclick="copyFromElement(this)">Copy</button>
-        </div>
-        <div class="account">
             <strong>Dana:</strong> *****7466
             <button data-account-type="Dana" onclick="copyFromElement(this)">Copy</button>
-        </div>
-        <div class="account">
-            <strong>Gopay:</strong> *****7466
-            <button data-account-type="Gopay" onclick="copyFromElement(this)">Copy</button>
         </div>
         <div class="account">
             <strong>Ovo:</strong> *****7466
@@ -98,15 +102,9 @@
             <button data-account-type="Paypal" onclick="copyFromElement(this)">Copy</button>
         </div>
         <div class="account">
-            <strong>Crypto USDT POLYGON:</strong> *****28E980a4
-            <button data-account-type="CryptoUSDTPOLYGON" onclick="copyFromElement(this)">Copy</button>
-            <a href="https://cdn.filestackcontent.com/PT1mHmpsTmCfwei5mwr9" download class="download-button">QR CRYPTO</a>
+            <strong>Crypto, Rek Bank, Dan ALL Payment Lainnya:</strong> Minta Ke Admin
         </div>
-        <div class="account">
-            <strong>Crypto LTC BEP20:</strong> *****28E980a4
-            <button data-account-type="CryptoLTCBEP20" onclick="copyFromElement(this)">Copy</button>
-            <a href="https://cdn.filestackcontent.com/ihU3tPh7SQO1VkasIRMa" download class="download-button">QR CRYPTO</a>
-        </div>
+        <a href="https://t.me/Xin_Kenji" class="telegram-button">Chat Admin Di Telegram</a>
         
         <h3>Download QRIS Image</h3>
         <div class="download-image">
