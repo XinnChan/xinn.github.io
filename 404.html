@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Challenge</title>
+    <style>
+        body {
+            background-color: #2b2b2b;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .verification-box {
+            display: inline-block;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 10px;
+        }
+        .checkbox-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+        .verify-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .verify-button:disabled {
+            background-color: #888;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            XcDDoS Shield
+        </div>
+        <div class="verification-box">
+            <p>Melakukan verifikasi...</p>
+            <div class="XcDDoS">
+                <img src="https://i.postimg.cc/6pMKxyfy/New-Project-25-D417-BE3.png" alt="XcDDoS" width="120">
+                <p>Privasi &bull; Syarat</p>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="verification-checkbox">
+                <label for="verification-checkbox">Saya bukan robot</label>
+            </div>
+            <button class="verify-button" id="verify-button" disabled>Verifikasi</button>
+        </div>
+    </div>
+
+    <script>
+        const checkbox = document.getElementById('verification-checkbox');
+        const button = document.getElementById('verify-button');
+
+        checkbox.addEventListener('change', () => {
+            button.disabled = !checkbox.checked;
+        });
+
+        button.addEventListener('click', () => {
+            document.querySelector('.verification-box p').innerText = 'Verifikasi berhasil!';
+            setTimeout(() => {
+                window.location.href = 'https://xcddos.my.id/manage-challenge'; // Replace with the target URL
+            }, 1000); // 1 second delay
+        });
+    </script>
+</body>
+</html>
