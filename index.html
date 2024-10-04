@@ -10,10 +10,8 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #E0E0E0;
+            background-color: #f5f5f5;
             color: #333;
-            background-image: url('https://telegram.org/img/tl_background_pattern.png');
-            background-size: cover;
         }
 
         .container {
@@ -25,110 +23,91 @@
 
         h1 {
             text-align: center;
-            color: #800080;
+            color: #4a148c;
+            font-size: 2.5em;
+            margin-bottom: 50px;
         }
 
         .pricing-table {
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-around;
-            margin-top: 20px;
+            justify-content: space-between;
         }
 
         .pricing-item {
-            background-color: #fff;
-            width: 45%;
-            margin: 10px;
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 48%;
+            margin-bottom: 30px;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
         }
 
         .pricing-item:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .pricing-header {
             text-align: center;
-            font-size: 20px;
+            font-size: 1.5em;
             font-weight: bold;
-            color: #800080;
-        }
-
-        .pricing-details {
-            margin: 20px 0;
-            padding: 10px 0;
-            border-top: 1px solid #eee;
+            color: #6200ea;
+            margin-bottom: 20px;
         }
 
         .pricing-details p {
-            margin: 10px 0;
-            font-size: 16px;
+            margin: 15px 0;
+            font-size: 1em;
+            color: #333;
         }
 
         .price {
             text-align: center;
-            font-size: 24px;
+            font-size: 2em;
             font-weight: bold;
-            color: #800080;
-            margin-bottom: 20px;
+            color: #6200ea;
+            margin: 20px 0;
         }
 
         .cta-button {
             display: block;
             width: 100%;
             text-align: center;
-            background-color: #800080;
+            background-color: #6200ea;
             color: white;
-            padding: 10px 0;
+            padding: 15px 0;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             transition: background-color 0.3s ease;
+            font-size: 1.1em;
         }
 
         .cta-button:hover {
-            background-color: #660066;
-        }
-
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            color: #777;
-        }
-
-        .additional-info {
-            background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 15px;
-            line-height: 1.6;
-        }
-
-        .additional-info p {
-            font-size: 14px;
-            margin: 5px 0;
-            color: #555;
+            background-color: #3700b3;
         }
 
         .copy-button {
-            background-color: #800080;
+            background-color: #6200ea;
             color: white;
             border: none;
-            padding: 8px 12px;
+            padding: 10px 15px;
             border-radius: 5px;
             margin-top: 10px;
             cursor: pointer;
+            width: 100%;
             transition: background-color 0.3s ease;
         }
 
         .copy-button:hover {
-            background-color: #660066;
+            background-color: #3700b3;
         }
 
         @media (max-width: 768px) {
             .pricing-item {
-                width: 90%;
+                width: 100%;
             }
         }
     </style>
@@ -143,32 +122,23 @@
             <div class="pricing-item">
                 <div class="pricing-header">REGULAR CPU</div>
                 <div class="pricing-details">
-                    <p id="reg-vps1"><strong>4 GB / 2 CPUs</strong> <br> 80 GB SSD Disk, 4 TB transfer</p>
+                    <p id="reg-vps1"><strong>4 GB / 2 CPUs</strong><br>80 GB SSD Disk, 4 TB transfer</p>
                     <div id="price-reg-vps1" class="price">Rp. 50k / $5</div>
                     <button class="copy-button" onclick="copyText('reg-vps1', 'price-reg-vps1')">Copy</button>
 
-                    <p id="reg-vps2"><strong>8 GB / 4 CPUs</strong> <br> 160 GB SSD Disk, 5 TB transfer</p>
+                    <p id="reg-vps2"><strong>8 GB / 4 CPUs</strong><br>160 GB SSD Disk, 5 TB transfer</p>
                     <div id="price-reg-vps2" class="price">Rp. 70k / $9</div>
                     <button class="copy-button" onclick="copyText('reg-vps2', 'price-reg-vps2')">Copy</button>
 
-                    <p id="reg-vps3"><strong>16 GB / 2 CPUs</strong> <br> 50 GB SSD Disk, 5 TB transfer</p>
+                    <p id="reg-vps3"><strong>16 GB / 2 CPUs</strong><br>50 GB SSD Disk, 5 TB transfer</p>
                     <div id="price-reg-vps3" class="price">Rp. 150k / $16</div>
                     <button class="copy-button" onclick="copyText('reg-vps3', 'price-reg-vps3')">Copy</button>
 
-                    <p id="reg-vps4"><strong>16 GB / 4 CPUs</strong> <br> 200 GB NVMe SSD, 8 TB transfer</p>
+                    <p id="reg-vps4"><strong>16 GB / 4 CPUs</strong><br>200 GB NVMe SSD, 8 TB transfer</p>
                     <div id="price-reg-vps4" class="price">Rp. 200k / $25</div>
                     <button class="copy-button" onclick="copyText('reg-vps4', 'price-reg-vps4')">Copy</button>
                 </div>
 
-                <!-- Additional Information for Regular VPS -->
-                <div class="additional-info">
-                    <p><strong>Card Pembelian:</strong> Full Garansi 15 Hari, 2x Replace</p>
-                    <p><strong>Any Request:</strong> Bisa request Region, OS, dan Version</p>
-                    <p><strong>Region:</strong> New York, Singapura, London, Amsterdam, Prancis, Toronto, San Francisco, Bangalore, Sydney</p>
-                    <p><strong>OS Supported:</strong> Ubuntu, CentOS, Debian, Fedora, Rockylinux, Almalinux</p>
-                    <p><strong>Keunggulan:</strong> Harga terjangkau, Efisiensi buat kaum mendang mending, Kecepatan Port 10-30 GB/s</p>
-                    <p><strong>Terms of Service:</strong> Dilarang untuk Mining, Bruteforce, atau IP VPS terkena DDoS</p>
-                </div>
                 <a href="https://t.me/Xin_Kenji" class="cta-button" target="_blank">Order Now</a>
             </div>
 
@@ -176,28 +146,19 @@
             <div class="pricing-item">
                 <div class="pricing-header">PREMIUM AMD CPU</div>
                 <div class="pricing-details">
-                    <p id="premium-vps1"><strong>4 GB / 2 AMD CPUs</strong> <br> 80 GB NVMe SSD, 4 TB transfer</p>
+                    <p id="premium-vps1"><strong>4 GB / 2 AMD CPUs</strong><br>80 GB NVMe SSD, 4 TB transfer</p>
                     <div id="price-premium-vps1" class="price">Rp. 70k / $8</div>
                     <button class="copy-button" onclick="copyText('premium-vps1', 'price-premium-vps1')">Copy</button>
 
-                    <p id="premium-vps2"><strong>8 GB / 2 AMD CPUs</strong> <br> 100 GB NVMe SSD, 5 TB transfer</p>
+                    <p id="premium-vps2"><strong>8 GB / 2 AMD CPUs</strong><br>100 GB NVMe SSD, 5 TB transfer</p>
                     <div id="price-premium-vps2" class="price">Rp. 90k / $10</div>
                     <button class="copy-button" onclick="copyText('premium-vps2', 'price-premium-vps2')">Copy</button>
 
-                    <p id="premium-vps3"><strong>8 GB / 4 AMD CPUs</strong> <br> 160 GB NVMe SSD, 5 TB transfer</p>
+                    <p id="premium-vps3"><strong>8 GB / 4 AMD CPUs</strong><br>160 GB NVMe SSD, 5 TB transfer</p>
                     <div id="price-premium-vps3" class="price">Rp. 100k / $15</div>
                     <button class="copy-button" onclick="copyText('premium-vps3', 'price-premium-vps3')">Copy</button>
                 </div>
 
-                <!-- Additional Information for Premium VPS -->
-                <div class="additional-info">
-                    <p><strong>Card Pembelian:</strong> Full Garansi 20 Hari, 3x Replace</p>
-                    <p><strong>Any Request:</strong> Bisa request Region, OS, dan Version</p>
-                    <p><strong>Region:</strong> New York, Singapura, London, Amsterdam, Prancis, Toronto, San Francisco, Bangalore, Sydney</p>
-                    <p><strong>OS Supported:</strong> Ubuntu, CentOS, Debian, Fedora, Rockylinux, Almalinux</p>
-                    <p><strong>Keunggulan:</strong> Premium AMD lebih awet, tidak mudah replace, performa multitasking, harga terjangkau, penggunaan tenaga yang efisien, kompatibilitas dengan teknologi baru, kecepatan port 10-50 GB/s</p>
-                    <p><strong>Terms of Service:</strong> Dilarang untuk Mining, Bruteforce, atau IP VPS terkena DDoS</p>
-                </div>
                 <a href="https://t.me/Xin_Kenji" class="cta-button" target="_blank">Order Now</a>
             </div>
         </div>
