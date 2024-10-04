@@ -144,20 +144,20 @@
                 <div class="pricing-header">REGULAR CPU</div>
                 <div class="pricing-details">
                     <p id="reg-vps1"><strong>4 GB / 2 CPUs</strong> <br> 80 GB SSD Disk, 4 TB transfer</p>
-                    <div class="price">Rp. 50k / $5</div>
-                    <button class="copy-button" onclick="copyText('reg-vps1')">Copy</button>
+                    <div id="price-reg-vps1" class="price">Rp. 50k / $5</div>
+                    <button class="copy-button" onclick="copyText('reg-vps1', 'price-reg-vps1')">Copy</button>
 
                     <p id="reg-vps2"><strong>8 GB / 4 CPUs</strong> <br> 160 GB SSD Disk, 5 TB transfer</p>
-                    <div class="price">Rp. 70k / $9</div>
-                    <button class="copy-button" onclick="copyText('reg-vps2')">Copy</button>
+                    <div id="price-reg-vps2" class="price">Rp. 70k / $9</div>
+                    <button class="copy-button" onclick="copyText('reg-vps2', 'price-reg-vps2')">Copy</button>
 
                     <p id="reg-vps3"><strong>16 GB / 2 CPUs</strong> <br> 50 GB SSD Disk, 5 TB transfer</p>
-                    <div class="price">Rp. 150k / $16</div>
-                    <button class="copy-button" onclick="copyText('reg-vps3')">Copy</button>
+                    <div id="price-reg-vps3" class="price">Rp. 150k / $16</div>
+                    <button class="copy-button" onclick="copyText('reg-vps3', 'price-reg-vps3')">Copy</button>
 
                     <p id="reg-vps4"><strong>16 GB / 4 CPUs</strong> <br> 200 GB NVMe SSD, 8 TB transfer</p>
-                    <div class="price">Rp. 200k / $25</div>
-                    <button class="copy-button" onclick="copyText('reg-vps4')">Copy</button>
+                    <div id="price-reg-vps4" class="price">Rp. 200k / $25</div>
+                    <button class="copy-button" onclick="copyText('reg-vps4', 'price-reg-vps4')">Copy</button>
                 </div>
 
                 <!-- Additional Information for Regular VPS -->
@@ -177,16 +177,16 @@
                 <div class="pricing-header">PREMIUM AMD CPU</div>
                 <div class="pricing-details">
                     <p id="premium-vps1"><strong>4 GB / 2 AMD CPUs</strong> <br> 80 GB NVMe SSD, 4 TB transfer</p>
-                    <div class="price">Rp. 70k / $8</div>
-                    <button class="copy-button" onclick="copyText('premium-vps1')">Copy</button>
+                    <div id="price-premium-vps1" class="price">Rp. 70k / $8</div>
+                    <button class="copy-button" onclick="copyText('premium-vps1', 'price-premium-vps1')">Copy</button>
 
                     <p id="premium-vps2"><strong>8 GB / 2 AMD CPUs</strong> <br> 100 GB NVMe SSD, 5 TB transfer</p>
-                    <div class="price">Rp. 90k / $10</div>
-                    <button class="copy-button" onclick="copyText('premium-vps2')">Copy</button>
+                    <div id="price-premium-vps2" class="price">Rp. 90k / $10</div>
+                    <button class="copy-button" onclick="copyText('premium-vps2', 'price-premium-vps2')">Copy</button>
 
                     <p id="premium-vps3"><strong>8 GB / 4 AMD CPUs</strong> <br> 160 GB NVMe SSD, 5 TB transfer</p>
-                    <div class="price">Rp. 100k / $15</div>
-                    <button class="copy-button" onclick="copyText('premium-vps3')">Copy</button>
+                    <div id="price-premium-vps3" class="price">Rp. 100k / $15</div>
+                    <button class="copy-button" onclick="copyText('premium-vps3', 'price-premium-vps3')">Copy</button>
                 </div>
 
                 <!-- Additional Information for Premium VPS -->
@@ -204,15 +204,18 @@
     </div>
 
     <script>
-        function copyText(elementId) {
+        function copyText(elementId, priceId) {
             var textToCopy = document.getElementById(elementId).innerText;
+            var priceToCopy = document.getElementById(priceId).innerText;
+            var fullText = textToCopy + "\n" + priceToCopy;
+
             var tempInput = document.createElement("textarea");
-            tempInput.value = textToCopy;
+            tempInput.value = fullText;
             document.body.appendChild(tempInput);
             tempInput.select();
             document.execCommand("copy");
             document.body.removeChild(tempInput);
-            alert("Teks berhasil disalin: " + textToCopy);
+            alert("Teks berhasil disalin: " + fullText);
         }
     </script>
 </body>
