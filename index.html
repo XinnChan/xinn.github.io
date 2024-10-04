@@ -10,9 +10,8 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #C0C0C0; /* Background abu-abu untuk seluruh body */
+            background: linear-gradient(135deg, #8A2BE2, #4B0082); /* Gradasi ungu neon */
             color: #333;
-            background-image: url('https://telegram.org/img/tl_background_pattern.png');
             background-size: cover;
         }
 
@@ -25,7 +24,7 @@
 
         h1 {
             text-align: center;
-            color: #9400D3; /* Warna ungu neon */
+            color: #FF00FF; /* Warna ungu neon terang */
             font-size: 2.5rem;
             margin-bottom: 30px;
         }
@@ -38,25 +37,25 @@
         }
 
         .pricing-item {
-            background-color: #fff; /* Warna putih untuk kotak depan */
+            background-color: rgba(255, 255, 255, 0.9); /* Warna putih dengan sedikit transparansi */
             width: 42%;
             margin: 10px 0;
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .pricing-item:hover {
             transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
 
         .pricing-header {
             text-align: center;
             font-size: 1.4rem;
             font-weight: bold;
-            color: #9400D3; /* Warna ungu neon */
+            color: #FF00FF; /* Warna ungu neon terang */
             margin-bottom: 15px;
         }
 
@@ -76,7 +75,7 @@
             text-align: center;
             font-size: 1.8rem;
             font-weight: bold;
-            color: #9400D3; /* Warna ungu neon */
+            color: #FF00FF; /* Warna ungu neon terang */
             margin-bottom: 20px;
         }
 
@@ -84,7 +83,7 @@
             display: block;
             width: 100%;
             text-align: center;
-            background-color: #9400D3; /* Warna ungu neon */
+            background-color: #FF00FF; /* Warna ungu neon terang */
             color: white;
             padding: 12px 0;
             text-decoration: none;
@@ -93,11 +92,11 @@
         }
 
         .cta-button:hover {
-            background-color: #3700B3;
+            background-color: #E500E5; /* Warna ungu lebih gelap */
         }
 
         .additional-info {
-            background-color: #F9F9F9;
+            background-color: rgba(240, 240, 255, 0.9); /* Latar belakang abu-abu terang dengan transparansi */
             padding: 10px;
             border-radius: 8px;
             margin-top: 15px;
@@ -111,7 +110,7 @@
         }
 
         .copy-button {
-            background-color: #9400D3; /* Warna ungu neon */
+            background-color: #FF00FF; /* Warna ungu neon terang */
             color: white;
             border: none;
             padding: 8px 10px;
@@ -123,7 +122,7 @@
         }
 
         .copy-button:hover {
-            background-color: #3700B3;
+            background-color: #E500E5;
         }
 
         /* Section for proof and payment */
@@ -134,25 +133,25 @@
 
         .proof-payment p {
             font-size: 1rem;
-            color: #555;
+            color: #ddd;
             margin-bottom: 10px;
         }
 
         .proof-link {
-            color: #9400D3; /* Warna ungu neon */
+            color: #FF00FF; /* Warna ungu neon terang */
             font-weight: bold;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .proof-link:hover {
-            color: #3700B3;
+            color: #E500E5;
         }
 
         .payment-methods {
             font-size: 1.1rem;
             margin-top: 10px;
-            color: #555;
+            color: #fff;
         }
 
         .payment-methods span {
