@@ -3,10 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Cache-Control" content="no-store">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'">
     <title>Tiktok Downloader</title>
     <style>
         * {
@@ -48,8 +44,7 @@
             border-radius: 12px;
             max-width: 400px;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Kontainer dengan latar belakang transparan */
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            
         }
         .shape {
             background-image: url(https://cdn.filestackcontent.com/kJBpKngSoOryAeFD4Oku);
@@ -78,7 +73,9 @@
             margin: 10px;
             height: 700px;
             width: 350px;
+           
         }               
+        
         
         h1 {
             font-size: 2em;
@@ -249,7 +246,6 @@
             <div class="bl"></div>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
@@ -337,26 +333,6 @@
             a.click();
             document.body.removeChild(a);
         }
-        // Menonaktifkan klik kanan
-        document.addEventListener('contextmenu', function(event) {
-            event.preventDefault();
-        });
-
-        // Menonaktifkan tombol F12, Ctrl+Shift+I, dan Ctrl+U
-        document.addEventListener('keydown', function(event) {
-            // F12
-            if (event.keyCode == 123) {
-                event.preventDefault();
-            }
-            // Ctrl + Shift + I
-            if (event.ctrlKey && event.shiftKey && event.keyCode == 73) {
-                event.preventDefault();
-            }
-            // Ctrl + U
-            if (event.ctrlKey && event.keyCode == 85) {
-                event.preventDefault();
-            }
-        });
     </script>
 </body>
 </html>
