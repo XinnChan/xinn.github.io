@@ -1,0 +1,339 @@
+-->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiktok Downloader</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            color: #fff;
+            background: url('https://c.top4top.io/p_3262i4ke20.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: auto;
+            min-height: 100vh;
+        }
+        #blur-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(10px);
+            z-index: 0;
+        }
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .container {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 400px;
+            text-align: center;
+            
+        }
+        .shape {
+            background-image: url(https://cdn.filestackcontent.com/kJBpKngSoOryAeFD4Oku);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px;
+            height: 500px;
+            width: 350px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .input-section {
+            margin-bottom: 15px;
+        }
+        .shape2 {
+            background-image: url(https://h.top4top.io/p_3262ynina0.png);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 10px;
+            height: 180px;
+            width: 350px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        } 
+        .shape3 {
+            background-color: transparent;
+            padding: 20px;
+            margin: 10px;
+            height: 700px;
+            width: 350px;
+           
+        }               
+        
+        
+        h1 {
+            font-size: 2em;
+            color: #ff6f61;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 1em;
+            background-color: #ff6f61;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        .profile-info {
+            font-size: 1.2em;
+            color: #ddd;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+        }
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .hashtags {
+            color: #ff6f61;
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 3;
+            align-items: center;
+            justify-content: center;
+        }
+         .opposites {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+        .opposites {
+            animation: opposites 2.5s ease-out 0s infinite;
+        }
+        .tl, .tr, .br, .bl {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+        }
+        .tl, .tr {
+            top: 0; 
+        }
+        .tr, .br {
+            left: 30px; 
+        }
+        .tl, .br {
+            animation: tlbr 2.5s ease-out 0s infinite;
+        }
+        .br, .bl {
+            top: 30px; 
+        }
+        .tl, .bl {
+            left: 0; 
+        }
+        .tr, .bl {
+            animation: trbl 2.5s ease-out 0s infinite;
+        }
+        .tl {
+            background: red;
+            transform-origin: bottom right;
+        }
+        .tr {
+            background: green; 
+            transform-origin: bottom left;
+        }
+        .br {
+            background: dodgerblue; 
+            transform-origin: top left;
+        }
+        .bl {
+            background: gold; 
+            transform-origin: top right;
+        }
+        @keyframes tlbr {
+            0% {transform: rotate(0);}
+            20% {transform: rotate(90deg);}
+            40% {transform: rotate(90deg);}
+            60% {transform: rotate(0);}
+        }
+        @keyframes trbl {
+            20% {transform: rotate(0);}
+            40% {transform: rotate(90deg);}
+            60% {transform: rotate(90deg);}
+            80% {transform: rotate(0);}
+        }
+        @keyframes opposites {
+            80% {transform: rotate(0deg);}
+            100% {transform: rotate(360deg);}
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <div id="blur-layer"></div>
+    <div class="container">
+        <!-- Shape 1: Input & Download Button -->
+        <center>
+<video autoplay muted loop width="100%" height="100%">
+  <source src="https://e.top4top.io/m_326207tpi0.mp4" type="video/mp4">
+</video></center>
+        <div class="shape input-section">
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <input type="text" id="url" placeholder="Masukkan tautan TikTok di sini">
+            <button onclick="downloadVideo()">DOWNLOAD...</button>  </div>
+        <!-- Shape 2: Username & Nickname -->
+        <div class="shape2 profile-info" id="profile-info" style="display: none;">
+        <br><br>
+        <p id="nickname"></p><br><br><br>
+        <p id="username"></p>
+        </div>
+        <!-- Shape 3: Video, Hashtags & Buttons -->
+        <div class="shape3 video-container" id="video-section" style="display: none;">
+            <video id="video" controls></video>
+            <p id="title" style="margin-top: 10px;"></p>
+            <p class="hashtags" id="hashtags"></p>
+            <div class="button-group">
+                <button id="copy-hashtags" style="display: none;" onclick="copyHashtags()">HasTag</button>
+                <button id="download-video" style="display: none;">Download Mp4</button>
+                <button id="download-audio" style="display: none;">Download Mp3</button>
+            </div>
+        </div>
+  
+        <p id="message"></p>
+    </div>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="opposites">
+            <div class="tl"></div>
+            <div class="tr"></div>
+            <div class="br"></div>
+            <div class="bl"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        particlesJS.load('particles-js', 'https://cdn.rawgit.com/VincentGarreau/particles.js/master/demo/js/config.json');
+        async function tiktok2(query) {
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const encodedParams = new URLSearchParams();
+                    encodedParams.set('url', query);
+                    encodedParams.set('hd', '1');
+                    const response = await axios.post('https://tikwm.com/api/', encodedParams, {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                            'User-Agent': 'Mozilla/5.0'
+                        }
+                    });
+                    const videoData = response.data.data;
+                    if (!videoData) {
+                        throw new Error("Data video tidak ditemukan.");
+                    }
+                    const result = {
+                        title: videoData.title,
+                        hashtags: videoData.title.match(/#[\w]+/g) || [],
+                        no_watermark: videoData.play,
+                        music: videoData.music,
+                        nickname: videoData.author.nickname,
+                        username: videoData.author.unique_id
+                    };
+                    resolve(result);
+                } catch (error) {
+                    console.error("Error:", error);
+                    reject("Maaf, terjadi kesalahan saat mengunduh video.");
+                }
+            });
+        }
+        async function downloadVideo() {
+            const url = document.getElementById('url');
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const message = document.getElementById('message');
+            const videoSection = document.getElementById('video-section');
+            const videoElement = document.getElementById('video');
+            const hashtagsElement = document.getElementById('hashtags');
+            const nicknameElement = document.getElementById('nickname');
+            const usernameElement = document.getElementById('username');
+            const profileInfo = document.getElementById('profile-info');
+            const titleElement = document.getElementById('title');
+            const copyHashtagsBtn = document.getElementById('copy-hashtags');
+            const downloadVideoBtn = document.getElementById('download-video');
+            const downloadAudioBtn = document.getElementById('download-audio');
+            message.textContent = "";
+            videoSection.style.display = "none";
+            profileInfo.style.display = "none";
+            loadingOverlay.style.display = "flex";
+            try {
+                const videoInfo = await tiktok2(url.value);
+                nicknameElement.textContent = videoInfo.nickname;
+                usernameElement.textContent = "@" + videoInfo.username;
+                titleElement.textContent = videoInfo.title;
+                videoElement.src = videoInfo.no_watermark;
+                hashtagsElement.textContent = videoInfo.hashtags.join(' ');
+                profileInfo.style.display = "block";
+                videoSection.style.display = "block";
+                copyHashtagsBtn.style.display = "inline";
+                downloadVideoBtn.style.display = "inline";
+                downloadAudioBtn.style.display = "inline";
+                copyHashtagsBtn.onclick = () => copyTextToClipboard(videoInfo.hashtags.join(' '));
+                downloadVideoBtn.onclick = () => downloadFile(videoInfo.no_watermark, "video.mp4");
+                downloadAudioBtn.onclick = () => downloadFile(videoInfo.music, "audio.mp3");
+            } catch (error) {
+                message.textContent = error;
+            } finally {
+                loadingOverlay.style.display = "none";
+            }
+        }
+        function copyTextToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Hashtags berhasil disalin!");
+            });
+        }
+        function downloadFile(url, filename) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script>
+</body>
+</html>
