@@ -4,28 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cyber Kazakhstan</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 110%; /* Lebih besar dari layar */
+            height: 110vh; /* Perbesar tinggi */
+            transform: scale(1.2); /* Zoom agar tulisan di luar tampilan */
+            transform-origin: top;
+        }
+    </style>
 </head>
-<body style="margin:0; padding:0; overflow:hidden;">
-    <iframe id="targetFrame" src="https://cyberkazakhstan.online/" width="100%" height="100%" style="border:none; position:absolute; top:0; left:0; width:100vw; height:100vh;"></iframe>
-
-    <script>
-        document.getElementById('targetFrame').onload = function() {
-            let iframeDoc = document.getElementById('targetFrame').contentDocument || document.getElementById('targetFrame').contentWindow.document;
-            
-            // Hapus tombol berdasarkan teks atau class/ID yang dikenali
-            let elementsToRemove = [
-                "Telegram Chat",  // Hapus tombol Telegram Chat
-                "DDoS Services",  // Hapus tombol DDoS Services
-                "FAQ"             // Hapus tombol FAQ
-            ];
-
-            elementsToRemove.forEach(text => {
-                let button = [...iframeDoc.getElementsByTagName("button")].find(el => el.innerText.includes(text));
-                if (button) {
-                    button.style.display = "none"; // Sembunyikan elemen
-                }
-            });
-        };
-    </script>
+<body>
+    <iframe src="https://cyberkazakhstan.online/" frameborder="0"></iframe>
 </body>
 </html>
