@@ -6,6 +6,25 @@
     <title>Cyber Kazakhstan</title>
 </head>
 <body style="margin:0; padding:0; overflow:hidden;">
-    <iframe src="https://cyberkazakhstan.online/" width="100%" height="100%" style="border:none; position:absolute; top:0; left:0; width:100vw; height:100vh;"></iframe>
+    <iframe id="targetFrame" src="https://cyberkazakhstan.online/" width="100%" height="100%" style="border:none; position:absolute; top:0; left:0; width:100vw; height:100vh;"></iframe>
+
+    <script>
+        // Tunggu hingga halaman iframe dimuat
+        document.getElementById('targetFrame').onload = function() {
+            let iframeDoc = document.getElementById('targetFrame').contentDocument || document.getElementById('targetFrame').contentWindow.document;
+            
+            // Ganti link "DDoS Services"
+            let ddosButton = iframeDoc.querySelector("a[href*='DDoS Services']");
+            if (ddosButton) {
+                ddosButton.href = "https://t.me/Xc_Corporation";
+            }
+
+            // Ganti link "Telegram Chat"
+            let telegramButton = iframeDoc.querySelector("a[href*='Telegram Chat']");
+            if (telegramButton) {
+                telegramButton.href = "https://t.me/Xin_Kenji";
+            }
+        };
+    </script>
 </body>
 </html>
