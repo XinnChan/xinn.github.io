@@ -16,14 +16,22 @@
             position: absolute;
             top: 0;
             left: 0;
-            width: 110%; /* Lebih besar dari layar */
-            height: 110vh; /* Perbesar tinggi */
-            transform: scale(1.2); /* Zoom agar tulisan di luar tampilan */
-            transform-origin: top;
+            width: 100%;
+            height: 100%;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://cyberkazakhstan.online/" frameborder="0"></iframe>
+    <iframe id="targetFrame" src="https://cyberkazakhstan.online/"></iframe>
+
+    <script>
+        document.getElementById('targetFrame').onload = function() {
+            let iframeWin = document.getElementById('targetFrame').contentWindow;
+            setTimeout(() => {
+                iframeWin.scrollTo(0, 300); // Geser 300px ke bawah setelah 1 detik
+            }, 1000);
+        };
+    </script>
 </body>
 </html>
