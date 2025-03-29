@@ -13,62 +13,64 @@
       padding: 0;
       box-sizing: border-box;
     }
-    
-    /* Latar belakang dengan gradasi lebih terang */
+    html, body {
+      height: 100%;
+    }
+    /* Canvas background */
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    /* Tema latar belakang dan teks */
     body {
       font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #9c27b0, #ba68c8);
-      color: #fff;
+      /* Gradasi gelap elegan */
+      background: linear-gradient(135deg, #1d0c3c, #2e1051);
+      color: #e0e0e0;
       line-height: 1.6;
       padding: 20px;
     }
-    
     h1, h2, h3 {
       text-align: center;
       margin-bottom: 20px;
-      color: #ffecb3;
-      /* Efek neon pulse yang lebih mencolok */
-      text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107;
-      animation: pulse 2s infinite;
+      color: #dcdcdc;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
     }
-    
     .container {
       max-width: 1200px;
       margin: auto;
       padding: 20px;
+      position: relative;
+      z-index: 1;
     }
-    
     .section {
       margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.5);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 20px rgba(255, 235, 59, 0.5);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
     }
-    
     .section h2 {
-      border-bottom: 2px solid #ffeb3b;
+      border-bottom: 2px solid #555;
       padding-bottom: 10px;
     }
-    
     .item {
       margin-bottom: 15px;
       padding: 10px;
-      border-bottom: 1px dashed #ffeb3b;
+      border-bottom: 1px dashed #555;
       position: relative;
     }
-    
     .item:last-child {
       border-bottom: none;
     }
-    
     .price {
       font-weight: bold;
-      color: #ffe082;
+      color: #ffcc00;
       margin-bottom: 10px;
     }
-    
-    /* Tombol Klik Beli dengan animasi pulse */
+    /* Tombol Klik Beli */
     .buy-btn {
       background: #ff4081;
       color: #1a001a;
@@ -78,64 +80,29 @@
       cursor: pointer;
       font-weight: bold;
       box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
-      animation: pulseButton 2s infinite;
       transition: background 0.3s, transform 0.3s;
     }
-    
     .buy-btn:hover {
       background: #f50057;
       transform: scale(1.05);
     }
-    
-    /* Responsive Grid jika diperlukan */
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    
-    @media (min-width: 768px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-    
     a {
       color: #ffeb3b;
       text-decoration: none;
     }
-    
     a:hover {
       text-decoration: underline;
     }
-    
     ul {
       list-style: disc;
       margin-left: 20px;
     }
-    
-    /* Animasi Pulse untuk heading */
-    @keyframes pulse {
-      0% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107; }
-      50% { text-shadow: 0 0 20px #ffeb3b, 0 0 30px #ffc107, 0 0 40px #ffca28; }
-      100% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107; }
-    }
-    
-    /* Animasi Pulse untuk tombol */
-    @keyframes pulseButton {
-      0% { box-shadow: 0 0 10px rgba(255, 64, 129, 0.7); }
-      50% { box-shadow: 0 0 20px rgba(255, 64, 129, 1); }
-      100% { box-shadow: 0 0 10px rgba(255, 64, 129, 0.7); }
-    }
   </style>
 </head>
 <body>
+  <!-- Canvas untuk animasi latar belakang -->
+  <canvas id="background-canvas"></canvas>
+  
   <div class="container">
     <h1>eXCe Corporation XCDDOS</h1>
     <p style="text-align: center; margin-bottom: 40px;">eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan Harga Terjangkau</p>
@@ -143,7 +110,7 @@
     <!-- Section VPS -->
     <div class="section">
       <h2>📌 Ready VPS 📌</h2>
-      <h3>VPS REGULAR CPU</h3>
+      <h3>VPS REGULAR</h3>
       <div class="item">
         <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 4 TB transfer</p>
         <p class="price">Rp. 49k / $4</p>
@@ -153,16 +120,6 @@
         <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 5 TB transfer</p>
         <p class="price">Rp. 69k / $7</p>
         <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')">Klik Beli</button>
-      </div>
-      <div class="item">
-        <p>16 GB / 4 CPUs &bull; 200 GB NVMe SSDs &bull; 8 TB transfer</p>
-        <p class="price">Rp.200k / $22</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 16 GB / 4 CPUs • 200 GB NVMe SSDs • 8 TB transfer - Rp.200k / $22')">Klik Beli</button>
-      </div>
-      <div class="item">
-        <p>16 GB / 8 CPUs &bull; 320 GB NVMe SSDs &bull; 12 TB transfer</p>
-        <p class="price">Rp.429k / $39</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 16 GB / 8 CPUs • 320 GB NVMe SSDs • 12 TB transfer - Rp.429k / $39')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
@@ -189,6 +146,7 @@
         <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
+      <p>✅ Bisa Perpanjang Hingga 2 Bulan</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
       <p>👾 Telegram Channel: <a href="https://t.me/eXCe_Corporation" target="_blank">t.me/eXCe_Corporation</a></p>
       
@@ -278,6 +236,88 @@
           window.location.href = "https://t.me/Xin_Kenji";
         });
     }
+
+    // Konfigurasi Canvas & Partikel
+    const canvas = document.getElementById('background-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 50;
+
+    // Sesuaikan ukuran canvas dengan viewport
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Membuat objek partikel
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = Math.random() * 4 + 1;
+        this.alpha = Math.random() * 0.5 + 0.5;
+        this.dx = (Math.random() - 0.5) * 2;
+        this.dy = (Math.random() - 0.5) * 2;
+      }
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
+        // Bounce dari tepi canvas
+        if (this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
+        if (this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff80ab';
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Inisialisasi partikel
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+      }
+    }
+    initParticles();
+
+    // Animasi partikel (gerakan dasar dan efek kedipan)
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => {
+        particle.update();
+        // Efek kedipan sederhana dengan variasi alpha
+        particle.alpha = 0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Event untuk membuat partikel baru di sekitar posisi mouse / sentuhan
+    function addParticles(x, y) {
+      for (let i = 0; i < 5; i++) {
+        particles.push(new Particle(x, y));
+      }
+      // Batasi jumlah partikel
+      if (particles.length > 200) {
+        particles.splice(0, particles.length - 200);
+      }
+    }
+    window.addEventListener('mousemove', (e) => {
+      addParticles(e.clientX, e.clientY);
+    });
+    window.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      addParticles(touch.clientX, touch.clientY);
+    });
   </script>
 </body>
 </html>
