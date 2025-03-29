@@ -16,7 +16,8 @@
     
     body {
       font-family: 'Orbitron', sans-serif;
-      background: #1a001a;
+      /* Warna background sedikit lebih terang */
+      background: #2a0032;
       color: #e0e0e0;
       line-height: 1.6;
       padding: 20px;
@@ -27,6 +28,8 @@
       margin-bottom: 20px;
       color: #d4a4ff;
       text-shadow: 0 0 10px rgba(212, 164, 255, 0.8);
+      /* Animasi blink untuk heading */
+      animation: blinkAnimation 2s infinite;
     }
     
     .container {
@@ -37,7 +40,7 @@
     
     .section {
       margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.08);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 15px rgba(212, 164, 255, 0.3);
@@ -102,17 +105,30 @@
       font-weight: bold;
       box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
       margin-top: 10px;
+      animation: blinkAnimation 2s infinite;
     }
     
     .btn:hover {
       background: #e600e6;
+    }
+    
+    ul {
+      list-style: disc;
+      margin-left: 20px;
+    }
+    
+    /* Animasi blink */
+    @keyframes blinkAnimation {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; }
+      100% { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Cyberpunk Neon Hosting</h1>
-    <p style="text-align: center; margin-bottom: 40px;">Layanan VPS, VDS dan RDP dengan tampilan neon ungu futuristik</p>
+    <p style="text-align: center; margin-bottom: 40px;">Layanan VPS, VDS, dan RDP dengan tampilan neon ungu futuristik</p>
     
     <!-- Section VPS -->
     <div class="section">
@@ -156,11 +172,13 @@
       </div>
       <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
-      <p>👾 Telegram Channel: <a href="https://t.me/Xc_Corporation" target="_blank">t.me/Xc_Corporation</a></p>
+      <p>👾 Telegram Channel: <a href="https://t.me/Xc_Corporation" target="_blank" class="btn">t.me/Xc_Corporation</a></p>
       
-      <p style="margin-top: 20px; text-align: center;">~ VPS Dengan Settingan Karnel Custom Terbaik<br>
-         ~ Free Firewall Anti DDOS<br>
-         ~ VPS SUPER SUPPORT DDOS</p>
+      <p style="margin-top: 20px; text-align: center;">
+        ~ VPS Dengan Settingan Karnel Custom Terbaik<br>
+        ~ Free Firewall Anti DDOS<br>
+        ~ VPS SUPER SUPPORT DDOS
+      </p>
       <p style="text-align: center;">🎥Mountly VPS?🎥</p>
     </div>
     
@@ -179,13 +197,15 @@
       </div>
       <p>Region: US</p>
       <p>OS:</p>
-      <ul style="margin-left: 20px;">
+      <ul>
         <li>Ubuntu: 20 / 22 / 23</li>
         <li>Debian: 11 / 12</li>
       </ul>
-      <p style="text-align: center; margin-top: 10px;">🎥Mountly VDS #Bisa_Perpanjang🎥<br>
-         Premium Dedicated VDS<br>
-         Support DDOS Layer-7</p>
+      <p style="text-align: center; margin-top: 10px;">
+        🎥Mountly VDS #Bisa_Perpanjang🎥<br>
+        Premium Dedicated VDS<br>
+        Support DDOS Layer-7
+      </p>
     </div>
     
     <!-- Section RDP -->
@@ -200,6 +220,27 @@
         <p><strong>16 CPUs Intel XEON</strong></p>
         <p>24 GB RAM &bull; 315 GB NVMe &bull; 20 TB Trafic &bull; 10 GB/s Port</p>
         <p class="price">IDR: 400k / USD: 30$</p>
+      </div>
+      <div class="item">
+        <p>Hak akses <strong>Root / Administrator</strong></p>
+        <p>Masa pakai 30 hari &bull; Bisa perpanjang dengan data dan IP tetap</p>
+      </div>
+      <div class="item">
+        <p>Pilihan OS <strong>Windows:</strong></p>
+        <ul>
+          <li>Windows Server 2016</li>
+          <li>Windows Server 2019</li>
+          <li>Windows Server 2022</li>
+          <li>Windows 10 Pro</li>
+          <li>Windows 11 Pro</li>
+        </ul>
+      </div>
+      <div class="item">
+        <p>Pilihan OS <strong>Linux:</strong></p>
+        <ul>
+          <li>Ubuntu 20 LTS</li>
+          <li>Ubuntu 22 LTS</li>
+        </ul>
       </div>
     </div>
   </div>
