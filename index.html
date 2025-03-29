@@ -16,8 +16,7 @@
     
     body {
       font-family: 'Orbitron', sans-serif;
-      /* Warna background sedikit lebih terang */
-      background: #2a0032;
+      background: #2a0032; /* Warna sedikit lebih terang */
       color: #e0e0e0;
       line-height: 1.6;
       padding: 20px;
@@ -28,7 +27,6 @@
       margin-bottom: 20px;
       color: #d4a4ff;
       text-shadow: 0 0 10px rgba(212, 164, 255, 0.8);
-      /* Animasi blink untuk heading */
       animation: blinkAnimation 2s infinite;
     }
     
@@ -55,6 +53,7 @@
       margin-bottom: 15px;
       padding: 10px;
       border-bottom: 1px dashed #d4a4ff;
+      position: relative;
     }
     
     .item:last-child {
@@ -64,6 +63,25 @@
     .price {
       font-weight: bold;
       color: #ffd700;
+      margin-bottom: 10px;
+    }
+    
+    /* Tombol Klik Beli */
+    .buy-btn {
+      background: #ff00ff;
+      color: #1a001a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
+      animation: blinkAnimation 2s infinite;
+      transition: background 0.3s;
+    }
+    
+    .buy-btn:hover {
+      background: #e600e6;
     }
     
     /* Responsive Grid untuk layanan jika diperlukan */
@@ -94,24 +112,6 @@
       text-decoration: underline;
     }
     
-    /* Tombol untuk Telegram Channel */
-    .btn {
-      display: inline-block;
-      background: #ff00ff;
-      color: #1a001a;
-      padding: 10px 20px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
-      margin-top: 10px;
-      animation: blinkAnimation 2s infinite;
-    }
-    
-    .btn:hover {
-      background: #e600e6;
-    }
-    
     ul {
       list-style: disc;
       margin-left: 20px;
@@ -137,18 +137,22 @@
       <div class="item">
         <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 4 TB transfer</p>
         <p class="price">Rp. 49k / $4</p>
+        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 CPUs • 80 GB SSD Disk • 4 TB transfer - Rp. 49k / $4')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 5 TB transfer</p>
         <p class="price">Rp. 69k / $7</p>
+        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')">Klik Beli</button>
       </div>
       <div class="item">
         <p>16 GB / 4 CPUs &bull; 200 GB NVMe SSDs &bull; 8 TB transfer</p>
         <p class="price">Rp.200k / $22</p>
+        <button class="buy-btn" onclick="copyAndRedirect('16 GB / 4 CPUs • 200 GB NVMe SSDs • 8 TB transfer - Rp.200k / $22')">Klik Beli</button>
       </div>
       <div class="item">
         <p>16 GB / 8 CPUs &bull; 320 GB NVMe SSDs &bull; 12 TB transfer</p>
         <p class="price">Rp.429k / $39</p>
+        <button class="buy-btn" onclick="copyAndRedirect('16 GB / 8 CPUs • 320 GB NVMe SSDs • 12 TB transfer - Rp.429k / $39')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
@@ -157,22 +161,26 @@
       <div class="item">
         <p>4 GB / 2 AMD CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 79k / $8</p>
+        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 AMD CPUs &bull; 160 GB NVMe SSDs &bull; 5 TB transfer</p>
         <p class="price">Rp. 129k / $15</p>
+        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')">Klik Beli</button>
       </div>
       <div class="item">
         <p>4 GB / 2 INTEL CPUs &bull; 160 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 89k / $9</p>
+        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 INTEL CPUs • 160 GB NVMe SSDs • 4 TB transfer - Rp. 89k / $9')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 INTEL CPUs &bull; 240 GB NVMe SSDs &bull; 6 TB transfer</p>
         <p class="price">Rp. 229k / $24</p>
+        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
-      <p>👾 Telegram Channel: <a href="https://t.me/Xc_Corporation" target="_blank" class="btn">t.me/Xc_Corporation</a></p>
+      <p>👾 Telegram Channel: <a href="https://t.me/Xc_Corporation" target="_blank">t.me/Xc_Corporation</a></p>
       
       <p style="margin-top: 20px; text-align: center;">
         ~ VPS Dengan Settingan Karnel Custom Terbaik<br>
@@ -189,11 +197,13 @@
         <p><strong>8 vCPU Intel Xeon E5-2683 v4</strong></p>
         <p>14 GB RAM &bull; 200 GB SSD &bull; 5.000 GB / 5 TB Traffic &bull; 500 Mbps port speed (fair share)</p>
         <p class="price">IDR: 400k / USD: 30$</p>
+        <button class="buy-btn" onclick="copyAndRedirect('8 vCPU Intel Xeon E5-2683 v4, 14 GB RAM • 200 GB SSD • 5.000 GB / 5 TB Traffic • 500 Mbps port speed - IDR: 400k / USD: 30$')">Klik Beli</button>
       </div>
       <div class="item">
         <p><strong>16 vCPU Intel Xeon E5-2683 v4</strong></p>
         <p>28 GB RAM &bull; 400 GB SSD &bull; 10.000 GB / 10 TB Traffic &bull; 1Gbps port speed (fair share)</p>
         <p class="price">IDR: 800k / USD: 60$</p>
+        <button class="buy-btn" onclick="copyAndRedirect('16 vCPU Intel Xeon E5-2683 v4, 28 GB RAM • 400 GB SSD • 10.000 GB / 10 TB Traffic • 1Gbps port speed - IDR: 800k / USD: 60$')">Klik Beli</button>
       </div>
       <p>Region: US</p>
       <p>OS:</p>
@@ -215,11 +225,13 @@
         <p><strong>8 CPUs Intel XEON</strong></p>
         <p>12 GB RAM &bull; 155 GB NVMe &bull; 13 TB Trafic &bull; 10 GB/s Port</p>
         <p class="price">IDR: 250k / USD: 20$</p>
+        <button class="buy-btn" onclick="copyAndRedirect('8 CPUs Intel XEON, 12 GB RAM • 155 GB NVMe • 13 TB Trafic • 10 GB/s Port - IDR: 250k / USD: 20$')">Klik Beli</button>
       </div>
       <div class="item">
         <p><strong>16 CPUs Intel XEON</strong></p>
         <p>24 GB RAM &bull; 315 GB NVMe &bull; 20 TB Trafic &bull; 10 GB/s Port</p>
         <p class="price">IDR: 400k / USD: 30$</p>
+        <button class="buy-btn" onclick="copyAndRedirect('16 CPUs Intel XEON, 24 GB RAM • 315 GB NVMe • 20 TB Trafic • 10 GB/s Port - IDR: 400k / USD: 30$')">Klik Beli</button>
       </div>
       <div class="item">
         <p>Hak akses <strong>Root / Administrator</strong></p>
@@ -244,5 +256,21 @@
       </div>
     </div>
   </div>
+  
+  <script>
+    function copyAndRedirect(text) {
+      // Menyalin teks ke clipboard
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          // Setelah berhasil menyalin, alihkan ke tautan Telegram
+          window.location.href = "https://t.me/Xin_Kenji";
+        })
+        .catch(err => {
+          console.error("Gagal menyalin teks:", err);
+          // Jika gagal, tetap alihkan ke Telegram
+          window.location.href = "https://t.me/Xin_Kenji";
+        });
+    }
+  </script>
 </body>
 </html>
