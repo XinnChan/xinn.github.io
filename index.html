@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>eXCe Corporation XCDDOS Layanan VPS, VDS, RDP</title>
-  <!-- Google Font untuk tampilan futuristik -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Roboto untuk teks yang mudah dibaca dan Orbitron untuk heading (opsional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
     /* Reset dasar */
     * {
@@ -16,7 +16,7 @@
     html, body {
       height: 100%;
     }
-    /* Canvas background */
+    /* Canvas untuk animasi latar belakang */
     #background-canvas {
       position: fixed;
       top: 0;
@@ -25,14 +25,15 @@
     }
     /* Tema latar belakang dan teks */
     body {
-      font-family: 'Orbitron', sans-serif;
-      /* Gradasi gelap elegan */
+      font-family: 'Roboto', sans-serif;
       background: linear-gradient(135deg, #1d0c3c, #2e1051);
       color: #e0e0e0;
       line-height: 1.6;
       padding: 20px;
     }
+    /* Gunakan Orbitron untuk heading agar tetap berkesan futuristik */
     h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
       margin-bottom: 20px;
       color: #dcdcdc;
@@ -105,7 +106,9 @@
   
   <div class="container">
     <h1>eXCe Corporation XCDDOS</h1>
-    <p style="text-align: center; margin-bottom: 40px;">eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan Harga Terjangkau</p>
+    <p style="text-align: center; margin-bottom: 40px;">
+      eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan Harga Terjangkau
+    </p>
     
     <!-- Section VPS -->
     <div class="section">
@@ -124,7 +127,7 @@
       <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
       
-      <h3 style="margin-top: 30px;">VPS PREMIUM CPU</h3>
+      <h3 style="margin-top: 30px;">VPS PREMIUM</h3>
       <div class="item">
         <p>4 GB / 2 AMD CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 79k / $8</p>
@@ -251,7 +254,7 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Membuat objek partikel
+    // Kelas partikel
     class Particle {
       constructor(x, y) {
         this.x = x;
@@ -264,7 +267,6 @@
       update() {
         this.x += this.dx;
         this.y += this.dy;
-        // Bounce dari tepi canvas
         if (this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
         if (this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
       }
@@ -279,7 +281,6 @@
       }
     }
 
-    // Inisialisasi partikel
     function initParticles() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
@@ -288,12 +289,10 @@
     }
     initParticles();
 
-    // Animasi partikel (gerakan dasar dan efek kedipan)
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach(particle => {
         particle.update();
-        // Efek kedipan sederhana dengan variasi alpha
         particle.alpha = 0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
         particle.draw();
       });
@@ -301,12 +300,10 @@
     }
     animate();
 
-    // Event untuk membuat partikel baru di sekitar posisi mouse / sentuhan
     function addParticles(x, y) {
       for (let i = 0; i < 5; i++) {
         particles.push(new Particle(x, y));
       }
-      // Batasi jumlah partikel
       if (particles.length > 200) {
         particles.splice(0, particles.length - 200);
       }
