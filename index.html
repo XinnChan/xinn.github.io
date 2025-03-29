@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Cyberpunk Neon Hosting</title>
+  <title>eXCe Corporation XCDDOS Layanan VPS, VDS, RDP</title>
   <!-- Google Font untuk tampilan futuristik -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -14,10 +14,11 @@
       box-sizing: border-box;
     }
     
+    /* Latar belakang dengan gradasi lebih terang */
     body {
       font-family: 'Orbitron', sans-serif;
-      background: #2a0032; /* Warna sedikit lebih terang */
-      color: #e0e0e0;
+      background: linear-gradient(135deg, #9c27b0, #ba68c8);
+      color: #fff;
       line-height: 1.6;
       padding: 20px;
     }
@@ -25,9 +26,10 @@
     h1, h2, h3 {
       text-align: center;
       margin-bottom: 20px;
-      color: #d4a4ff;
-      text-shadow: 0 0 10px rgba(212, 164, 255, 0.8);
-      animation: blinkAnimation 2s infinite;
+      color: #ffecb3;
+      /* Efek neon pulse yang lebih mencolok */
+      text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107;
+      animation: pulse 2s infinite;
     }
     
     .container {
@@ -38,21 +40,21 @@
     
     .section {
       margin-bottom: 40px;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 15px rgba(212, 164, 255, 0.3);
+      box-shadow: 0 0 20px rgba(255, 235, 59, 0.5);
     }
     
     .section h2 {
-      border-bottom: 2px solid #d4a4ff;
+      border-bottom: 2px solid #ffeb3b;
       padding-bottom: 10px;
     }
     
     .item {
       margin-bottom: 15px;
       padding: 10px;
-      border-bottom: 1px dashed #d4a4ff;
+      border-bottom: 1px dashed #ffeb3b;
       position: relative;
     }
     
@@ -62,29 +64,30 @@
     
     .price {
       font-weight: bold;
-      color: #ffd700;
+      color: #ffe082;
       margin-bottom: 10px;
     }
     
-    /* Tombol Klik Beli */
+    /* Tombol Klik Beli dengan animasi pulse */
     .buy-btn {
-      background: #ff00ff;
+      background: #ff4081;
       color: #1a001a;
       border: none;
       padding: 8px 16px;
       border-radius: 4px;
       cursor: pointer;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(255, 0, 255, 0.7);
-      animation: blinkAnimation 2s infinite;
-      transition: background 0.3s;
+      box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+      animation: pulseButton 2s infinite;
+      transition: background 0.3s, transform 0.3s;
     }
     
     .buy-btn:hover {
-      background: #e600e6;
+      background: #f50057;
+      transform: scale(1.05);
     }
     
-    /* Responsive Grid untuk layanan jika diperlukan */
+    /* Responsive Grid jika diperlukan */
     .grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -104,7 +107,7 @@
     }
     
     a {
-      color: #d4a4ff;
+      color: #ffeb3b;
       text-decoration: none;
     }
     
@@ -117,18 +120,25 @@
       margin-left: 20px;
     }
     
-    /* Animasi blink */
-    @keyframes blinkAnimation {
-      0% { opacity: 1; }
-      50% { opacity: 0.8; }
-      100% { opacity: 1; }
+    /* Animasi Pulse untuk heading */
+    @keyframes pulse {
+      0% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107; }
+      50% { text-shadow: 0 0 20px #ffeb3b, 0 0 30px #ffc107, 0 0 40px #ffca28; }
+      100% { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ffeb3b, 0 0 30px #ffc107; }
+    }
+    
+    /* Animasi Pulse untuk tombol */
+    @keyframes pulseButton {
+      0% { box-shadow: 0 0 10px rgba(255, 64, 129, 0.7); }
+      50% { box-shadow: 0 0 20px rgba(255, 64, 129, 1); }
+      100% { box-shadow: 0 0 10px rgba(255, 64, 129, 0.7); }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Cyberpunk Neon Hosting</h1>
-    <p style="text-align: center; margin-bottom: 40px;">Layanan VPS, VDS, dan RDP dengan tampilan neon ungu futuristik</p>
+    <h1>eXCe Corporation XCDDOS</h1>
+    <p style="text-align: center; margin-bottom: 40px;">eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan Harga Terjangkau</p>
     
     <!-- Section VPS -->
     <div class="section">
@@ -137,22 +147,22 @@
       <div class="item">
         <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 4 TB transfer</p>
         <p class="price">Rp. 49k / $4</p>
-        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 CPUs • 80 GB SSD Disk • 4 TB transfer - Rp. 49k / $4')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 4 TB transfer - Rp. 49k / $4')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 5 TB transfer</p>
         <p class="price">Rp. 69k / $7</p>
-        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')">Klik Beli</button>
       </div>
       <div class="item">
         <p>16 GB / 4 CPUs &bull; 200 GB NVMe SSDs &bull; 8 TB transfer</p>
         <p class="price">Rp.200k / $22</p>
-        <button class="buy-btn" onclick="copyAndRedirect('16 GB / 4 CPUs • 200 GB NVMe SSDs • 8 TB transfer - Rp.200k / $22')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 16 GB / 4 CPUs • 200 GB NVMe SSDs • 8 TB transfer - Rp.200k / $22')">Klik Beli</button>
       </div>
       <div class="item">
         <p>16 GB / 8 CPUs &bull; 320 GB NVMe SSDs &bull; 12 TB transfer</p>
         <p class="price">Rp.429k / $39</p>
-        <button class="buy-btn" onclick="copyAndRedirect('16 GB / 8 CPUs • 320 GB NVMe SSDs • 12 TB transfer - Rp.429k / $39')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 16 GB / 8 CPUs • 320 GB NVMe SSDs • 12 TB transfer - Rp.429k / $39')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
@@ -161,26 +171,26 @@
       <div class="item">
         <p>4 GB / 2 AMD CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 79k / $8</p>
-        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 AMD CPUs &bull; 160 GB NVMe SSDs &bull; 5 TB transfer</p>
         <p class="price">Rp. 129k / $15</p>
-        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')">Klik Beli</button>
       </div>
       <div class="item">
         <p>4 GB / 2 INTEL CPUs &bull; 160 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 89k / $9</p>
-        <button class="buy-btn" onclick="copyAndRedirect('4 GB / 2 INTEL CPUs • 160 GB NVMe SSDs • 4 TB transfer - Rp. 89k / $9')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 INTEL CPUs • 160 GB NVMe SSDs • 4 TB transfer - Rp. 89k / $9')">Klik Beli</button>
       </div>
       <div class="item">
         <p>8 GB / 4 INTEL CPUs &bull; 240 GB NVMe SSDs &bull; 6 TB transfer</p>
         <p class="price">Rp. 229k / $24</p>
-        <button class="buy-btn" onclick="copyAndRedirect('8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')">Klik Beli</button>
       </div>
       <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
-      <p>👾 Telegram Channel: <a href="https://t.me/Xc_Corporation" target="_blank">t.me/Xc_Corporation</a></p>
+      <p>👾 Telegram Channel: <a href="https://t.me/eXCe_Corporation" target="_blank">t.me/eXCe_Corporation</a></p>
       
       <p style="margin-top: 20px; text-align: center;">
         ~ VPS Dengan Settingan Karnel Custom Terbaik<br>
@@ -197,13 +207,13 @@
         <p><strong>8 vCPU Intel Xeon E5-2683 v4</strong></p>
         <p>14 GB RAM &bull; 200 GB SSD &bull; 5.000 GB / 5 TB Traffic &bull; 500 Mbps port speed (fair share)</p>
         <p class="price">IDR: 400k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('8 vCPU Intel Xeon E5-2683 v4, 14 GB RAM • 200 GB SSD • 5.000 GB / 5 TB Traffic • 500 Mbps port speed - IDR: 400k / USD: 30$')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VDS 8 vCPU Intel Xeon E5-2683 v4, 14 GB RAM • 200 GB SSD • 5.000 GB / 5 TB Traffic • 500 Mbps port speed - IDR: 400k / USD: 30$')">Klik Beli</button>
       </div>
       <div class="item">
         <p><strong>16 vCPU Intel Xeon E5-2683 v4</strong></p>
         <p>28 GB RAM &bull; 400 GB SSD &bull; 10.000 GB / 10 TB Traffic &bull; 1Gbps port speed (fair share)</p>
         <p class="price">IDR: 800k / USD: 60$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('16 vCPU Intel Xeon E5-2683 v4, 28 GB RAM • 400 GB SSD • 10.000 GB / 10 TB Traffic • 1Gbps port speed - IDR: 800k / USD: 60$')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy VDS 16 vCPU Intel Xeon E5-2683 v4, 28 GB RAM • 400 GB SSD • 10.000 GB / 10 TB Traffic • 1Gbps port speed - IDR: 800k / USD: 60$')">Klik Beli</button>
       </div>
       <p>Region: US</p>
       <p>OS:</p>
@@ -225,13 +235,13 @@
         <p><strong>8 CPUs Intel XEON</strong></p>
         <p>12 GB RAM &bull; 155 GB NVMe &bull; 13 TB Trafic &bull; 10 GB/s Port</p>
         <p class="price">IDR: 250k / USD: 20$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('8 CPUs Intel XEON, 12 GB RAM • 155 GB NVMe • 13 TB Trafic • 10 GB/s Port - IDR: 250k / USD: 20$')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP 8 CPUs Intel XEON, 12 GB RAM • 155 GB NVMe • 13 TB Trafic • 10 GB/s Port - IDR: 250k / USD: 20$')">Klik Beli</button>
       </div>
       <div class="item">
         <p><strong>16 CPUs Intel XEON</strong></p>
         <p>24 GB RAM &bull; 315 GB NVMe &bull; 20 TB Trafic &bull; 10 GB/s Port</p>
         <p class="price">IDR: 400k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('16 CPUs Intel XEON, 24 GB RAM • 315 GB NVMe • 20 TB Trafic • 10 GB/s Port - IDR: 400k / USD: 30$')">Klik Beli</button>
+        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP 16 CPUs Intel XEON, 24 GB RAM • 315 GB NVMe • 20 TB Trafic • 10 GB/s Port - IDR: 400k / USD: 30$')">Klik Beli</button>
       </div>
       <div class="item">
         <p>Hak akses <strong>Root / Administrator</strong></p>
@@ -259,15 +269,12 @@
   
   <script>
     function copyAndRedirect(text) {
-      // Menyalin teks ke clipboard
       navigator.clipboard.writeText(text)
         .then(() => {
-          // Setelah berhasil menyalin, alihkan ke tautan Telegram
           window.location.href = "https://t.me/Xin_Kenji";
         })
         .catch(err => {
           console.error("Gagal menyalin teks:", err);
-          // Jika gagal, tetap alihkan ke Telegram
           window.location.href = "https://t.me/Xin_Kenji";
         });
     }
