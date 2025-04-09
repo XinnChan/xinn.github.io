@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>eXCe Corporation XCDDOS Layanan VPS, VDS, RDP</title>
-  <!-- Google Fonts: Roboto untuk teks yang mudah dibaca dan Orbitron untuk heading (opsional) -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Google Fonts: Roboto untuk teks & Orbitron untuk heading -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
   <style>
     /* Reset dasar */
     * {
@@ -13,7 +16,8 @@
       padding: 0;
       box-sizing: border-box;
     }
-    html, body {
+    html,
+    body {
       height: 100%;
     }
     /* Canvas untuk animasi latar belakang */
@@ -25,15 +29,17 @@
     }
     /* Tema latar belakang dan teks */
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: "Roboto", sans-serif;
       background: linear-gradient(135deg, #1d0c3c, #2e1051);
       color: #e0e0e0;
       line-height: 1.6;
       padding: 20px;
     }
-    /* Gunakan Orbitron untuk heading agar tetap berkesan futuristik */
-    h1, h2, h3 {
-      font-family: 'Orbitron', sans-serif;
+    /* Heading futuristik dengan Orbitron */
+    h1,
+    h2,
+    h3 {
+      font-family: "Orbitron", sans-serif;
       text-align: center;
       margin-bottom: 20px;
       color: #dcdcdc;
@@ -71,8 +77,9 @@
       color: #ffcc00;
       margin-bottom: 10px;
     }
-    /* Tombol Klik Beli dan tombol tambahan */
-    .buy-btn, .toggle-btn {
+    /* Tombol Klik Beli + tombol tambahan */
+    .buy-btn,
+    .toggle-btn {
       background: #ff4081;
       color: #1a001a;
       border: none;
@@ -84,8 +91,10 @@
       transition: background 0.3s, transform 0.3s;
       display: block;
       margin: 20px auto;
+      text-align: center;
     }
-    .buy-btn:hover, .toggle-btn:hover {
+    .buy-btn:hover,
+    .toggle-btn:hover {
       background: #f50057;
       transform: scale(1.05);
     }
@@ -96,25 +105,42 @@
     a:hover {
       text-decoration: underline;
     }
+    /* Penataan list */
     ul {
       list-style: disc;
-      margin-left: 20px;
+      margin: 10px 0 10px 20px;
+      padding-left: 10px;
     }
     /* Animasi Emoji bergerak */
     @keyframes emojiMove {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-      100% { transform: translateY(0); }
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0);
+      }
     }
     .emoji-animate {
       display: inline-block;
       animation: emojiMove 1s infinite;
+      margin-right: 5px;
     }
-    /* Style untuk konten collapsible */
+    /* Efek Slide / Fade untuk konten tambahan */
     #moreContent {
-      display: none;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
       margin-top: 20px;
       border-top: 1px solid #555;
+      padding-top: 0; /* akan disesuaikan saat show */
+    }
+    #moreContent.show {
+      max-height: 2000px; /* cukup besar untuk menampung konten */
+      opacity: 1;
       padding-top: 20px;
     }
     .list-section {
@@ -124,22 +150,24 @@
       margin-bottom: 10px;
       font-size: 1.2em;
     }
-    .list-section p, .list-section li {
+    .list-section p,
+    .list-section li {
       margin-bottom: 5px;
       font-size: 0.95em;
     }
   </style>
 </head>
 <body>
-  <!-- Canvas untuk animasi latar belakang -->
+  <!-- Canvas Latar Belakang -->
   <canvas id="background-canvas"></canvas>
-  
+
   <div class="container">
     <h1>eXCe Corporation XCDDOS</h1>
     <p style="text-align: center; margin-bottom: 40px;">
-      eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan Harga Terjangkau
+      eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan
+      Harga Terjangkau
     </p>
-    
+
     <!-- Section VPS -->
     <div class="section">
       <h2>Virtual Private Server ( VPS )</h2>
@@ -147,82 +175,157 @@
       <div class="item">
         <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 4 TB transfer</p>
         <p class="price">Rp. 49k / $4</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 4 TB transfer - Rp. 49k / $4')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 4 TB transfer - Rp. 49k / $4')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 5 TB transfer</p>
         <p class="price">Rp. 69k / $7</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 5 TB transfer - Rp. 69k / $7')"
+        >
+          Klik Beli
+        </button>
       </div>
       <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
-      
+
       <h3 style="margin-top: 30px;">VPS PREMIUM</h3>
       <div class="item">
         <p>4 GB / 2 AMD CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 79k / $8</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p>8 GB / 4 AMD CPUs &bull; 160 GB NVMe SSDs &bull; 5 TB transfer</p>
         <p class="price">Rp. 129k / $15</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p>4 GB / 2 INTEL CPUs &bull; 160 GB NVMe SSDs &bull; 4 TB transfer</p>
         <p class="price">Rp. 89k / $9</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 4 GB / 2 INTEL CPUs • 160 GB NVMe SSDs • 4 TB transfer - Rp. 89k / $9')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 INTEL CPUs • 160 GB NVMe SSDs • 4 TB transfer - Rp. 89k / $9')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p>8 GB / 4 INTEL CPUs &bull; 240 GB NVMe SSDs &bull; 6 TB transfer</p>
         <p class="price">Rp. 229k / $24</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VPS 8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 INTEL CPUs • 240 GB NVMe SSDs • 6 TB transfer - Rp. 229k / $24')"
+        >
+          Klik Beli
+        </button>
       </div>
       <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
       <p>✅ Bisa Perpanjang Hingga 2 Bulan</p>
       <p>🌐 Can Request Region, Platform, & Version</p>
-      <p>👾 Telegram Channel: <a href="https://t.me/eXCe_Corporation" target="_blank">t.me/eXCe_Corporation</a></p>
-      
+      <p>
+        👾 Telegram Channel:
+        <a href="https://t.me/eXCe_Corporation" target="_blank"
+          >t.me/eXCe_Corporation</a
+        >
+      </p>
+
       <p style="margin-top: 20px; text-align: center;">
-        ~ VPS Dengan Settingan Karnel Custom Terbaik<br>
-        ~ Free Firewall Anti DDOS<br>
+        ~ VPS Dengan Settingan Karnel Custom Terbaik<br />
+        ~ Free Firewall Anti DDOS<br />
         ~ VPS SUPER SUPPORT DDOS
       </p>
       <p style="text-align: center;">🎥Mountly VPS?🎥</p>
     </div>
-    
+
     <!-- Section VDS -->
     <div class="section">
       <h2>Virtual Dedicated Server ( VDS )</h2>
       <div class="item">
         <p><strong>REGION US 8 vCPU Intel Xeon E5-2683 v4</strong></p>
-        <p>14 GB RAM &bull; 200 GB SSD &bull; 5.000 GB / 5 TB Traffic &bull; 500 Mbps data/port speed (fair share)</p>
+        <p>
+          14 GB RAM &bull; 200 GB SSD &bull; 5.000 GB / 5 TB Traffic &bull;
+          500 Mbps data/port speed (fair share)
+        </p>
         <p class="price">IDR: 400k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VDS REGION US 8 vCPU Intel Xeon E5-2683 v4, 14 GB RAM • 200 GB SSD • 5.000 GB / 5 TB Traffic • 500 Mbps port speed - IDR: 400k / USD: 30$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 8 vCPU Intel Xeon E5-2683 v4, 14 GB RAM • 200 GB SSD • 5.000 GB / 5 TB Traffic • 500 Mbps port speed - IDR: 400k / USD: 30$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION US 16 vCPU Intel Xeon E5-2683 v4</strong></p>
-        <p>28 GB RAM &bull; 400 GB SSD &bull; 10.000 GB / 10 TB Traffic &bull; 1Gbps data/port speed (fair share)</p>
+        <p>
+          28 GB RAM &bull; 400 GB SSD &bull; 10.000 GB / 10 TB Traffic &bull;
+          1Gbps data/port speed (fair share)
+        </p>
         <p class="price">IDR: 800k / USD: 60$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy VDS REGION US 16 vCPU Intel Xeon E5-2683 v4, 28 GB RAM • 400 GB SSD • 10.000 GB / 10 TB Traffic • 1Gbps port speed - IDR: 800k / USD: 60$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 16 vCPU Intel Xeon E5-2683 v4, 28 GB RAM • 400 GB SSD • 10.000 GB / 10 TB Traffic • 1Gbps port speed - IDR: 800k / USD: 60$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION ID 8 CPUs</strong></p>
-        <p>16 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          16 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 320k / USD: 25$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 8 CPUs, 16 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 320k / USD: 25$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 8 CPUs, 16 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 320k / USD: 25$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION ID 16 CPUs</strong></p>
-        <p>32 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          32 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 475k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 16 CPUs, 32 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 475k / USD: 30$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 16 CPUs, 32 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 475k / USD: 30$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION ID 32 CPUs</strong></p>
-        <p>64 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          64 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 775k / USD: 55$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 32 CPUs, 64 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 775k / USD: 55$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 32 CPUs, 64 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 775k / USD: 55$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <p>OS:</p>
       <ul>
@@ -230,44 +333,84 @@
         <li>Debian: 11 / 12</li>
       </ul>
       <p style="text-align: center; margin-top: 10px;">
-        🎥VDS 30 hari Anti Suspen #Bisa_Perpanjang🎥<br>
-        Premium Dedicated VDS<br>
+        🎥VDS 30 hari Anti Suspen #Bisa_Perpanjang🎥<br />
+        Premium Dedicated VDS<br />
         Support DDOS Layer-7
       </p>
     </div>
-    
+
     <!-- Section RDP -->
     <div class="section">
       <h2>Remote Desktop Protocol ( RDP )</h2>
       <div class="item">
         <p><strong>REGION ID 8 CPUs</strong></p>
-        <p>16 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          16 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 260k / USD: 20$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 8 CPUs, 16 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 260k / USD: 20$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 8 CPUs, 16 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 260k / USD: 20$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION ID 16 CPUs</strong></p>
-        <p>32 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          32 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 400k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 16 CPUs, 32 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 400k / USD: 30$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 16 CPUs, 32 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 400k / USD: 30$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION ID 32 CPUs</strong></p>
-        <p>64 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1 GB/s data/port speed</p>
+        <p>
+          64 GB RAM &bull; 100 GB NVMe &bull; Unlimited TB Trafic &bull; 1
+          GB/s data/port speed
+        </p>
         <p class="price">IDR: 700k / USD: 55$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION ID 32 CPUs, 64 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 700k / USD: 55$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION ID 32 CPUs, 64 GB RAM • 100 GB NVMe • Unlimited Trafic • 1 GB/s Data/Port - IDR: 700k / USD: 55$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION US 8 CPUs Intel XEON</strong></p>
-        <p>12 GB RAM &bull; 155 GB NVMe &bull; 13 TB Trafic &bull; 10 GB/s data/port speed</p>
+        <p>
+          12 GB RAM &bull; 155 GB NVMe &bull; 13 TB Trafic &bull; 10 GB/s
+          data/port speed
+        </p>
         <p class="price">IDR: 250k / USD: 20$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION US 8 CPUs Intel XEON, 12 GB RAM • 155 GB NVMe • 13 TB Trafic • 10 GB/s Data/Port - IDR: 250k / USD: 20$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 8 CPUs Intel XEON, 12 GB RAM • 155 GB NVMe • 13 TB Trafic • 10 GB/s Data/Port - IDR: 250k / USD: 20$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p><strong>REGION US 16 CPUs Intel XEON</strong></p>
-        <p>24 GB RAM &bull; 315 GB NVMe &bull; 20 TB Trafic &bull; 10 GB/s data/port speed</p>
+        <p>
+          24 GB RAM &bull; 315 GB NVMe &bull; 20 TB Trafic &bull; 10 GB/s
+          data/port speed
+        </p>
         <p class="price">IDR: 400k / USD: 30$</p>
-        <button class="buy-btn" onclick="copyAndRedirect('Buy RDP REGION US 16 CPUs Intel XEON, 24 GB RAM • 315 GB NVMe • 20 TB Trafic • 10 GB/s Data/Port - IDR: 400k / USD: 30$')">Klik Beli</button>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 16 CPUs Intel XEON, 24 GB RAM • 315 GB NVMe • 20 TB Trafic • 10 GB/s Data/Port - IDR: 400k / USD: 30$')"
+        >
+          Klik Beli
+        </button>
       </div>
       <div class="item">
         <p>Hak akses <strong>Root / Administrator</strong></p>
@@ -292,26 +435,33 @@
         </ul>
       </div>
     </div>
-    
-    <!-- Tombol untuk menampilkan layanan tambahan -->
-    <button id="toggle-btn" class="toggle-btn" onclick="toggleMore()">Lihat Selengkapnya</button>
-    
-    <!-- Konten tambahan yang tersembunyi -->
+
+    <!-- Tombol Tampilkan Layanan Tambahan -->
+    <button id="toggle-btn" class="toggle-btn" onclick="toggleMore()">
+      Lihat Selengkapnya
+    </button>
+
+    <!-- Konten Tambahan (Collapsible) -->
     <div id="moreContent">
       <!-- List Jasa Convert / Rekber -->
       <div class="list-section">
-        <h3><span class="emoji-animate">₿</span> JASA CONVERT / REKBER BEBAS NOMINAL</h3>
+        <h3>
+          <span class="emoji-animate">₮</span> JASA CONVERT / REKBER BEBAS NOMINAL
+        </h3>
         <p>USDT / CRYPTO / PAYPAL / ALL PAYMENT</p>
         <p>
-          <!-- Logo crypto menggunakan simbol dan emoji sederhana -->
-          <span class="emoji-animate">₿</span>
-          <span class="emoji-animate">Ξ</span>
-          <span class="emoji-animate">Ł</span>
-          <span class="emoji-animate">XRP</span>
-          <span class="emoji-animate">BCH</span>
-          <span class="emoji-animate">🅱️</span>
+          <!-- Contoh penambahan beberapa simbol/emoji koin -->
+          <span class="emoji-animate">₿</span> Bitcoin
+          <span class="emoji-animate">₮</span> Tether
+          <span class="emoji-animate">USDT</span> 
+          <span class="emoji-animate">TRX</span> Tron
+          <span class="emoji-animate">Ł</span> Litecoin
+          <span class="emoji-animate">🅱️</span> Binance
         </p>
-        <p>Nilai Convert USDT 13k - 16k per USDT/Dolar Atau Tergantung Harga Dolar Dan PNL Saat Ini</p>
+        <p>
+          Nilai Convert USDT 13k - 16k per USDT/Dolar (Tergantung Harga Dolar &amp;
+          PNL Saat Ini)
+        </p>
         <ul>
           <li>5-100K BIAYA ADMIN = 2K</li>
           <li>100-500 BIAYA ADMIN = 5K</li>
@@ -331,10 +481,18 @@
           <li>100T-500T BIAYA ADMIN = 20JT</li>
           <li>500T-10KD BIAYA ADMIN = 50JT</li>
         </ul>
-        <p>Minat? Chat: <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a></p>
-        <p>Proof Trx: <a href="https://t.me/eXCe_Corporation" target="_blank">https://t.me/eXCe_Corporation</a></p>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
       </div>
-      
+
       <!-- List Proxy Premium Squid -->
       <div class="list-section">
         <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_SQUID</h3>
@@ -349,15 +507,24 @@
           <li>Support BOT VIEWS/CLICK/FAKE_HUMAN</li>
           <li>PREMIUM 1 MONTH</li>
           <li>Support ALL FITUR PROXY</li>
-          <li>Arsitektur Lengkap sp: "386, amd64_v1, amd64_v2, amd64_v3, amd64_v4, arm64, arm_5, arm_6, arm_7"</li>
+          <li>
+            Arsitektur Lengkap sp: "386, amd64_v1, amd64_v2, amd64_v3, amd64_v4,
+            arm64, arm_5, arm_6, arm_7"
+          </li>
           <li>Installed Cromium and Cookie Lookup</li>
           <li>Auto Refresh</li>
         </ul>
         <p>Price:</p>
-        <p><strong>PAKET PX-AUTHENTICATION</strong> - SQUID PROXY 5 IP<br>🛒IDR 80K / USD 20$</p>
-        <p><strong>PAKET PX-NON_AUTHENTICATION</strong> - SQUID PROXY 5 IP<br>🛒IDR 80K / USD 20$</p>
+        <p>
+          <strong>PAKET PX-AUTHENTICATION</strong> - SQUID PROXY 5 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+        <p>
+          <strong>PAKET PX-NON_AUTHENTICATION</strong> - SQUID PROXY 5 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
       </div>
-      
+
       <!-- List Proxy Premium Datacenter & Shared -->
       <div class="list-section">
         <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_DATACENTER</h3>
@@ -373,9 +540,12 @@
           <li>Support ALL FITUR PROXY</li>
         </ul>
         <p>Price:</p>
-        <p><strong>PAKET PX-AUTHENTICATION</strong> - DATACENTER PROXY 10 IP<br>🛒IDR 80K / USD 20$</p>
+        <p>
+          <strong>PAKET PX-AUTHENTICATION</strong> - DATACENTER PROXY 10 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
       </div>
-      
+
       <div class="list-section">
         <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_SHARED</h3>
         <p>Fitur Proxy Shared Meliputi:</p>
@@ -387,11 +557,22 @@
           <li>PREMIUM 1 MONTH</li>
         </ul>
         <p>Price:</p>
-        <p><strong>PAKET PX-NON_AUTHENTICATION</strong> - SHARED PROXY 100 IP<br>🛒IDR 80K / USD 20$</p>
-        <p>Minat? Chat: <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a></p>
-        <p>Proof Trx: <a href="https://t.me/eXCe_Corporation" target="_blank">https://t.me/eXCe_Corporation</a></p>
+        <p>
+          <strong>PAKET PX-NON_AUTHENTICATION</strong> - SHARED PROXY 100 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
       </div>
-      
+
       <!-- List Jasa DDOS Website -->
       <div class="list-section">
         <h3><span class="emoji-animate">🌐</span> JASA DDOS WEBSITE</h3>
@@ -431,67 +612,83 @@
           <li>Hard: 3jt / 200$</li>
           <li>Super Hard: 15jt / 1000$</li>
         </ul>
-        <p><strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos! Beberapa website bersifat Static, menggunakan CDN, blok IP, sehingga beberapa request akan diblok dan mengakibatkan serangan tidak mencapai target.</p>
-        <p>🔩 Konsep:<br>
-           Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold (sampai waktu yang dituju)
+        <p><strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos!
+          Beberapa website bersifat Static, menggunakan CDN, blok IP, sehingga
+          beberapa request akan diblok dan mengakibatkan serangan tidak
+          mencapai target.
         </p>
-        <p>PowerProof: <a href="https://t.me/eXCe_Fixxed" target="_blank">https://t.me/eXCe_Fixxed</a></p>
-        <p>Minat? Chat: <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a></p>
-        <p>Proof Trx: <a href="https://t.me/eXCe_Corporation" target="_blank">https://t.me/eXCe_Corporation</a></p>
+        <p>
+          🔩 Konsep:<br />
+          Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold (sampai waktu
+          yang dituju)
+        </p>
+        <p>
+          PowerProof:
+          <a href="https://t.me/eXCe_Fixxed" target="_blank"
+            >https://t.me/eXCe_Fixxed</a
+          >
+        </p>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
       </div>
-      
-    </div> <!-- end moreContent -->
+    </div>
   </div>
-  
+
   <script>
-    // Fungsi untuk menyalin teks dan mengarahkan ke link Telegram
+    // Fungsi salin teks & redirect Telegram
     function copyAndRedirect(text) {
-      navigator.clipboard.writeText(text)
+      navigator.clipboard
+        .writeText(text)
         .then(() => {
           window.location.href = "https://t.me/Xin_Kenji";
         })
-        .catch(err => {
+        .catch((err) => {
           console.error("Gagal menyalin teks:", err);
           window.location.href = "https://t.me/Xin_Kenji";
         });
     }
-    
-    // Fungsi untuk toggle tampilan konten tambahan
+
+    // Toggle tampilan #moreContent (dengan efek animasi)
     function toggleMore() {
-      var moreContent = document.getElementById('moreContent');
-      var toggleBtn = document.getElementById('toggle-btn');
-      if (moreContent.style.display === "none" || moreContent.style.display === "") {
-        moreContent.style.display = "block";
-        toggleBtn.textContent = "Sembunyikan";
-      } else {
-        moreContent.style.display = "none";
+      var moreContent = document.getElementById("moreContent");
+      var toggleBtn = document.getElementById("toggle-btn");
+      if (moreContent.classList.contains("show")) {
+        moreContent.classList.remove("show");
         toggleBtn.textContent = "Lihat Selengkapnya";
+      } else {
+        moreContent.classList.add("show");
+        toggleBtn.textContent = "Sembunyikan";
       }
     }
-    
-    // Konfigurasi Canvas & Partikel
-    const canvas = document.getElementById('background-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 100; // ditingkatkan dari 50 menjadi 100
 
-    // Sesuaikan ukuran canvas dengan viewport
+    // Konfigurasi Canvas & Partikel
+    const canvas = document.getElementById("background-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const particleCount = 100; // dinaikkan agar lebih ramai
+
     function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
-    // Kelas partikel
     class Particle {
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        // radius dibuat sedikit lebih besar untuk efek yang lebih heboh
         this.radius = Math.random() * 5 + 2;
         this.alpha = Math.random() * 0.5 + 0.5;
-        // Kecepatan partikel ditingkatkan
+        // Tingkatkan kecepatan agar lebih heboh
         this.dx = (Math.random() - 0.5) * 3;
         this.dy = (Math.random() - 0.5) * 3;
       }
@@ -506,7 +703,7 @@
         ctx.globalAlpha = this.alpha;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = '#ff80ab';
+        ctx.fillStyle = "#ff80ab";
         ctx.fill();
         ctx.restore();
       }
@@ -515,34 +712,39 @@
     function initParticles() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+        particles.push(
+          new Particle(Math.random() * canvas.width, Math.random() * canvas.height)
+        );
       }
     }
     initParticles();
 
     function animate() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
+      particles.forEach((particle) => {
         particle.update();
-        particle.alpha = 0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
+        // Efek berdenyut (modulasi alpha)
+        particle.alpha =
+          0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
         particle.draw();
       });
       requestAnimationFrame(animate);
     }
     animate();
 
+    // Tambah partikel saat mouse/touch bergerak
     function addParticles(x, y) {
       for (let i = 0; i < 5; i++) {
         particles.push(new Particle(x, y));
       }
-      if (particles.length > 300) { // batas maksimum partikel dinaikkan agar efek tetap maksimal
+      if (particles.length > 300) {
         particles.splice(0, particles.length - 300);
       }
     }
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
       addParticles(e.clientX, e.clientY);
     });
-    window.addEventListener('touchmove', (e) => {
+    window.addEventListener("touchmove", (e) => {
       const touch = e.touches[0];
       addParticles(touch.clientX, touch.clientY);
     });
