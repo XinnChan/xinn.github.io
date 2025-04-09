@@ -300,26 +300,16 @@
     <div id="moreContent">
       <!-- List Jasa Convert / Rekber -->
       <div class="list-section">
-        <h3><span class="emoji-animate">💲</span> JASA CONVERT / REKBER BEBAS NOMINAL</h3>
+        <h3><span class="emoji-animate">₿</span> JASA CONVERT / REKBER BEBAS NOMINAL</h3>
         <p>USDT / CRYPTO / PAYPAL / ALL PAYMENT</p>
         <p>
-          <span class="emoji-animate">2️⃣</span>
-          <span class="emoji-animate">🐳</span>
-          <span class="emoji-animate">👻</span>
-          <span class="emoji-animate">🐶</span>
-          <span class="emoji-animate">🪡</span>
-          <span class="emoji-animate">🧤</span>
-          <span class="emoji-animate">🎩</span>
-          <span class="emoji-animate">🦄</span>
-          <span class="emoji-animate">🐯</span>
-          <span class="emoji-animate">🐤</span>
-          <span class="emoji-animate">🐥</span>
-          <span class="emoji-animate">🕸</span>
-          <span class="emoji-animate">🐴</span>
-          <span class="emoji-animate">🦀</span>
-          <span class="emoji-animate">📱</span>
-          <span class="emoji-animate">📱</span>
-          <span class="emoji-animate">📱</span>
+          <!-- Logo crypto menggunakan simbol dan emoji sederhana -->
+          <span class="emoji-animate">₿</span>
+          <span class="emoji-animate">Ξ</span>
+          <span class="emoji-animate">Ł</span>
+          <span class="emoji-animate">XRP</span>
+          <span class="emoji-animate">BCH</span>
+          <span class="emoji-animate">🅱️</span>
         </p>
         <p>Nilai Convert USDT 13k - 16k per USDT/Dolar Atau Tergantung Harga Dolar Dan PNL Saat Ini</p>
         <ul>
@@ -483,7 +473,7 @@
     const canvas = document.getElementById('background-canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
-    const particleCount = 50;
+    const particleCount = 100; // ditingkatkan dari 50 menjadi 100
 
     // Sesuaikan ukuran canvas dengan viewport
     function resizeCanvas() {
@@ -498,10 +488,12 @@
       constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.radius = Math.random() * 4 + 1;
+        // radius dibuat sedikit lebih besar untuk efek yang lebih heboh
+        this.radius = Math.random() * 5 + 2;
         this.alpha = Math.random() * 0.5 + 0.5;
-        this.dx = (Math.random() - 0.5) * 2;
-        this.dy = (Math.random() - 0.5) * 2;
+        // Kecepatan partikel ditingkatkan
+        this.dx = (Math.random() - 0.5) * 3;
+        this.dy = (Math.random() - 0.5) * 3;
       }
       update() {
         this.x += this.dx;
@@ -543,8 +535,8 @@
       for (let i = 0; i < 5; i++) {
         particles.push(new Particle(x, y));
       }
-      if (particles.length > 200) {
-        particles.splice(0, particles.length - 200);
+      if (particles.length > 300) { // batas maksimum partikel dinaikkan agar efek tetap maksimal
+        particles.splice(0, particles.length - 300);
       }
     }
     window.addEventListener('mousemove', (e) => {
