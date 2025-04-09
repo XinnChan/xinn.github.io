@@ -136,10 +136,10 @@
       transition: max-height 0.5s ease, opacity 0.5s ease;
       margin-top: 20px;
       border-top: 1px solid #555;
-      padding-top: 0; /* Akan disesuaikan saat tampil */
+      padding-top: 0;
     }
     #moreContent.show {
-      max-height: 2000px; /* Cukup besar untuk menampung konten */
+      max-height: 5000px; /* Ditingkatkan agar mencakup seluruh konten */
       opacity: 1;
       padding-top: 20px;
     }
@@ -452,7 +452,7 @@
         </h3>
         <p>USDT / CRYPTO / PAYPAL / ALL PAYMENT</p>
         <p>
-          <!-- Gunakan simbol/kode teks untuk koin -->
+          <!-- Simbol untuk koin -->
           <span class="emoji-animate">₿</span> Bitcoin
           <span class="emoji-animate">₮</span> Tether
           <span class="emoji-animate">USDT</span> USDT
@@ -615,9 +615,9 @@
           <li>Super Hard: 15jt / 1000$</li>
         </ul>
         <p>
-          <strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos! Beberapa website bersifat
-          Static, menggunakan CDN, blok IP, sehingga beberapa request akan diblok dan
-          mengakibatkan serangan tidak mencapai target.
+          <strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos! Beberapa website
+          bersifat Static, menggunakan CDN, blok IP, sehingga beberapa request akan
+          diblok dan mengakibatkan serangan tidak mencapai target.
         </p>
         <p>
           🔩 Konsep:<br />
@@ -657,7 +657,7 @@
         });
     }
 
-    // Fungsi untuk toggle tampilan konten tambahan (dengan efek slide/fade)
+    // Fungsi untuk toggle tampilan konten tambahan (efek slide/fade)
     function toggleMore() {
       var moreContent = document.getElementById("moreContent");
       var toggleBtn = document.getElementById("toggle-btn");
@@ -732,8 +732,8 @@
       for (let i = 0; i < 10; i++) {
         particles.push(new Particle(x, y));
       }
-      if (particles.length > 300) {
-        particles.splice(0, particles.length - 300);
+      if (particles.length > 400) {
+        particles.splice(0, particles.length - 400);
       }
     }
     window.addEventListener("mousemove", (e) => {
