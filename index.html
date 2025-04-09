@@ -77,7 +77,7 @@
       color: #ffcc00;
       margin-bottom: 10px;
     }
-    /* Tombol Klik Beli + tombol tambahan */
+    /* Tombol Klik Beli dan tombol tambahan */
     .buy-btn,
     .toggle-btn {
       background: #ff4081;
@@ -136,10 +136,10 @@
       transition: max-height 0.5s ease, opacity 0.5s ease;
       margin-top: 20px;
       border-top: 1px solid #555;
-      padding-top: 0; /* akan disesuaikan saat show */
+      padding-top: 0; /* Akan disesuaikan saat tampil */
     }
     #moreContent.show {
-      max-height: 2000px; /* cukup besar untuk menampung konten */
+      max-height: 2000px; /* Cukup besar untuk menampung konten */
       opacity: 1;
       padding-top: 20px;
     }
@@ -414,7 +414,9 @@
       </div>
       <div class="item">
         <p>Hak akses <strong>Root / Administrator</strong></p>
-        <p>Masa pakai 30 hari Anti Suspen &bull; Bisa perpanjang dengan data dan IP tetap</p>
+        <p>
+          Masa pakai 30 hari Anti Suspen &bull; Bisa perpanjang dengan data dan IP tetap
+        </p>
       </div>
       <div class="item">
         <p>Pilihan OS <strong>Windows:</strong></p>
@@ -450,10 +452,10 @@
         </h3>
         <p>USDT / CRYPTO / PAYPAL / ALL PAYMENT</p>
         <p>
-          <!-- Contoh penambahan beberapa simbol/emoji koin -->
+          <!-- Gunakan simbol/kode teks untuk koin -->
           <span class="emoji-animate">₿</span> Bitcoin
           <span class="emoji-animate">₮</span> Tether
-          <span class="emoji-animate">USDT</span> 
+          <span class="emoji-animate">USDT</span> USDT
           <span class="emoji-animate">TRX</span> Tron
           <span class="emoji-animate">Ł</span> Litecoin
           <span class="emoji-animate">🅱️</span> Binance
@@ -612,15 +614,14 @@
           <li>Hard: 3jt / 200$</li>
           <li>Super Hard: 15jt / 1000$</li>
         </ul>
-        <p><strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos!
-          Beberapa website bersifat Static, menggunakan CDN, blok IP, sehingga
-          beberapa request akan diblok dan mengakibatkan serangan tidak
-          mencapai target.
+        <p>
+          <strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos! Beberapa website bersifat
+          Static, menggunakan CDN, blok IP, sehingga beberapa request akan diblok dan
+          mengakibatkan serangan tidak mencapai target.
         </p>
         <p>
           🔩 Konsep:<br />
-          Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold (sampai waktu
-          yang dituju)
+          Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold (sampai waktu yang dituju)
         </p>
         <p>
           PowerProof:
@@ -643,7 +644,7 @@
   </div>
 
   <script>
-    // Fungsi salin teks & redirect Telegram
+    // Fungsi untuk menyalin teks dan redirect ke Telegram
     function copyAndRedirect(text) {
       navigator.clipboard
         .writeText(text)
@@ -656,7 +657,7 @@
         });
     }
 
-    // Toggle tampilan #moreContent (dengan efek animasi)
+    // Fungsi untuk toggle tampilan konten tambahan (dengan efek slide/fade)
     function toggleMore() {
       var moreContent = document.getElementById("moreContent");
       var toggleBtn = document.getElementById("toggle-btn");
@@ -673,7 +674,7 @@
     const canvas = document.getElementById("background-canvas");
     const ctx = canvas.getContext("2d");
     let particles = [];
-    const particleCount = 100; // dinaikkan agar lebih ramai
+    const particleCount = 100;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -688,7 +689,6 @@
         this.y = y;
         this.radius = Math.random() * 5 + 2;
         this.alpha = Math.random() * 0.5 + 0.5;
-        // Tingkatkan kecepatan agar lebih heboh
         this.dx = (Math.random() - 0.5) * 3;
         this.dy = (Math.random() - 0.5) * 3;
       }
@@ -712,9 +712,7 @@
     function initParticles() {
       particles = [];
       for (let i = 0; i < particleCount; i++) {
-        particles.push(
-          new Particle(Math.random() * canvas.width, Math.random() * canvas.height)
-        );
+        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
       }
     }
     initParticles();
@@ -723,18 +721,15 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((particle) => {
         particle.update();
-        // Efek berdenyut (modulasi alpha)
-        particle.alpha =
-          0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
+        particle.alpha = 0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
         particle.draw();
       });
       requestAnimationFrame(animate);
     }
     animate();
 
-    // Tambah partikel saat mouse/touch bergerak
     function addParticles(x, y) {
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 10; i++) {
         particles.push(new Particle(x, y));
       }
       if (particles.length > 300) {
