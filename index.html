@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eXCe Corporation XCDDOS Layanan VPS, VDS, RDP</title>
+  <!-- Google Fonts: Roboto untuk teks & Orbitron untuk heading -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset dasar */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+    body {
+      font-family: "Roboto", sans-serif;
+      background: linear-gradient(135deg, #1d0c3c, #2e1051);
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+
+    .section h2 {
+      border-bottom: 2px solid #555;
+      padding-bottom: 10px;
+    }
+
+    .item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px dashed #555;
+      position: relative;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+
+    .buy-btn,
+    .toggle-btn {
+      background: #ff4081;
+      color: #1a001a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+      transition: background 0.3s, transform 0.3s;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .buy-btn:hover,
+    .toggle-btn:hover {
+      background: #f50057;
+      transform: scale(1.05);
+    }
+
+    a {
+      color: #ffeb3b;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      list-style: disc;
+      margin: 10px 0 10px 20px;
+      padding-left: 10px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+
+      .section h2 {
+        font-size: 1.5em;
+      }
+
+      .item {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .price {
+        font-size: 1.2em;
+      }
+
+      .buy-btn {
+        padding: 10px 20px;
+      }
+
+      .toggle-btn {
+        font-size: 1.1em;
+      }
+
+      /* Grid Layout untuk Produk */
+      .section {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 20px;
+      }
+
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .section {
+        padding: 10px;
+      }
+
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .price {
+        font-size: 1.1em;
+      }
+
+      .buy-btn {
+        font-size: 1em;
+        width: 100%;
+      }
+
+      /* Mengurangi jarak antar elemen untuk tampilan mobile */
+      .section p,
+      .section li {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>eXCe Corporation XCDDOS</h1>
+    <p style="text-align: center; margin-bottom: 40px;">
+      eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan
+      Harga Terjangkau
+    </p>
+
+    <!-- Section VPS -->
+    <div class="section">
+      <h2>Virtual Private Server ( VPS )</h2>
+      <h3>VPS REGULAR</h3>
+      <div class="item">
+        <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 2 TB transfer</p>
+        <p class="price">Rp. 49k / $4</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 2 TB transfer - Rp. 49k / $4')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 3 TB transfer</p>
+        <p class="price">Rp. 69k / $7</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 3 TB transfer - Rp. 69k / $7')"
+        >
+          Klik Beli
+        </button>
+      </div>
+
+      <h3 style="margin-top: 30px;">VPS PREMIUM</h3>
+      <div class="item">
+        <p>4 GB / 2 AMD/INTEL CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
+        <p class="price">Rp. 79k / $8</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p>8 GB / 4 AMD/INTEL CPUs &bull; 160 GB NVMe SSDs &bull; 5 TB transfer</p>
+        <p class="price">Rp. 129k / $15</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')"
+        >
+          Klik Beli
+        </button>
+      </div>
+    </div>
+
+    <!-- Section VDS -->
+    <div class="section">
+      <h2>Virtual Dedicated Server ( VDS )</h2>
+
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>8 vCPU AMD EPYC 9654</p>
+        <p>16 GB RAM &bull; 512 GB SSD NVMe &bull; Unlimited Bandwidth &bull; 2.5Gbps data/port speed (Private)</p>
+        <p class="price">IDR: 350k / USD: 25$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 8 vCPU AMD EPYC 9654, 16 GB RAM • 512 GB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 350k / USD: 25$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+    </div>
+
+    <!-- Section RDP -->
+    <div class="section">
+      <h2>Remote Desktop Protocol ( RDP )</h2>
+
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>8 vCPU AMD EPYC 9654</p>
+        <p>16 GB RAM &bull; 512 GB SSD NVMe &bull; Unlimited Bandwidth &bull; 2.5Gbps data/port speed (Private)</p>
+        <p class="price">IDR: 350k / USD: 25$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 8 vCPU AMD EPYC 9654, 16 GB RAM • 512 GB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 350k / USD: 25$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+    </div>
+
+    <!-- Tombol Tampilkan Layanan Tambahan -->
+    <button id="toggle-btn" class="toggle-btn" onclick="toggleMore()">
+      Lihat Selengkapnya
+    </button>
+
+    <div id="moreContent">
+      <!-- Konten tambahan jika di-klik -->
+      <div class="list-section">
+        <h3><span class="emoji-animate">₮</span> JASA CONVERT / REKBER BEBAS NOMINAL</h3>
+        <ul>
+          <li>Bitcoin</li>
+          <li>Tether (USDT)</li>
+          <li>Tron</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function copyAndRedirect(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        window.location.href = "https://t.me/Xin_Kenji";
+      }).catch((err) => {
+        console.error("Gagal menyalin teks:", err);
+        window.location.href = "https://t.me/Xin_Kenji";
+      });
+    }
+
+    function toggleMore() {
+      var moreContent = document.getElementById("moreContent");
+      var toggleBtn = document.getElementById("toggle-btn");
+      if (moreContent.classList.contains("show")) {
+        moreContent.classList.remove("show");
+        toggleBtn.textContent = "Lihat Selengkapnya";
+      } else {
+        moreContent.classList.add("show");
+        toggleBtn.textContent = "Sembunyikan";
+      }
+    }
+  </script>
+</body>
+</html>
