@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eXCe Corporation XCDDOS Layanan VPS, VDS, RDP</title>
+  <!-- Google Fonts: Roboto untuk teks & Orbitron untuk heading -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset dasar */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html,
+    body {
+      height: 100%;
+    }
+    /* Canvas untuk animasi latar belakang */
+    #background-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+    /* Tema latar belakang dan teks */
+    body {
+      font-family: "Roboto", sans-serif;
+      background: linear-gradient(135deg, #1d0c3c, #2e1051);
+      color: #e0e0e0;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    /* Heading futuristik dengan Orbitron */
+    h1,
+    h2,
+    h3 {
+      font-family: "Orbitron", sans-serif;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #dcdcdc;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .section {
+      margin-bottom: 40px;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    }
+    .section h2 {
+      border-bottom: 2px solid #555;
+      padding-bottom: 10px;
+    }
+    .item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px dashed #555;
+      position: relative;
+    }
+    .item:last-child {
+      border-bottom: none;
+    }
+    .price {
+      font-weight: bold;
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+    /* Tombol Klik Beli dan tombol tambahan */
+    .buy-btn,
+    .toggle-btn {
+      background: #ff4081;
+      color: #1a001a;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(255, 64, 129, 0.7);
+      transition: background 0.3s, transform 0.3s;
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+    }
+    .buy-btn:hover,
+    .toggle-btn:hover {
+      background: #f50057;
+      transform: scale(1.05);
+    }
+    a {
+      color: #ffeb3b;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Penataan list */
+    ul {
+      list-style: disc;
+      margin: 10px 0 10px 20px;
+      padding-left: 10px;
+    }
+    /* Animasi Emoji bergerak */
+    @keyframes emojiMove {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-5px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    .emoji-animate {
+      display: inline-block;
+      animation: emojiMove 1s infinite;
+      margin-right: 5px;
+    }
+    /* Efek Slide / Fade untuk konten tambahan */
+    #moreContent {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.5s ease;
+      margin-top: 20px;
+      border-top: 1px solid #555;
+      padding-top: 0;
+    }
+    #moreContent.show {
+      max-height: 5000px; /* Ditingkatkan agar mencakup seluruh konten */
+      opacity: 1;
+      padding-top: 20px;
+    }
+    .list-section {
+      margin-bottom: 30px;
+    }
+    .list-section h3 {
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    .list-section p,
+    .list-section li {
+      margin-bottom: 5px;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <!-- Canvas Latar Belakang -->
+  <canvas id="background-canvas"></canvas>
+
+  <div class="container">
+    <h1>eXCe Corporation XCDDOS</h1>
+    <p style="text-align: center; margin-bottom: 40px;">
+      eXCe Corporation Layanan VPS, VDS, dan RDP Berkualitas Support DDOS Dengan
+      Harga Terjangkau
+    </p>
+
+    <!-- Section VPS -->
+    <div class="section">
+      <h2>Virtual Private Server ( VPS )</h2>
+      <h3>VPS REGULAR</h3>
+      <div class="item">
+        <p>4 GB / 2 CPUs &bull; 80 GB SSD Disk &bull; 2 TB transfer</p>
+        <p class="price">Rp. 49k / $4</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 2 TB transfer - Rp. 49k / $4')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p>8 GB / 4 CPUs &bull; 160 GB SSD Disk &bull; 3 TB transfer</p>
+        <p class="price">Rp. 69k / $7</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 CPUs • 160 GB SSD Disk • 3 TB transfer - Rp. 69k / $7')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <p>✅ FULL GARANSI 15 HARI 2x REPLACE</p>
+      <p>🌐 Can Request Region, Platform, & Version</p>
+
+      <h3 style="margin-top: 30px;">VPS PREMIUM</h3>
+      <div class="item">
+        <p>4 GB / 2 AMD/INTEL CPUs &bull; 80 GB NVMe SSDs &bull; 4 TB transfer</p>
+        <p class="price">Rp. 79k / $8</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p>8 GB / 4 AMD/INTEL CPUs &bull; 160 GB NVMe SSDs &bull; 5 TB transfer</p>
+        <p class="price">Rp. 129k / $15</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VPS 8 GB / 4 AMD CPUs • 160 GB NVMe SSDs • 5 TB transfer - Rp. 129k / $15')"
+        >
+          Klik Beli
+        </button>
+      <p>✅ FULL GARANSI 25 HARI 2x REPLACE</p>
+      <p>✅ Reguler Only 1 Bulan (Tergantung situasi)</p>
+      <p>✅ PREMIUM Bisa Perpanjang Hingga 2 Bulan (Tergantung situasi)</p>
+      <p>🌐 Can Request Region, Platform, & Version</p>
+      <p>
+        👾 Telegram Channel:
+        <a href="https://t.me/eXCe_Corporation" target="_blank"
+          >t.me/eXCe_Corporation</a
+        >
+      </p>
+
+      <p style="margin-top: 20px; text-align: center;">
+        ~ VPS Dengan Settingan Karnel Custom Terbaik<br />
+        ~ Free Firewall Anti DDOS<br />
+        ~ VPS SUPER SUPPORT DDOS
+      </p>
+      <p style="text-align: center;">🎥Mountly VPS?🎥</p>
+    </div>
+
+    <!-- Section VDS -->
+    <div class="section">
+      <h2>Virtual Dedicated Server ( VDS )</h2>
+
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>8 vCPU AMD EPYC 9654</p>
+        <p>
+          16 GB RAM &bull; 512 GB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 350k / USD: 25$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 8 vCPU AMD EPYC 9654, 16 GB RAM • 512 GB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 350k / USD: 25$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>12 vCPU AMD EPYC 9654</p>
+        <p>
+          32 GB RAM &bull; 1 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 500k / USD: 36$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 12 vCPU AMD EPYC 9654, 32 GB RAM • 1 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 500k / USD: 36$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>16 vCPU AMD EPYC 9654</p>
+        <p>
+          64 GB RAM &bull; 2 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 700k / USD: 50$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 16 vCPU AMD EPYC 9654, 64 GB RAM • 2 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 700k / USD: 50$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>24 vCPU AMD EPYC 9654</p>
+        <p>
+          96 GB RAM &bull; 3 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 1.500k / USD: 94$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 24 vCPU AMD EPYC 9654, 96 GB RAM • 3 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 1.500k / USD: 94$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>28 vCPU AMD EPYC 9654</p>
+        <p>
+          112 GB RAM &bull; 3.5 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 1.770k / USD: 110$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 28 vCPU AMD EPYC 9654, 112 GB RAM • 3.5 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 1.770k / USD: 110$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>32 vCPU AMD EPYC 9654</p>
+        <p>
+          128 GB RAM &bull; 4 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 2.100k / USD: 135$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy VDS REGION US 32 vCPU AMD EPYC 9654, 128 GB RAM • 4 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 2.100k / USD: 135$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+
+      <p>OS:</p>
+      <ul>
+        <li>Ubuntu: 20 / 22 / 24</li>
+        <li>Debian: 11 / 12</li>
+      </ul>
+      <p style="text-align: center; margin-top: 5px;">
+        🎥VDS 30 hari Anti Suspen #Bisa_Perpanjang🎥
+      </p>
+      <ul>
+        <li>Premium Dedicated VDS</li>
+        <li>Support DDOS Layer-7</li>
+        <li>Cocok untuk Aktifitas Super berat</li>
+        <li>Bisa Buat Server game, VPN, Mining, bbos, pentest, dll.</li>
+      </ul>
+      <p style="text-align: center; margin-top: 10px;">
+        Need Region ID / lainnya Dm <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+      </p>
+    </div>
+
+    <!-- Section RDP -->
+    <div class="section">
+      <h2>Remote Desktop Protocol ( RDP )</h2>
+
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>8 vCPU AMD EPYC 9654</p>
+        <p>
+          16 GB RAM &bull; 512 GB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 350k / USD: 25$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 8 vCPU AMD EPYC 9654, 16 GB RAM • 512 GB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 350k / USD: 25$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>12 vCPU AMD EPYC 9654</p>
+        <p>
+          32 GB RAM &bull; 1 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 500k / USD: 36$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 12 vCPU AMD EPYC 9654, 32 GB RAM • 1 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 500k / USD: 36$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>16 vCPU AMD EPYC 9654</p>
+        <p>
+          64 GB RAM &bull; 2 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 700k / USD: 50$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 16 vCPU AMD EPYC 9654, 64 GB RAM • 2 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 700k / USD: 50$')"
+        >
+          Klik Beli
+        </button>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>24 vCPU AMD EPYC 9654</p>
+        <p>
+          96 GB RAM &bull; 3 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 1.500k / USD: 94$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 24 vCPU AMD EPYC 9654, 96 GB RAM • 3 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 1.500k / USD: 94$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>28 vCPU AMD EPYC 9654</p>
+        <p>
+          112 GB RAM &bull; 3.5 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 1.770k / USD: 110$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 28 vCPU AMD EPYC 9654, 112 GB RAM • 3.5 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 1.770k / USD: 110$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+      </div>
+      <div class="item">
+        <p><strong>REGION US</strong></p>
+        <p>32 vCPU AMD EPYC 9654</p>
+        <p>
+          128 GB RAM &bull; 4 TB SSD NVMe &bull; Unlimited Bandwidth &bull;
+          2.5Gbps data/port speed (Private)
+        </p>
+        <p class="price">IDR: 2.100k / USD: 135$</p>
+        <button
+          class="buy-btn"
+          onclick="copyAndRedirect('Buy RDP REGION US 32 vCPU AMD EPYC 9654, 128 GB RAM • 4 TB SSD NVMe • Unlimited Bandwidth • 2.5Gbps data/port speed (Private) - IDR: 2.100k / USD: 135$')"
+        >
+          Klik Beli
+        </button>
+      </div>
+
+      <div class="item">
+        <p>Hak akses <strong>Root / Administrator</strong></p>
+        <p>
+          Masa pakai 30 hari Anti Suspen &bull; Bisa perpanjang dengan data dan IP tetap
+        </p>
+      </div>
+      <div class="item">
+        <p>Pilihan OS <strong>Windows:</strong></p>
+        <ul>
+          <li>Windows Server 2016 - Windows Server 2022</li>
+        </ul>
+      </div>
+      <p style="text-align: center; margin-top: 10px;">
+        Need Region ID / lainnya Dm <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+      </p>
+    </div>
+
+    <!-- Tombol Tampilkan Layanan Tambahan -->
+    <button id="toggle-btn" class="toggle-btn" onclick="toggleMore()">
+      Lihat Selengkapnya
+    </button>
+
+    <!-- Konten Tambahan (Collapsible) -->
+    <div id="moreContent">
+      <!-- List Jasa Convert / Rekber -->
+      <div class="list-section">
+        <h3>
+          <span class="emoji-animate">₮</span> JASA CONVERT / REKBER BEBAS NOMINAL
+        </h3>
+        <p>USDT / CRYPTO / PAYPAL / ALL PAYMENT</p>
+        <p>
+          <!-- Simbol untuk koin -->
+          <span class="emoji-animate">₿</span> Bitcoin
+          <span class="emoji-animate">₮</span> Tether
+          <span class="emoji-animate">USDT</span> USDT
+          <span class="emoji-animate">TRX</span> Tron
+          <span class="emoji-animate">Ł</span> Litecoin
+          <span class="emoji-animate">🅱️</span> Binance
+        </p>
+        <p>
+          Nilai Convert USDT 13k - 16k per USDT/Dolar (Tergantung Harga Dolar &amp;
+          PNL Saat Ini)
+        </p>
+        <ul>
+          <li>5-100K BIAYA ADMIN = 2K</li>
+          <li>100-500 BIAYA ADMIN = 5K</li>
+          <li>500-1JT BIAYA ADMIN = 10K</li>
+          <li>1JT-5JT BIAYA ADMIN = 20K</li>
+          <li>5JT-10JT BIAYA ADMIN = 30K</li>
+          <li>10JT-20JT BIAYA ADMIN = 40K</li>
+          <li>20JT-30JT BIAYA ADMIN = 50K</li>
+          <li>30JT-100JT BIAYA ADMIN = 100K</li>
+          <li>100JT-1M BIAYA ADMIN = 200K</li>
+          <li>1M-10M BIAYA ADMIN = 500K</li>
+          <li>10M-100M BIAYA ADMIN = 1JT</li>
+          <li>100M-1T BIAYA ADMIN = 2JT</li>
+          <li>1T-5T BIAYA ADMIN = 3JT</li>
+          <li>5T-20T BIAYA ADMIN = 5JT</li>
+          <li>20T-100T BIAYA ADMIN = 10JT</li>
+          <li>100T-500T BIAYA ADMIN = 20JT</li>
+          <li>500T-10KD BIAYA ADMIN = 50JT</li>
+        </ul>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
+      </div>
+
+      <!-- List Proxy Premium Squid -->
+      <div class="list-section">
+        <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_SQUID</h3>
+        <p>Fitur Proxy Squid Meliputi:</p>
+        <ul>
+          <li>Region: Indo, Malay, Singapore, ALL Region</li>
+          <li>Support DDOS: Browser Method</li>
+          <li>Fast Proxy 300k touch/sec</li>
+          <li>Unlimited bandwidth</li>
+          <li>Thread Tanpa Batas</li>
+          <li>Support BOTNET</li>
+          <li>Support BOT VIEWS/CLICK/FAKE_HUMAN</li>
+          <li>PREMIUM 1 MONTH</li>
+          <li>Support ALL FITUR PROXY</li>
+          <li>
+            Arsitektur Lengkap sp: "386, amd64_v1, amd64_v2, amd64_v3, amd64_v4,
+            arm64, arm_5, arm_6, arm_7"
+          </li>
+          <li>Installed Cromium and Cookie Lookup</li>
+          <li>Auto Refresh</li>
+        </ul>
+        <p>Price:</p>
+        <p>
+          <strong>PAKET PX-AUTHENTICATION</strong> - SQUID PROXY 5 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+        <p>
+          <strong>PAKET PX-NON_AUTHENTICATION</strong> - SQUID PROXY 5 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+      </div>
+
+      <!-- List Proxy Premium Datacenter & Shared -->
+      <div class="list-section">
+        <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_DATACENTER</h3>
+        <p>Fitur Proxy Datacenter Meliputi:</p>
+        <ul>
+          <li>Region: Random</li>
+          <li>Support DDOS Browser: Method &amp;&amp; Flood TLS</li>
+          <li>Fast Proxy 500k touch/sec</li>
+          <li>1GB bandwidth Abis Bisa Replace IP</li>
+          <li>Support BOTNET</li>
+          <li>Support BOT VIEWS/CLICK/FAKE_HUMAN</li>
+          <li>PREMIUM 1 MONTH</li>
+          <li>Support ALL FITUR PROXY</li>
+        </ul>
+        <p>Price:</p>
+        <p>
+          <strong>PAKET PX-AUTHENTICATION</strong> - DATACENTER PROXY 10 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+      </div>
+
+      <div class="list-section">
+        <h3><span class="emoji-animate">⭐️</span> #PROXY_PREMIUM_SHARED</h3>
+        <p>Fitur Proxy Shared Meliputi:</p>
+        <ul>
+          <li>Region: Custom Request</li>
+          <li>Rotasi IP</li>
+          <li>Support BOTNET</li>
+          <li>Support DDOS Browser: Flood TLS</li>
+          <li>PREMIUM 1 MONTH</li>
+        </ul>
+        <p>Price:</p>
+        <p>
+          <strong>PAKET PX-NON_AUTHENTICATION</strong> - SHARED PROXY 100 IP<br />
+          🛒IDR 80K / USD 20$
+        </p>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
+      </div>
+
+      <!-- List Jasa DDOS Website -->
+      <div class="list-section">
+        <h3><span class="emoji-animate">🌐</span> JASA DDOS WEBSITE</h3>
+        <ul>
+          <li>Web slot/judi</li>
+          <li>Web Money site</li>
+          <li>Web Phising</li>
+          <li>Web Rest api</li>
+          <li>Web Panel bot</li>
+          <li>Backend/Frontend WEB</li>
+          <li>DLL</li>
+        </ul>
+        <p><strong>Price list Jasa Attack Hold Site Per Jam :</strong></p>
+        <ul>
+          <li>1 Jam: 120k / 10$</li>
+          <li>2 Jam: 180k / 15$</li>
+          <li>3 Jam: 240k / 20$</li>
+          <li>4 Jam: 300k / 25$</li>
+          <li>5 Jam: 390k / 30$</li>
+          <li>6 Jam: 500k / 35$</li>
+        </ul>
+        <p><strong>Price list Jasa Attack Hold Site Harian :</strong></p>
+        <ul>
+          <li>1 Day: 1jt / 70$</li>
+          <li>2 Day: 1.5 jt / 110$</li>
+          <li>3 Day: 2 jt / 125$</li>
+          <li>4 Day: 2.5 jt / 170$</li>
+          <li>5 Day: 3 jt / 200$</li>
+          <li>6 Day: 3.5 jt / 230$</li>
+          <li>7 Day: 4 jt / 270$</li>
+          <li>30 Day: 14 jt / 900$</li>
+        </ul>
+        <p>✅ DELETE ARTIKEL atau SUSPEN WEBSITE PERMANENT</p>
+        <p>💎 Per Web (Tergantung Kesulitan Bertahap 1-7 Hari):</p>
+        <ul>
+          <li>Easy: 1jt / 70$</li>
+          <li>Hard: 3jt / 200$</li>
+          <li>Super Hard: 15jt / 1000$</li>
+        </ul>
+        <p>
+          <strong>⚠️ Catatan:</strong> Tidak semua Website bisa di ddos! Beberapa website
+          bersifat Static, menggunakan CDN, blok IP, sehingga beberapa request akan
+          diblok dan mengakibatkan serangan tidak mencapai target.
+        </p>
+        <p>
+          🔩 Konsep:<br />
+          Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold (sampai waktu yang dituju)
+        </p>
+        <p>
+          PowerProof:
+          <a href="https://t.me/eXCe_Fixxed" target="_blank"
+            >https://t.me/eXCe_Fixxed</a
+          >
+        </p>
+        <p>
+          Minat? Chat:
+          <a href="https://t.me/Xin_Kenji" target="_blank">@Xin_Kenji</a>
+        </p>
+        <p>
+          Proof Trx:
+          <a href="https://t.me/eXCe_Corporation" target="_blank"
+            >https://t.me/eXCe_Corporation</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi untuk menyalin teks dan redirect ke Telegram
+    function copyAndRedirect(text) {
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          window.location.href = "https://t.me/Xin_Kenji";
+        })
+        .catch((err) => {
+          console.error("Gagal menyalin teks:", err);
+          window.location.href = "https://t.me/Xin_Kenji";
+        });
+    }
+
+    // Fungsi untuk toggle tampilan konten tambahan (efek slide/fade)
+    function toggleMore() {
+      var moreContent = document.getElementById("moreContent");
+      var toggleBtn = document.getElementById("toggle-btn");
+      if (moreContent.classList.contains("show")) {
+        moreContent.classList.remove("show");
+        toggleBtn.textContent = "Lihat Selengkapnya";
+      } else {
+        moreContent.classList.add("show");
+        toggleBtn.textContent = "Sembunyikan";
+      }
+    }
+
+    // Konfigurasi Canvas & Partikel
+    const canvas = document.getElementById("background-canvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+    const particleCount = 100;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.radius = Math.random() * 5 + 2;
+        this.alpha = Math.random() * 0.5 + 0.5;
+        this.dx = (Math.random() - 0.5) * 3;
+        this.dy = (Math.random() - 0.5) * 3;
+      }
+      update() {
+        this.x += this.dx;
+        this.y += this.dy;
+        if (this.x < 0 || this.x > canvas.width) this.dx = -this.dx;
+        if (this.y < 0 || this.y > canvas.height) this.dy = -this.dy;
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff80ab";
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle(Math.random() * canvas.width, Math.random() * canvas.height));
+      }
+    }
+    initParticles();
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((particle) => {
+        particle.update();
+        particle.alpha = 0.5 + 0.5 * Math.sin(Date.now() * 0.005 + particle.x);
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    function addParticles(x, y) {
+      for (let i = 0; i < 10; i++) {
+        particles.push(new Particle(x, y));
+      }
+      if (particles.length > 400) {
+        particles.splice(0, particles.length - 400);
+      }
+    }
+    window.addEventListener("mousemove", (e) => {
+      addParticles(e.clientX, e.clientY);
+    });
+    window.addEventListener("touchmove", (e) => {
+      const touch = e.touches[0];
+      addParticles(touch.clientX, touch.clientY);
+    });
+  </script>
+</body>
+</html>
