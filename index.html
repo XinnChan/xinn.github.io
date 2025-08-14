@@ -2,359 +2,676 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>eXCe Corporation - Catalog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>eXCe Corporation — VPS, VDS, RDP</title>
+  <meta name="description" content="Katalog VPS, VDS, dan RDP interaktif — pilih tipe, region, dan kategori dengan mudah." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+
   <style>
-    :root {
-      --primary: #0d6efd;
-      --primary-dark: #0b5ed7;
-      --bg: #f8f9fa;
-      --text: #212529;
-      --muted: #6c757d;
-      --white: #fff;
+    :root{
+      --bg: #0b0b12;
+      --card: #11111a;
+      --soft: #181825;
+      --text: #e9e9ee;
+      --muted: #a6a6b3;
+      --brand: #7c5cff;
+      --brand-2: #ff2e86;
+      --ring: rgba(124,92,255,.35);
       --radius: 14px;
-      --shadow: 0 8px 22px rgba(0,0,0,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
     }
-    * { box-sizing: border-box }
-    body { font-family: Inter, Arial, sans-serif; margin: 0; background: var(--bg); color: var(--text); }
-    a { color: inherit }
-    header {
-      background: linear-gradient(135deg, #0d6efd, #4f8cff);
-      color: var(--white);
-      padding: 22px 16px;
-      text-align: center;
+
+    /* Reset ringkas */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(60vmax 60vmax at 10% -10%, rgba(124,92,255,.12), transparent 60%),
+        radial-gradient(60vmax 60vmax at 120% 20%, rgba(255,46,134,.10), transparent 60%),
+        var(--bg);
     }
-    header h1 { margin: 0 0 6px; font-size: 26px; }
-    header p { margin: 0; opacity: .95 }
-    header p a { color: #fff; text-decoration: underline; }
-    #toolbarChips {
-      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-      background: var(--white); padding: 12px; box-shadow: var(--shadow);
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Container */
+    .wrap{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
     }
-    .chip {
-      padding: 8px 14px; border-radius: 999px; background: var(--bg); cursor: pointer;
-      font-size: 14px; border: 1px solid #e9ecef; user-select: none;
+
+    /* Header */
+    .hero{
+      text-align:center;
+      margin: 10px 0 28px;
     }
-    .chip.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
-    main { padding: 22px; max-width: 1200px; margin: 0 auto; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-    .card {
-      background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow);
-      overflow: hidden; display: flex; flex-direction: column; cursor: pointer; transition: transform .2s ease, box-shadow .2s;
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-family:Orbitron,Inter;
+      font-weight:800;
+      letter-spacing:.5px;
+      background: linear-gradient(90deg,var(--brand),var(--brand-2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+      font-size: clamp(22px, 3.2vw, 36px);
     }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
-    .card img { width: 100%; height: 160px; object-fit: cover; background: #e9ecef; }
-    .card-body { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; }
-    .card-body h3 { margin: 0; font-size: 18px; font-weight: 800; }
-    .card-body p { margin: 0; font-size: 14px; color: var(--muted); }
-    .card-body .price { font-weight: 800; margin-top: 4px; color: var(--primary); }
-    /* Modal */
-    .modal-backdrop {
-      position: fixed; inset: 0; background: rgba(0,0,0,0.5);
-      display: none; align-items: center; justify-content: center; z-index: 1000;
+    .hero p{
+      margin: 8px auto 0;
+      max-width: 820px;
+      color: var(--muted);
+      line-height: 1.6;
     }
-    .modal {
-      background: var(--white); border-radius: 16px; max-width: 980px; width: 96%;
-      padding: 18px; box-shadow: var(--shadow); max-height: 92vh; overflow-y: auto;
+
+    /* Toolbar (filter global opsional, nanti dipakai untuk tombol/shortcut) */
+    .toolbar{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin: 22px 0 8px;
     }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eef0f2; padding-bottom: 8px; margin-bottom: 14px; }
-    .modal-header h2 { margin: 0; font-size: 20px; }
-    .close-btn { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--muted); }
-    .modal-body { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-    @media (max-width: 768px){ .modal-body { grid-template-columns: 1fr; } }
-    .table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    .table th, .table td { padding: 8px 10px; border: 1px solid #e9ecef; font-size: 14px; vertical-align: top; }
-    .btn {
-      background: var(--primary); color: #fff; padding: 9px 14px; border-radius: 10px; text-decoration: none; display: inline-block; border: none; cursor: pointer;
+    .chip{
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.06);
+      cursor: pointer;
+      font-weight:600;
+      font-size: 14px;
+      transition: transform .15s ease, background .2s ease, border-color .2s ease;
     }
-    .btn:hover{ background: var(--primary-dark); }
-    .pill { display: inline-block; background: var(--bg); padding: 4px 10px; font-size: 12px; border-radius: 999px; margin-right: 6px; }
-    .fieldset { display: flex; flex-direction: column; gap: 10px; }
-    .row { display: grid; grid-template-columns: 120px 1fr; align-items: center; gap: 10px; }
-    select, input[type="text"] { padding: 8px; border-radius: 10px; border: 1px solid #dee2e6; font-size: 14px; width: 100%; }
-    details summary { font-weight: 800; cursor: pointer; }
-    details { margin: 18px auto; background: var(--white); padding: 12px; border-radius: var(--radius); box-shadow: var(--shadow); max-width: 1200px; }
+    .chip:hover{ transform: translateY(-2px); border-color: rgba(255,255,255,.14); }
+    .chip.active{ background: linear-gradient(90deg, rgba(124,92,255,.25), rgba(255,46,134,.22)); border-color: var(--ring); }
+
+    /* Grid katalog */
+    .catalog{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+    /* Responsif: 1 kolom HP, 2–4 kolom di layar lebih lebar */
+    @media (max-width: 599px){
+      .col { grid-column: span 12; }
+    }
+    @media (min-width: 600px) and (max-width: 899px){
+      .col { grid-column: span 6; }
+    }
+    @media (min-width: 900px){
+      .col { grid-column: span 4; }
+    }
+
+    /* Kartu produk */
+    .card{
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease, background .25s ease;
+      cursor:pointer;
+      min-height: 260px;
+      display:flex;
+      flex-direction:column;
+    }
+    .card:hover{
+      transform: translateY(-4px);
+      border-color: rgba(124,92,255,.35);
+      box-shadow: 0 16px 40px rgba(124,92,255,.12), var(--shadow);
+    }
+
+    /* Gambar/ilustrasi header card */
+    .thumb{
+      position: relative;
+      height: 150px;
+      background:
+        radial-gradient(60% 70% at 30% 20%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(60% 70% at 80% 30%, rgba(255,46,134,.28), transparent 60%),
+        var(--card);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    /* Icon inline SVG */
+    .thumb svg{
+      width: 64px;
+      height: 64px;
+      opacity:.95;
+      filter: drop-shadow(0 6px 14px rgba(124,92,255,.35));
+    }
+
+    .card-body{
+      padding: 14px 16px 16px;
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+      flex:1;
+    }
+    .title{
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing:.2px;
+    }
+    .meta{
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.6;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      padding: 6px 10px;
+      gap:8px;
+      font-size:12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      margin-right:8px;
+    }
+
+    .card-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-top:auto;
+      padding-top:10px;
+      border-top:1px dashed rgba(255,255,255,.08);
+    }
+    .price{
+      font-weight:800;
+      font-size: 15px;
+      letter-spacing:.2px;
+    }
+    .btn{
+      padding:8px 12px;
+      border-radius:10px;
+      background: linear-gradient(90deg,var(--brand),var(--brand-2));
+      border:none;
+      color:white;
+      font-weight:700;
+      cursor:pointer;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+
+    /* Modal (popup detail & pricelist) */
+    .modal-backdrop{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 20px;
+      z-index: 50;
+    }
+    .modal{
+      width: 100%;
+      max-width: 840px;
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: calc(var(--radius) + 4px);
+      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+      overflow:hidden;
+    }
+    .modal-head{
+      padding: 16px 18px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: linear-gradient(180deg, rgba(124,92,255,.10), transparent);
+    }
+    .modal-title{
+      font-family: Orbitron, Inter;
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+    .modal-close{
+      background:transparent;
+      border:1px solid rgba(255,255,255,.14);
+      color:var(--text);
+      padding:6px 10px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+    .modal-body{
+      padding: 18px;
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 900px){
+      .modal-body{
+        grid-template-columns: 1.2fr .8fr;
+      }
+    }
+
+    /* Panel opsi & tabel harga */
+    .fieldset{
+      background: var(--soft);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 12px;
+      padding: 12px;
+      display:grid;
+      gap: 10px;
+    }
+    .row{
+      display:grid;
+      grid-template-columns: 140px 1fr;
+      align-items:center;
+      gap: 10px;
+    }
+    label{ color:var(--muted); font-size: 13px; }
+    select{
+      width:100%;
+      padding:10px 12px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.14);
+      background: #0f0f17;
+      color: var(--text);
+      outline:none;
+      box-shadow: 0 0 0 0px var(--ring);
+      transition: box-shadow .2s ease, border-color .2s ease;
+    }
+    select:focus{ box-shadow: 0 0 0 6px var(--ring); border-color: var(--brand); }
+
+    .table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .table thead th{
+      text-align:left;
+      padding:12px;
+      font-size:12px;
+      color:var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+    .table tbody td{
+      padding:12px;
+      border-top:1px solid rgba(255,255,255,.06);
+      font-size:14px;
+    }
+    .table tfoot td{
+      padding:12px;
+      border-top:1px dashed rgba(255,255,255,.08);
+      font-weight:800;
+    }
+
+    /* Bagian Selengkapnya (akan dibuat ringkas di bagian 4) */
+    .more{
+      margin-top: 34px;
+      padding: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius);
+    }
+    details summary{
+      cursor: pointer;
+      list-style:none;
+      font-weight:800;
+      margin: 6px 0 12px;
+    }
+    details[open] summary{ color: #fff; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>eXCe Corporation — Catalog</h1>
-    <p>Xiin eXCe — CEO | <a href="https://t.me/Xin_Kenji" target="_blank" rel="noopener">Contact Telegram</a> | <a href="https://t.me/eXCe_Corporation" target="_blank" rel="noopener">@eXCe_Corporation</a></p>
-  </header>
+  <div class="wrap">
+    <header class="hero">
+      <div class="brand">eXCe Corporation — XCDDOS</div>
+      <p>Katalog interaktif VPS, VDS, dan RDP. Pilih produk → atur tipe, kategori, dan region → lihat pricelist → klik beli.</p>
 
-  <div id="toolbarChips">
-    <span class="chip active" data-chip="all">Semua</span>
-    <span class="chip" data-chip="vps">VPS</span>
-    <span class="chip" data-chip="vds">VDS</span>
-    <span class="chip" data-chip="rdp">RDP</span>
-    <span class="chip" data-chip="service">Layanan</span>
+      <!-- (Opsional) Shortcut filter kategori via chip -->
+      <div class="toolbar" id="toolbarChips">
+        <button class="chip active" data-chip="all">Semua</button>
+        <button class="chip" data-chip="vps">VPS</button>
+        <button class="chip" data-chip="vds">VDS</button>
+        <button class="chip" data-chip="rdp">RDP</button>
+      </div>
+    </header>
+
+    <!-- Katalog (grid kartu) — konten akan dikirim di Bagian 2 -->
+    <section class="catalog" id="catalog">
+      <!-- Card produk akan disisipkan di Bagian 2 -->
+    </section>
+
+    <!-- Modal popup detail & pricelist — konten akan dikirim di Bagian 3 -->
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-head">
+          <div class="modal-title" id="modalTitle">Detail Produk</div>
+          <button class="modal-close" id="modalClose" aria-label="Tutup">Tutup</button>
+        </div>
+        <div class="modal-body">
+          <!-- Panel kiri/kanan akan dikirim pada Bagian 3 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Bagian Selengkapnya (ringkas) — akan dikirim di Bagian 4 -->
+    <section class="more" id="moreSection">
+      <!-- Konten “Selengkapnya” akan dikirim di Bagian 4 -->
+    </section>
+      <!-- VPS -->
+      <div class="col">
+        <div class="card" data-type="vps" data-name="VPS" data-category="regular">
+          <div class="thumb">
+            <!-- Icon VPS -->
+            <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
+              <path d="M4 6h16v12H4z"></path>
+              <path d="M4 10h16"></path>
+              <circle cx="8" cy="14" r="1"></circle>
+              <circle cx="12" cy="14" r="1"></circle>
+              <circle cx="16" cy="14" r="1"></circle>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="title">VPS Reguler</div>
+            <div class="meta">Paket hemat untuk kebutuhan dasar, uptime stabil & bandwidth cukup.</div>
+            <div class="card-footer">
+              <div class="price">Mulai IDR 50k</div>
+              <button class="btn">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VPS Premium -->
+      <div class="col">
+        <div class="card" data-type="vps" data-name="VPS" data-category="premium">
+          <div class="thumb">
+            <!-- Icon VPS Premium -->
+            <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <path d="M3 10h18"></path>
+              <path d="M8 14h.01M12 14h.01M16 14h.01"></path>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="title">VPS Premium</div>
+            <div class="meta">Performa tinggi, bandwidth besar, cocok untuk project besar.</div>
+            <div class="card-footer">
+              <div class="price">Mulai IDR 150k</div>
+              <button class="btn">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VDS -->
+      <div class="col">
+        <div class="card" data-type="vds" data-name="VDS">
+          <div class="thumb">
+            <!-- Icon VDS -->
+            <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
+              <path d="M4 4h16v6H4zM4 14h16v6H4z"></path>
+              <path d="M8 4v6M8 14v6"></path>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="title">VDS</div>
+            <div class="meta">Dedicated virtual server, sumber daya penuh untuk performa maksimal.</div>
+            <div class="card-footer">
+              <div class="price">Mulai IDR 500k</div>
+              <button class="btn">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RDP -->
+      <div class="col">
+        <div class="card" data-type="rdp" data-name="RDP">
+          <div class="thumb">
+            <!-- Icon RDP -->
+            <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
+              <path d="M4 4h16v12H4z"></path>
+              <path d="M2 20h20"></path>
+              <path d="M8 8h8v4H8z"></path>
+            </svg>
+          </div>
+          <div class="card-body">
+            <div class="title">RDP</div>
+            <div class="meta">Akses desktop jarak jauh, koneksi cepat, cocok untuk kerja remote.</div>
+            <div class="card-footer">
+              <div class="price">Mulai IDR 300k</div>
+              <button class="btn">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+          <!-- Panel kiri: info produk -->
+          <div>
+            <h3 id="modalProductName" style="margin-top:0;font-size:20px;font-weight:800;">Nama Produk</h3>
+            <p id="modalProductDesc" style="color:var(--muted);line-height:1.6;">
+              Deskripsi singkat produk akan muncul di sini.
+            </p>
+            <div style="margin-top:12px;">
+              <span class="pill" id="modalCategory">Kategori: -</span>
+              <span class="pill" id="modalRegion">Region: -</span>
+            </div>
+          </div>
+
+          <!-- Panel kanan: opsi & tabel harga -->
+          <div>
+            <div class="fieldset">
+              <div class="row" id="rowCategorySelect" style="display:none;">
+                <label for="selectCategory">Kategori VPS</label>
+                <select id="selectCategory">
+                  <option value="regular">Reguler</option>
+                  <option value="premium">Premium</option>
+                </select>
+              </div>
+              <div class="row" id="rowTypeSelect">
+                <label for="selectType">Tipe</label>
+                <select id="selectType">
+                  <option value="vps">VPS</option>
+                  <option value="vds">VDS</option>
+                  <option value="rdp">RDP</option>
+                </select>
+              </div>
+              <div class="row">
+                <label for="selectRegion">Region</label>
+                <select id="selectRegion">
+                  <option value="sg">Singapore</option>
+                  <option value="us">United States</option>
+                  <option value="id">Indonesia</option>
+                  <option value="eu">Europe</option>
+                </select>
+              </div>
+            </div>
+
+            <table class="table" style="margin-top:16px;">
+              <thead>
+                <tr>
+                  <th>Paket</th>
+                  <th>Spesifikasi</th>
+                  <th>Harga</th>
+                </tr>
+              </thead>
+              <tbody id="priceTableBody">
+                <!-- Baris harga diisi lewat JS -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">
+                    <button class="btn" id="buyButton">Beli Sekarang</button>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+      <details>
+        <summary>💼 Layanan Lainnya & Proxy</summary>
+        <ul style="margin-top:12px;line-height:1.7;">
+          <li><strong>Proxy Premium Squid</strong> — High speed, low latency, private.</li>
+          <li><strong>Proxy Datacenter</strong> — Lokasi multiple region, stabil.</li>
+          <li><strong>Proxy Shared</strong> — Hemat biaya, tetap cepat.</li>
+          <li><strong>Proxy Rotating</strong> — IP berganti otomatis untuk anonimitas maksimal.</li>
+          <li><strong>Jasa DDoS Website</strong> — Uji ketahanan website dengan metode aman.</li>
+          <li><strong>Jasa Bypass Protection</strong> — Penetrasi pentest proteksi anti-DDoS.</li>
+          <li><strong>Jasa Convert</strong> — Convert saldo e-wallet, bank, atau crypto.</li>
+          <li><strong>Jasa Install Server</strong> — Instalasi VPS/VDS/RDP siap pakai.</li>
+          <li><strong>Jasa Setting Proxy</strong> — Konfigurasi proxy optimal sesuai kebutuhan.</li>
+        </ul>
+      </details>
+
+      <details>
+        <summary>📞 Kontak & Pemesanan</summary>
+        <p style="margin-top:10px;line-height:1.6;">
+          Untuk pemesanan atau pertanyaan, hubungi kami via WhatsApp atau Telegram.<br>
+          <strong>WhatsApp:</strong> <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a><br>
+          <strong>Telegram:</strong> <a href="https://t.me/username" target="_blank">@username</a>
+        </p>
+      </details>
+    <script>
+      // Data harga (bisa diubah sesuai kebutuhan)
+      const priceData = {
+        vps: {
+          regular: {
+            sg: [
+              { name: "VPS SG 1", spec: "2 CPU / 2GB RAM / 30GB SSD", price: "IDR 50k" },
+              { name: "VPS SG 2", spec: "4 CPU / 4GB RAM / 60GB SSD", price: "IDR 100k" }
+            ],
+            us: [
+              { name: "VPS US 1", spec: "2 CPU / 2GB RAM / 30GB SSD", price: "IDR 55k" }
+            ]
+          },
+          premium: {
+            sg: [
+              { name: "VPS Premium SG 1", spec: "4 CPU / 8GB RAM / 100GB SSD", price: "IDR 150k" }
+            ],
+            us: [
+              { name: "VPS Premium US 1", spec: "4 CPU / 8GB RAM / 100GB SSD", price: "IDR 160k" }
+            ]
+          }
+        },
+        vds: {
+          sg: [
+            { name: "VDS SG 1", spec: "8 CPU / 16GB RAM / 200GB SSD", price: "IDR 500k" }
+          ],
+          us: [
+            { name: "VDS US 1", spec: "8 CPU / 16GB RAM / 200GB SSD", price: "IDR 520k" }
+          ]
+        },
+        rdp: {
+          sg: [
+            { name: "RDP SG 1", spec: "4 CPU / 8GB RAM / 100GB SSD", price: "IDR 300k" }
+          ],
+          us: [
+            { name: "RDP US 1", spec: "4 CPU / 8GB RAM / 100GB SSD", price: "IDR 310k" }
+          ]
+        }
+      };
+
+      const catalog = document.getElementById('catalog');
+      const modalBackdrop = document.getElementById('modalBackdrop');
+      const modalClose = document.getElementById('modalClose');
+      const modalProductName = document.getElementById('modalProductName');
+      const modalProductDesc = document.getElementById('modalProductDesc');
+      const modalCategory = document.getElementById('modalCategory');
+      const modalRegion = document.getElementById('modalRegion');
+      const selectCategory = document.getElementById('selectCategory');
+      const selectType = document.getElementById('selectType');
+      const selectRegion = document.getElementById('selectRegion');
+      const priceTableBody = document.getElementById('priceTableBody');
+      const buyButton = document.getElementById('buyButton');
+      const rowCategorySelect = document.getElementById('rowCategorySelect');
+
+      // Open modal on card click
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+          const type = card.dataset.type;
+          const name = card.dataset.name;
+          const category = card.dataset.category || '';
+          modalProductName.textContent = name;
+          modalProductDesc.textContent = card.querySelector('.meta').textContent;
+          selectType.value = type;
+          modalCategory.textContent = category ? `Kategori: ${category}` : 'Kategori: -';
+          modalRegion.textContent = 'Region: -';
+          rowCategorySelect.style.display = (type === 'vps') ? 'grid' : 'none';
+          if (category) selectCategory.value = category;
+          updatePriceTable();
+          modalBackdrop.style.display = 'flex';
+        });
+      });
+
+      // Close modal
+      modalClose.addEventListener('click', () => {
+        modalBackdrop.style.display = 'none';
+      });
+      modalBackdrop.addEventListener('click', (e) => {
+        if (e.target === modalBackdrop) modalBackdrop.style.display = 'none';
+      });
+
+      // Update table when select changes
+      [selectType, selectCategory, selectRegion].forEach(sel => {
+        sel.addEventListener('change', () => {
+          rowCategorySelect.style.display = (selectType.value === 'vps') ? 'grid' : 'none';
+          updatePriceTable();
+        });
+      });
+
+      function updatePriceTable() {
+        const type = selectType.value;
+        const category = selectCategory.value;
+        const region = selectRegion.value;
+        let items = [];
+
+        if (type === 'vps') {
+          items = priceData.vps?.[category]?.[region] || [];
+        } else {
+          items = priceData[type]?.[region] || [];
+        }
+
+        priceTableBody.innerHTML = '';
+        if (!items.length) {
+          priceTableBody.innerHTML = '<tr><td colspan="3">Tidak ada data harga untuk pilihan ini</td></tr>';
+          return;
+        }
+
+        items.forEach(item => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${item.name}</td><td>${item.spec}</td><td>${item.price}</td>`;
+          priceTableBody.appendChild(tr);
+        });
+
+        buyButton.onclick = () => {
+          alert(`Membeli ${type.toUpperCase()} ${category || ''} - ${region.toUpperCase()}`);
+          // copyAndRedirect(url) bisa ditambahkan di sini
+        };
+      }
+
+      // Toolbar filter chips
+      document.querySelectorAll('#toolbarChips .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          document.querySelectorAll('#toolbarChips .chip').forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          const filter = chip.dataset.chip;
+          document.querySelectorAll('.card').forEach(card => {
+            if (filter === 'all' || card.dataset.type === filter) {
+              card.parentElement.style.display = '';
+            } else {
+              card.parentElement.style.display = 'none';
+            }
+          });
+        });
+      });
+    </script>
   </div>
-
-  <main>
-    <div class="grid" id="catalog"><!-- Katalog akan diisi di Bagian 2 --></div>
-  </main>
-
-  <!-- Modal -->
-  <div class="modal-backdrop" id="modalBackdrop">
-    <div class="modal">
-      <div class="modal-header">
-        <h2 id="modalTitle">Detail Produk</h2>
-        <button class="close-btn" id="modalClose" aria-label="Close">&times;</button>
-      </div>
-      <div class="modal-body" id="modalBody"><!-- Diisi Bagian 3 --></div>
-    </div>
-  </div>
-    <!-- VPS REGULER -->
-    <div class="card" data-type="vps" data-key="VPS Reguler">
-      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="VPS Reguler">
-      <div class="card-body">
-        <h3>VPS Reguler</h3>
-        <p>Paket ekonomis SSD — stabil & hemat.</p>
-        <span class="price">Mulai Rp49k / $4</span>
-      </div>
-    </div>
-
-    <!-- VPS PREMIUM -->
-    <div class="card" data-type="vps" data-key="VPS Premium">
-      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop" alt="VPS Premium">
-      <div class="card-body">
-        <h3>VPS Premium</h3>
-        <p>NVMe + CPU AMD/Intel untuk performa tinggi.</p>
-        <span class="price">Mulai Rp79k / $8</span>
-      </div>
-    </div>
-
-    <!-- VDS & RDP — SINGAPORE & HONGKONG -->
-    <div class="card" data-type="vds rdp" data-key="VDS & RDP — SG & HK">
-      <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="VDS & RDP SG/HK">
-      <div class="card-body">
-        <h3>VDS & RDP — SG & HK</h3>
-        <p>Xeon e5v4 / EPYC (tergantung stok), port private 4Gbps.</p>
-        <span class="price">Mulai IDR 660k / $42</span>
-      </div>
-    </div>
-
-    <!-- VDS & RDP — US -->
-    <div class="card" data-type="vds rdp" data-key="VDS & RDP — US">
-      <img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop" alt="VDS & RDP US">
-      <div class="card-body">
-        <h3>VDS & RDP — US</h3>
-        <p>AMD EPYC, Unlimited BW, 2.5Gbps private port.</p>
-        <span class="price">Mulai IDR 800k / $50</span>
-      </div>
-    </div>
-
-    <!-- VPS/RDP — INDONESIA -->
-    <div class="card" data-type="vps rdp" data-key="VPS/RDP — Indonesia">
-      <img src="https://images.unsplash.com/photo-1581093458791-9d09f9b3b2a9?q=80&w=1200&auto=format&fit=crop" alt="VPS/RDP Indonesia">
-      <div class="card-body">
-        <h3>VPS/RDP — Indonesia</h3>
-        <p>Latency rendah untuk user Indonesia.</p>
-        <span class="price">Mulai IDR 250k / $20</span>
-      </div>
-    </div>
-
-    <!-- LAYANAN PROFESIONAL (Legal) -->
-    <div class="card" data-type="service" data-key="Security & Performance Services">
-      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" alt="Security & Performance Services">
-      <div class="card-body">
-        <h3>Security & Performance Services</h3>
-        <p>Authorized load/stress testing & security assessment (dengan izin).</p>
-        <span class="price">Mulai Rp 48k / $3</span>
-      </div>
-    </div>
-<script>
-/* =========================
-   DATA PRODUK & LAYANAN
-   ========================= */
-const productMap = {
-  "VPS Reguler": {
-    type: "vps",
-    regions: {
-      "Default": [
-        { name: "VPS 4/2 • 80GB SSD • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD • 2 TB transfer", price: "Rp 49k / $4" },
-        { name: "VPS 8/4 • 160GB SSD • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD • 3 TB transfer", price: "Rp 69k / $7" },
-      ]
-    }
-  },
-  "VPS Premium": {
-    type: "vps",
-    regions: {
-      "Default": [
-        { name: "VPS 4/2 NVMe • 4TB", spec: "4 GB RAM / 2 AMD/Intel CPU • 80 GB NVMe SSD • 4 TB transfer", price: "Rp 79k / $8" },
-        { name: "VPS 8/4 NVMe • 5TB", spec: "8 GB RAM / 4 AMD/Intel CPU • 160 GB NVMe SSD • 5 TB transfer", price: "Rp 129k / $15" },
-      ]
-    }
-  },
-  "VDS & RDP — SG & HK": {
-    type: "vds/rdp",
-    note: "SINGAPORE (Xeon e5v4) & HONGKONG (EPYC/XEON — tergantung stok). Private port 4 Gbps, 1 IPv4 + IPv6.",
-    regions: {
-      "Singapore": [
-        { name: "8C/16G/200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
-        { name: "12C/24G/300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
-        { name: "14C/28G/350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
-        { name: "16C/32G/400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
-        { name: "20C/40G/500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" },
-      ],
-      "Hongkong": [
-        { name: "8C/16G/200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k+ (tergantung stok)" },
-      ],
-    }
-  },
-  "VDS & RDP — US": {
-    type: "vds/rdp",
-    note: "REGION US — AMD EPYC, Unlimited Bandwidth, 2.5Gbps private port.",
-    regions: {
-      "US": [
-        { name: "12vCPU / 32G / 1TB NVMe", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 800k / USD $50" },
-        { name: "16vCPU / 64G / 2TB NVMe", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.100k / USD $69" },
-        { name: "24vCPU / 96G / 3TB NVMe", spec: "24 vCPU AMD EPYC • 96 GB RAM • 3 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.500k / USD $94" },
-        { name: "28vCPU / 112G / 3.5TB NVMe", spec: "28 vCPU AMD EPYC • 112 GB RAM • 3.5 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.770k / USD $110" },
-        { name: "32vCPU / 128G / 4TB NVMe", spec: "32 vCPU AMD EPYC • 128 GB RAM • 4 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 2.100k / USD $135" },
-      ]
-    }
-  },
-  "VPS/RDP — Indonesia": {
-    type: "vps/rdp",
-    note: "Server Indonesia — opsi VPS & RDP.",
-    regions: {
-      "Indonesia": [
-        { name: "4C / 8G", spec: "4 CPU / 8 GB RAM", price: "IDR 250k / USDT $20" },
-        { name: "8C / 16G", spec: "8 CPU / 16 GB RAM", price: "IDR 500k / USDT $40" },
-        { name: "16C / 32G", spec: "16 CPU / 32 GB RAM", price: "IDR 850k / USDT $65" },
-        { name: "32C / 64G", spec: "32 CPU / 64 GB RAM", price: "IDR 1.450k / USDT $112" },
-        { name: "64C / 256G", spec: "64 CPU / 256 GB RAM", price: "IDR 2.200k / USDT $170" },
-      ]
-    }
-  },
-  /* Layanan profesional & legal sebagai pengganti "DDoS/Attack" */
-  "Security & Performance Services": {
-    type: "service",
-    note: "Semua pengujian dilakukan HANYA dengan bukti kepemilikan atau izin tertulis dari pemilik sistem/website.",
-    regions: {
-      "Authorized Load/Stress Testing": [
-        { name: "Reguler — 1 hari", spec: "Durasi uji: 1 day • 200s max run / 1 concurrency", price: "$3 / Rp48.000" },
-        { name: "Reguler — 7 hari", spec: "Durasi uji: 7 days • 200s / 1 concurrency", price: "$6 / Rp96.000" },
-        { name: "Reguler — 20 hari", spec: "Durasi uji: 20 days • 200s / 1 concurrency", price: "$15 / Rp240.000" },
-        { name: "Reguler — 30 hari", spec: "Durasi uji: 30 days • 200s / 1 concurrency", price: "$25 / Rp400.000" },
-        { name: "Pro — 50 menit", spec: "Durasi uji singkat • slot prioritas", price: "$3 / Rp48.000" },
-        { name: "Pro — 12 jam", spec: "Pengujian menengah", price: "$6 / Rp96.000" },
-        { name: "Pro — 1 hari", spec: "Pengujian harian", price: "$12 / Rp192.000" },
-        { name: "Pro — 3 hari", spec: "Pengujian 3 hari", price: "$20 / Rp320.000" },
-        { name: "Pro — 7 hari", spec: "Pengujian 1 minggu", price: "$35 / Rp560.000" },
-        { name: "Pro — 14 hari", spec: "Pengujian 2 minggu", price: "$60 / Rp960.000" },
-        { name: "Pro — 30 hari", spec: "Pengujian 1 bulan", price: "$100 / Rp1.600.000" },
-        { name: "Enterprise — 7 hari", spec: "Engagement enterprise terjadwal", price: "$200 / Rp3.200.000" }
-      ],
-      "Security Assessment (Legal)": [
-        { name: "Web App Security Review", spec: "Scope: OWASP Top 10 (black/grey/white box) • Laporan temuan & rekomendasi", price: "Hubungi @Xin_Kenji" },
-        { name: "Infra & Network Review", spec: "Scope: konfigurasi server, patching, basic hardening", price: "Hubungi @Xin_Kenji" }
-      ]
-    }
-  }
-};
-
-/* =========================
-   RENDER MODAL & INTERAKSI
-   ========================= */
-const modalBackdrop = document.getElementById('modalBackdrop');
-const modalClose = document.getElementById('modalClose');
-const modalBody  = document.getElementById('modalBody');
-const modalTitle = document.getElementById('modalTitle');
-
-function openModalFor(key){
-  const data = productMap[key];
-  if(!data) return;
-  modalTitle.textContent = key;
-
-  const regionOptions = Object.keys(data.regions).map(r=>`<option value="${r}">${r}</option>`).join('');
-  const note = data.note ? `<div class="pill">${data.note}</div>` : "";
-
-  modalBody.innerHTML = `
-    <div style="grid-column:1 / -1">
-      ${note}
-    </div>
-    <div class="fieldset" style="grid-column:1 / -1">
-      <div class="row">
-        <label>Pilih Kategori/Region</label>
-        <select id="regionSelect">${regionOptions}</select>
-      </div>
-      <div>
-        <table class="table" id="priceTable">
-          <thead><tr><th>Paket</th><th>Spesifikasi</th><th>Harga</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div>
-        <a class="btn" href="https://t.me/Xin_Kenji" target="_blank" rel="noopener">Chat & Order via Telegram</a>
-      </div>
-    </div>
-  `;
-
-  const regionSelect = document.getElementById('regionSelect');
-  regionSelect.addEventListener('change', ()=> refreshTable(data, regionSelect.value));
-  refreshTable(data, regionSelect.value);
-
-  modalBackdrop.style.display = 'flex';
-}
-
-function refreshTable(data, region){
-  const tbody = modalBody.querySelector('#priceTable tbody');
-  const items = data.regions[region] || [];
-  if(!items.length){
-    tbody.innerHTML = `<tr><td colspan="3">Belum ada data untuk pilihan ini.</td></tr>`;
-    return;
-  }
-  tbody.innerHTML = items.map(it=>`
-    <tr>
-      <td>${it.name || '-'}</td>
-      <td>${it.spec || '-'}</td>
-      <td><strong>${it.price || '-'}</strong></td>
-    </tr>
-  `).join('');
-}
-
-/* =========================
-   EVENT LISTENER KARTU
-   ========================= */
-document.querySelectorAll('.card').forEach(card=>{
-  card.addEventListener('click', ()=>{
-    const key = card.getAttribute('data-key');
-    openModalFor(key);
-  });
-});
-modalClose.addEventListener('click', ()=> modalBackdrop.style.display='none');
-modalBackdrop.addEventListener('click', (e)=> { if(e.target===modalBackdrop) modalBackdrop.style.display='none'; });
-
-/* =========================
-   FILTER CHIP
-   ========================= */
-document.querySelectorAll('#toolbarChips .chip').forEach(chip=>{
-  chip.addEventListener('click', ()=>{
-    document.querySelectorAll('#toolbarChips .chip').forEach(c=>c.classList.remove('active'));
-    chip.classList.add('active');
-    const filter = chip.dataset.chip;
-    document.querySelectorAll('.card').forEach(card=>{
-      const types = (card.getAttribute('data-type')||'').split(' ');
-      card.style.display = (filter==='all' || types.includes(filter)) ? '' : 'none';
-    });
-  });
-});
-</script>
-<details>
-  <summary>ℹ️ Informasi Tambahan</summary>
-  <ul style="margin:12px 0; line-height:1.7;">
-    <li><strong>OS Tersedia:</strong> Ubuntu 20.04/22.04/24.04, Debian 11/12.</li>
-    <li><strong>Metode Pembayaran:</strong> IDR & USDT (kurs mengikuti market).</li>
-    <li><strong>Catatan Layanan:</strong> Semua pengujian performa/keamanan hanya dilakukan dengan <em>izin tertulis</em> pemilik sistem.</li>
-  </ul>
-</details>
-
-<details>
-  <summary>📞 Kontak & Pemesanan</summary>
-  <p style="margin:10px 0; line-height:1.7;">
-    <strong>Telegram (Contact):</strong> <a href="https://t.me/Xin_Kenji" target="_blank" rel="noopener">@Xin_Kenji</a><br>
-    <strong>Telegram (Channel):</strong> <a href="https://t.me/eXCe_Corporation" target="_blank" rel="noopener">@eXCe_Corporation</a>
-  </p>
-</details>
+</body>
+</html>
