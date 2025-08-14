@@ -106,8 +106,8 @@
 
 <header>
   <div class="title">
-    <h1>eXCe Corporation — Catalog</h1>
-    <p>Katalog cyberpunk — cepat, simple, enak dibaca</p>
+    <h1>eXCe Corporation — Vps, Vds, Rdp Bullet Proof</h1>
+    <p>Provider Services VPS, VDS, RDP, PENTEST PLAN, HOLD PENTEST</p>
     <div class="links">
       <span class="btn">CEO: Xiin eXCe</span>
       <a class="btn" href="https://t.me/Xin_Kenji" target="_blank">t.me/Xin_Kenji</a>
@@ -131,7 +131,7 @@
     <summary>ℹ️ Informasi Tambahan</summary>
     <ul>
       <li><strong>OS:</strong> Ubuntu, Debian.</li>
-      <li><strong>Pembayaran:</strong> IDR & USDT.</li>
+      <li><strong>Pembayaran:</strong> IDR & Crypto.</li>
       <li><strong>Catatan:</strong> Pentest & Load Testing hanya dengan izin tertulis.</li>
     </ul>
   </details>
@@ -155,7 +155,7 @@ const rawProductMap = {
   /* VPS */
   "VPS Reguler": {
     type: "vps",
-    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+    img: "https://tmpfiles.org/dl/10370792/tmp.jpg",
     subtitle: "Paket ekonomis SSD — stabil & hemat.",
     badge: "SSD",
     regions: {
@@ -167,8 +167,8 @@ const rawProductMap = {
   },
   "VPS Premium": {
     type: "vps",
-    img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "NVMe + CPU AMD/Intel untuk performa tinggi.",
+    img: "https://tmpfiles.org/dl/10370792/tmp.jpg",
+    subtitle: "NVMe + CPU AMD/Intel untuk ketahanan tinggi.",
     badge: "NVMe",
     regions: {
       "Default": [
@@ -181,32 +181,35 @@ const rawProductMap = {
   /* VDS & RDP — SG & HK */
   "VDS & RDP — SG & HK": {
     type: "vds rdp",
-    img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "Xeon e5v4 / EPYC (tergantung stok), port private 4Gbps.",
+    img: "https://tmpfiles.org/dl/10371453/tmp.jpg",
+    subtitle: "Intel Xeon e5v4 / EPYC (tergantung stok), speed data/port private 4Gbps.",
     badge: "4Gbps",
-    note: "SINGAPORE (Xeon e5v4) & HONGKONG (EPYC/XEON — tergantung stok). Private port 4 Gbps, 1 IPv4 + IPv6.",
+    note: "SINGAPORE (Intel Xeon e5v4) & HONGKONG (AMD EPYC/Intel XEON — tergantung stok). Private port 4 Gbps, 1 IPv4 + IPv6, AMD-V/VN-X: Active.",
     regions: {
       "Singapore": [
-        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
-        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
-        { name: "14C / 28G / 350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
-        { name: "16C / 32G / 400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
-        { name: "20C / 40G / 500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" }
+        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
+        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
+        { name: "14C / 28G / 350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
+        { name: "16C / 32G / 400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
+        { name: "20C / 40G / 500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" }
       ],
       "Hongkong": [
-        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k+ (tergantung stok)" },
-        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 900k+ (tergantung stok)" }
-      ]
+        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
+        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
+        { name: "14C / 28G / 350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
+        { name: "16C / 32G / 400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
+        { name: "20C / 40G / 500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" }
+      ],
     }
   },
 
   /* VDS & RDP — US */
   "VDS & RDP — US": {
     type: "vds rdp",
-    img: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "AMD EPYC, Unlimited BW, 2.5Gbps private port.",
+    img: "https://tmpfiles.org/dl/10371453/tmp.jpg",
+    subtitle: "AMD EPYC, Unlimited BW, 2.5Gbps private port/data speed.",
     badge: "2.5Gbps",
-    note: "REGION US — AMD EPYC, Unlimited Bandwidth, 2.5Gbps private port.",
+    note: "REGION US / Europa — AMD EPYC, Unlimited Bandwidth, 2.5Gbps private port.",
     regions: {
       "US": [
         { name: "12vCPU / 32G / 1TB NVMe", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 800k / USD $50" },
@@ -221,7 +224,7 @@ const rawProductMap = {
   /* VPS/RDP — Indonesia */
   "VPS/RDP — Indonesia": {
     type: "vps rdp",
-    img: "https://images.unsplash.com/photo-1581093458791-9d09f9b3b2a9?q=80&w=1200&auto=format&fit=crop",
+    img: "https://tmpfiles.org/dl/10371946/tmp.jpg",
     subtitle: "Latency rendah untuk user Indonesia.",
     badge: "Local",
     regions: {
@@ -236,12 +239,12 @@ const rawProductMap = {
   },
 
   /* Offshore VDS */
-  "Offshore VDS (Bahrain/NL/Swiss)": {
+  "VDS Free DMCA BULLET PROOF FREE ALL ABUSED (Bahrain/NL/Swiss)": {
     type: "vds",
-    img: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "Offshore regions dengan bandwidth unlimited (AUP berlaku).",
-    badge: "Offshore",
-    note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Tunduk pada hukum & AUP wilayah terkait.",
+    img: "https://tmpfiles.org/dl/10372154/tmp.jpg",
+    subtitle: "VDS Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
+    badge: "VDS BULLET PROOF",
+    note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
     regions: {
       "Bahrain": [
         { name: "1C / 1G / 20GB", spec: "1 CPU / 1 GB RAM / 20 GB Disk • 1Gbps", price: "IDR 1.000k / USDT $60" },
@@ -262,44 +265,61 @@ const rawProductMap = {
   },
 
   /* Managed Cloud Panel Setup */
-  "Managed Cloud Panel Setup": {
+  "CLOUD PANEL AKUN DIGITAL OCHEAN": {
     type: "service",
-    img: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "Bantuan setup panel cloud (akun & pembayaran milik pelanggan).",
+    img: "https://tmpfiles.org/dl/10372645/tmp.jpg",
+    subtitle: "Akun Cloud Digital Ochean.",
     badge: "Managed",
     regions: {
       "DigitalOcean": [
-        { name: "Setup 3 deploy", spec: "Assist setup & 3 deploy (best practice, SSH key, firewall)", price: "IDR 110k / $10" },
-        { name: "Setup 10 deploy", spec: "Assist setup & 10 deploy (templating + basic hardening)", price: "IDR 130k / $13" }
+        { name: "3 Droplet", spec: "3 DROP VCC 200$", price: "IDR 110k / $10" },
+        { name: "10 Droplet", spec: "10 DROP VCC 200$", price: "IDR 130k / $13" }
       ]
     }
   },
 
   /* Pentest & Load Testing (Authorized) */
-  "Pentest & Load/Stress Testing (Authorized)": {
+  "Plan Bot DDOS Telegram / Pentest / Load/Stress Testing (Authorized)": {
     type: "service",
-    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-    subtitle: "Legal & berizin — butuh bukti kepemilikan/otorisasi.",
+    img: "https://tmpfiles.org/dl/10372965/tmp.jpg",
+    subtitle: "Legal & berizin — Layanan Pentest.",
     badge: "Security",
-    note: "Semua pengujian dilakukan HANYA dengan bukti kepemilikan atau izin tertulis dari pemilik sistem/website.",
+    note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
     regions: {
-      "Load/Stress Testing": [
-        { name: "Reguler — 1 hari", spec: "Durasi: 1 day • 200s run • 1 concurrency", price: "$3 / Rp48.000" },
-        { name: "Reguler — 7 hari", spec: "Durasi: 7 days • 200s run • 1 concurrency", price: "$6 / Rp96.000" },
-        { name: "Reguler — 20 hari", spec: "Durasi: 20 days • 200s run • 1 concurrency", price: "$15 / Rp240.000" },
-        { name: "Reguler — 30 hari", spec: "Durasi: 30 days • 200s run • 1 concurrency", price: "$25 / Rp400.000" },
-        { name: "Pro — 50 menit", spec: "Durasi singkat • slot prioritas", price: "$3 / Rp48.000" },
-        { name: "Pro — 12 jam", spec: "Pengujian menengah", price: "$6 / Rp96.000" },
-        { name: "Pro — 1 hari", spec: "Pengujian harian", price: "$12 / Rp192.000" },
-        { name: "Pro — 3 hari", spec: "Pengujian 3 hari", price: "$20 / Rp320.000" },
-        { name: "Pro — 7 hari", spec: "Pengujian 1 minggu", price: "$35 / Rp560.000" },
-        { name: "Pro — 14 hari", spec: "Pengujian 2 minggu", price: "$60 / Rp960.000" },
-        { name: "Pro — 30 hari", spec: "Pengujian 1 bulan", price: "$100 / Rp1.600.000" },
-        { name: "Enterprise — 7 hari", spec: "Engagement enterprise terjadwal + report ringkas", price: "$200 / Rp3.200.000" }
+      "Plan Bot Telegram DDOS / Pentest / Load/Stress Testing": [
+        { name: "REGULAR — 1 hari", spec: "200s run • 1 concurrency", price: "$3 / Rp48.000" },
+        { name: "REGULAR — 7 hari", spec: "200s run • 1 concurrency", price: "$6 / Rp96.000" },
+        { name: "REGULAR — 20 hari", spec: "200s run • 1 concurrency", price: "$15 / Rp240.000" },
+        { name: "REGULAR — 30 hari", spec: "200s run • 1 concurrency", price: "$25 / Rp400.000" },
+        { name: "VIP — 50 menit", spec: "200s run • 2 concurrency", price: "$3 / Rp48.000" },
+        { name: "VIP — 12 jam", spec: "200s run • 2 concurrency", price: "$6 / Rp96.000" },
+        { name: "VIP — 1 hari", spec: "200s run • 2 concurrency", price: "$12 / Rp192.000" },
+        { name: "VIP — 3 hari", spec: "200s run • 2 concurrency", price: "$20 / Rp320.000" },
+        { name: "VIP — 7 hari", spec: "200s run • 2 concurrency", price: "$35 / Rp560.000" },
+        { name: "VIP — 14 hari", spec: "200s run • 2 concurrency", price: "$60 / Rp960.000" },
+        { name: "VIP — 30 hari", spec: "200s run • 2 concurrency", price: "$100 / Rp1.600.000" },
+        { name: "VVIP — 7 hari", spec: "200s run • 2 concurrency API ACCESS", price: "$200 / Rp3.200.000" }
       ],
-      "Web & Infra Pentest": [
-        { name: "Web App Security Review", spec: "Scope: OWASP Top 10 • Black/Grey/White Box • Report & rekomendasi", price: "Hubungi @Xin_Kenji" },
-        { name: "Infra & Network Review", spec: "Scope: OS hardening, patching, konfigurasi firewall", price: "Hubungi @Xin_Kenji" }
+      "JASA HOLD DDOS WEBSITE / JASA HOLD PENTEST WEBSITE": [
+        { name: "1 Jam 120k / 10$" },
+        { name: "2 Jam 180k / 15$" },
+        { name: "3 Jam 240k / 20$" },
+        { name: "4 Jam 300k / 25$" },
+        { name: "5 Jam 390k / 30$" },
+        { name: "6 Jam 500k / 35$" },
+        { name: "1 Day : 1jt / 70$" },
+        { name: "2 Day : 1.5 jt / 110$" },
+        { name: "3 Day : 2 jt / 125$" },
+        { name: "4 Day : 2.5 jt / 170$" },
+        { name: "5 Day : 3 jt / 200$" },
+        { name: "6 Day : 3.5 jt / 230$" },
+        { name: "7 Day : 4 jt / 270$" },
+        { name: "30 Day : 14 jt / 900$" },
+      ],
+      "DELETE ARTIKEL PALSU atau SUSPEN WEBSITE PHISING PERMANENT / HAPUS PAGE DARI KW GOOGLE": [
+        { name: "Easy: 1jt / 70$", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari" },
+        { name: "Hard: 3jt / 200$", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari" },
+        { name: "Super Hard: 15jt / 1000$", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari" },
       ]
     }
   }
