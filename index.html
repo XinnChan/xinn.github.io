@@ -229,7 +229,7 @@ const rawProductMap = {
     type: "vps rdp",
     img: "https://tmpfiles.org/dl/10371946/tmp.jpg",
     subtitle: "Latency rendah untuk user Indonesia.",
-    badge: "Local",
+    badge: "1Gbps",
     regions: {
       "Indonesia": [
         { name: "4C / 8G", spec: "4 CPU / 8 GB RAM", price: "IDR 250k / USDT $20" },
@@ -272,7 +272,7 @@ const rawProductMap = {
     type: "service",
     img: "https://tmpfiles.org/dl/10376180/tmp.jpg",
     subtitle: "Akun Cloud Digital Ochean.",
-    badge: "Managed",
+    badge: "Account Cloud",
     regions: {
       "DigitalOcean": [
         { name: "3 Droplet", spec: "3 DROP VCC 200$", price: "IDR 110k / $10" },
@@ -286,7 +286,7 @@ const rawProductMap = {
     type: "service",
     img: "https://tmpfiles.org/dl/10372965/tmp.jpg",
     subtitle: "Legal & berizin — Layanan Pentest.",
-    badge: "Security",
+    badge: "Security/Pentest",
     note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
     regions: {
       "Plan Bot Telegram DDOS / Pentest / Load/Stress Testing": [
@@ -304,25 +304,31 @@ const rawProductMap = {
         { name: "VVIP — 7 hari", spec: "200s run • 2 concurrency API ACCESS", price: "$200 / Rp3.200.000" }
       ],
       "JASA HOLD DDOS WEBSITE / JASA HOLD PENTEST WEBSITE": [
-        { name: "1 Jam ", price: "120k / 10$" },
-        { name: "2 Jam ", price: "180k / 15$" },
-        { name: "3 Jam ", price: "240k / 20$" },
-        { name: "4 Jam ", price: "300k / 25$" },
-        { name: "5 Jam ", price: "390k / 30$" },
-        { name: "6 Jam ", price: "500k / 35$" },
-        { name: "1 Day ", price: "1jt / 70$" },
-        { name: "2 Day ", price: "1.5 jt / 110$" },
-        { name: "3 Day ", price: "2 jt / 125$" },
-        { name: "4 Day ", price: "2.5 jt / 170$" },
-        { name: "5 Day ", price: "3 jt / 200$" },
-        { name: "6 Day ", price: "3.5 jt / 230$" },
-        { name: "7 Day ", price: "4 jt / 270$" },
-        { name: "30 Day ", price: "14 jt / 900$" },
+        { name: "1 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "120k / 10$" },
+        { name: "2 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "180k / 15$" },
+        { name: "3 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "240k / 20$" },
+        { name: "4 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "300k / 25$" },
+        { name: "5 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "390k / 30$" },
+        { name: "6 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "500k / 35$" },
+        { name: "1 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "1jt / 70$" },
+        { name: "2 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "1.5 jt / 110$" },
+        { name: "3 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "2 jt / 125$" },
+        { name: "4 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "2.5 jt / 170$" },
+        { name: "5 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "3 jt / 200$" },
+        { name: "6 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "3.5 jt / 230$" },
+        { name: "7 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "4 jt / 270$" },
+        { name: "30 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "14 jt / 900$" },
       ],
       "DELETE ARTIKEL PALSU atau SUSPEN WEBSITE PHISING PERMANENT / HAPUS PAGE DARI KW GOOGLE": [
         { name: "Easy", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "1jt / 70$" },
         { name: "Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "3jt / 200$" },
         { name: "Super Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "15jt / 1000$" },
+      ],
+      "PROTECT WEBSITE / INSTALL FIREWALL WEBSITE": [
+        { name: "Basic", spec: "Basic Protect", price: "Harga Bisa Di Diskusikan" },
+        { name: "Normal", spec: "Normal Protect", price: "1jt / 70$" },
+        { name: "Medium", spec: "Medium Protect", price: "3jt / 200$" },
+        { name: "Expert", spec: "Expert Protect + Free Pantau 24 Jam", price: "15jt / 1000$" },
       ]
     }
   }
