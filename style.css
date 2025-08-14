@@ -1,72 +1,81 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #f8fafc;
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
 header {
     text-align: center;
     padding: 20px;
-    background: #007bff;
-    color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-.catalog {
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
-.category {
+.catalog {
+    background: rgba(255,255,255,0.05);
+    border-radius: 16px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
     text-align: center;
 }
 
-.card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.card img {
-    width: 150px;
-    height: 150px;
+.catalog-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
     object-fit: contain;
-    margin-bottom: 15px;
 }
 
-.card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 15px 0;
-    text-align: left;
-}
-
-.card li {
-    background: #f8f9fa;
-    margin: 5px 0;
-    padding: 8px 10px;
+.item {
+    margin: 10px 0;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
     border-radius: 8px;
+}
+
+.price {
+    color: #22d3ee;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
 button {
-    padding: 10px 15px;
-    background: #007bff;
+    background: #0ea5e9;
     color: white;
+    padding: 8px 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-    background: #0056b3;
+    background: #0284c7;
+}
+
+.price-list {
+    text-align: left;
+    background: rgba(0,0,0,0.2);
+    padding: 10px;
+    border-radius: 8px;
+    overflow-x: auto;
 }
