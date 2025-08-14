@@ -6,7 +6,6 @@
   <title>eXCe Corporation — VPS, VDS, RDP & Jasa Pentest</title>
   <meta name="description" content="Katalog VPS, VDS, RDP, dan Jasa Pentest / Load Test — interaktif, detail, dan mudah dibaca." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
-
   <style>
     :root{
       --bg: #0b0b12;
@@ -89,6 +88,33 @@
       transition:transform .15s ease, filter .15s ease;
     }
     .btn:hover{transform:translateY(-1px);filter:brightness(1.05)}
+    /* Modal */
+    .modal-backdrop{
+      position:fixed;inset:0;background:rgba(0,0,0,.55);
+      display:none;align-items:center;justify-content:center;
+      padding:20px;z-index:50;
+    }
+    .modal{
+      width:100%;max-width:840px;background:var(--card);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:calc(var(--radius) + 4px);
+      box-shadow:0 24px 64px rgba(0,0,0,.5);overflow:hidden;
+    }
+    .modal-head{
+      padding:16px 18px;border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      background:linear-gradient(180deg, rgba(124,92,255,.10), transparent);
+    }
+    .modal-title{font-family:Orbitron, Inter;font-weight:800;letter-spacing:.3px}
+    .modal-close{
+      background:transparent;border:1px solid rgba(255,255,255,.14);
+      color:var(--text);padding:6px 10px;border-radius:10px;cursor:pointer;
+    }
+    .modal-body{padding:18px;display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.modal-body{grid-template-columns:1.2fr .8fr}}
+    .table{width:100%;border-collapse:collapse;border-radius:12px;border:1px solid rgba(255,255,255,.1)}
+    .table thead th{padding:12px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.03);text-align:left}
+    .table tbody td{padding:12px;border-top:1px solid rgba(255,255,255,.06);font-size:14px}
   </style>
 </head>
 <body>
@@ -105,11 +131,10 @@
   </div>
 </header>
 <section class="catalog" id="catalog">
-  <!-- VPS REGULER -->
+  <!-- VPS Reguler -->
   <div class="col">
     <div class="card" data-type="vps" data-name="VPS Reguler">
       <div class="thumb">
-        <!-- Icon Server -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="16" rx="2"></rect>
           <path d="M3 10h18"></path>
@@ -128,12 +153,10 @@
       </div>
     </div>
   </div>
-
-  <!-- VPS PREMIUM -->
+  <!-- VPS Premium -->
   <div class="col">
     <div class="card" data-type="vps" data-name="VPS Premium">
       <div class="thumb">
-        <!-- Icon Premium -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <rect x="2" y="4" width="20" height="14" rx="2"></rect>
           <path d="M2 10h20"></path>
@@ -150,12 +173,10 @@
       </div>
     </div>
   </div>
-
   <!-- VDS -->
   <div class="col">
-    <div class="card" data-type="vds" data-name="VDS">
+    <div class="card" data-type="vds" data-name="VDS Dedicated">
       <div class="thumb">
-        <!-- Icon VDS -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <path d="M4 4h16v6H4zM4 14h16v6H4z"></path>
           <path d="M8 4v6M8 14v6"></path>
@@ -171,12 +192,10 @@
       </div>
     </div>
   </div>
-
   <!-- RDP -->
   <div class="col">
     <div class="card" data-type="rdp" data-name="RDP">
       <div class="thumb">
-        <!-- Icon RDP -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <rect x="3" y="4" width="18" height="12" rx="2"></rect>
           <path d="M2 20h20"></path>
@@ -193,12 +212,10 @@
       </div>
     </div>
   </div>
-
-  <!-- PLAN PENTEST -->
+  <!-- Plan Bot Telegram Load Test -->
   <div class="col">
     <div class="card" data-type="pentest" data-name="Plan Bot Telegram Load Test">
       <div class="thumb">
-        <!-- Icon Shield -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
         </svg>
@@ -213,12 +230,10 @@
       </div>
     </div>
   </div>
-
-  <!-- PLAN PENTEST STRESS -->
+  <!-- Plan Bot Telegram Stress -->
   <div class="col">
     <div class="card" data-type="pentest" data-name="Plan Bot Telegram Stress">
       <div class="thumb">
-        <!-- Icon Zap -->
         <svg fill="none" stroke="white" stroke-width="1.6" viewBox="0 0 24 24">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
         </svg>
@@ -234,7 +249,7 @@
     </div>
   </div>
 </section>
-<!-- MODAL POPUP DETAIL -->
+<!-- ========== MODAL POPUP DETAIL ========== -->
 <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-head">
@@ -248,7 +263,16 @@
         <p id="modalProductDesc" style="color:var(--muted);line-height:1.6;">
           Deskripsi singkat produk akan muncul di sini.
         </p>
+
+        <!-- Legal / Catatan penting untuk layanan pentest -->
+        <div id="legalNote" style="margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);color:var(--muted);font-size:13px;display:none;">
+          <strong>Catatan Pentest & Load Test (Authorized Only)</strong>
+          <p style="margin:6px 0 0;line-height:1.5;">
+            Semua layanan pengujian keamanan (pentest / load test) hanya dilakukan setelah ada <strong>izin tertulis</strong> dari pemilik sistem. Kami tidak melayani permintaan untuk menyerang, menahan, atau merusak situs tanpa otorisasi. Dengan menggunakan layanan ini, pemesan menyatakan memiliki hak / wewenang terhadap target.
+          </p>
+        </div>
       </div>
+
       <!-- Panel Kanan: Tabel Harga -->
       <div>
         <table class="table" style="margin-top:16px;">
@@ -268,69 +292,117 @@
   </div>
 </div>
 
+<!-- ========== SCRIPT PRICE DATA + LOGIC MODAL ========== -->
 <script>
+  // Harga dan paket — VPS/VDS/RDP sesuai datamu; PENTEST diganti jadi paket pentest yang legal/authorized
   const priceData = {
     "VPS Reguler": [
-      {name: "4 GB / 2 CPUs • 80 GB SSD Disk • 2 TB transfer", price: "Rp. 49k / $4"},
-      {name: "8 GB / 4 CPUs • 160 GB SSD Disk • 3 TB transfer", price: "Rp. 69k / $7"}
+      {paket: "4 GB / 2 CPUs", spec: "80 GB SSD Disk • 2 TB transfer", harga: "Rp 49k / $4"},
+      {paket: "8 GB / 4 CPUs", spec: "160 GB SSD Disk • 3 TB transfer", harga: "Rp 69k / $7"}
     ],
     "VPS Premium": [
-      {name: "4 GB / 2 AMD/INTEL CPUs • 80 GB NVMe SSDs • 4 TB transfer", price: "Rp. 79k / $8"},
-      {name: "8 GB / 4 AMD/INTEL CPUs • 160 GB NVMe SSDs • 5 TB transfer", price: "Rp. 129k / $15"}
+      {paket: "4 GB / 2 AMD/INTEL CPUs", spec: "80 GB NVMe SSDs • 4 TB transfer", harga: "Rp 79k / $8"},
+      {paket: "8 GB / 4 AMD/INTEL CPUs", spec: "160 GB NVMe SSDs • 5 TB transfer", harga: "Rp 129k / $15"}
     ],
-    "VDS": [
-      {name: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB SSD NVMe • Unlimited BW • 2.5Gbps", price: "Rp. 800k / $50"},
-      {name: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB SSD NVMe • Unlimited BW • 2.5Gbps", price: "Rp. 1.100k / $69"}
+    "VDS Dedicated": [
+      {paket: "VDS SG", spec: "8 CPU / 16 GB RAM • 200 GB NVMe • 4Gbit/s (Private)", harga: "Rp 660k / $42"},
+      {paket: "VDS SG", spec: "12 CPU / 24 GB RAM • 300 GB NVMe • 4Gbit/s (Private)", harga: "Rp 800k / $55"},
+      {paket: "VDS SG", spec: "14 CPU / 28 GB RAM • 350 GB NVMe • 4Gbit/s (Private)", harga: "Rp 1.100k / $73"},
+      {paket: "VDS SG", spec: "16 CPU / 32 GB RAM • 400 GB NVMe • 4Gbit/s (Private)", harga: "Rp 1.300k / $85"},
+      {paket: "VDS SG", spec: "20 CPU / 40 GB RAM • 500 GB NVMe • 4Gbit/s (Private)", harga: "Rp 1.900k / $123"},
+      {paket: "VDS US", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB SSD NVMe • 2.5Gbps (Private)", harga: "Rp 800k / $50"},
+      {paket: "VDS US", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB SSD NVMe • 2.5Gbps (Private)", harga: "Rp 1.100k / $69"},
+      {paket: "VDS US", spec: "24 vCPU AMD EPYC • 96 GB RAM • 3 TB SSD NVMe • 2.5Gbps (Private)", harga: "Rp 1.500k / $94"},
+      {paket: "VDS US", spec: "28 vCPU AMD EPYC • 112 GB RAM • 3.5 TB SSD NVMe • 2.5Gbps (Private)", harga: "Rp 1.770k / $110"},
+      {paket: "VDS US", spec: "32 vCPU AMD EPYC • 128 GB RAM • 4 TB SSD NVMe • 2.5Gbps (Private)", harga: "Rp 2.100k / $135"}
     ],
     "RDP": [
-      {name: "4 CPU • 8GB RAM • 100GB SSD", price: "Rp. 300k"},
-      {name: "8 CPU • 16GB RAM • 200GB SSD", price: "Rp. 500k"}
+      {paket: "RDP SG 1", spec: "4 CPU • 8 GB RAM • 100 GB SSD", harga: "Rp 300k"},
+      {paket: "RDP US 1", spec: "4 CPU • 8 GB RAM • 100 GB SSD", harga: "Rp 310k"},
+      {paket: "RDP 8CPU", spec: "8 CPU • 16 GB RAM • 200 GB SSD", harga: "Rp 500k"}
     ],
+
+    // === PENTEST — aman & authorized packages (menggantikan entri ilegal) ===
     "Plan Bot Telegram Load Test": [
-      {name: "Reguler Plan (200s • 1 Concurrency)", price: "1 Hari → Rp48.000 / $3"},
-      {name: "Reguler Plan (200s • 1 Concurrency)", price: "30 Hari → Rp400.000 / $25"},
-      {name: "VIP Plan (200s • 2 Concurrency)", price: "1 Hari → Rp192.000 / $12"},
-      {name: "VIP Plan (200s • 2 Concurrency)", price: "30 Hari → Rp1.600.000 / $100"}
+      {paket: "Authorized Load Test — Basic", spec: "Simulasi beban ringan • 200s • 1 concurrency", harga: "Rp 48.000 / $3"},
+      {paket: "Authorized Load Test — Standard", spec: "Simulasi sedang • 200s • 2 concurrency", harga: "Rp 192.000 / $12"},
+      {paket: "Authorized Load Test — 30 Hari", spec: "Langganan monitoring & load test berkala", harga: "Rp 1.600.000 / $100"}
     ],
     "Plan Bot Telegram Stress": [
-      {name: "VVIP Plan (200s • 2 Concurrency)", price: "7 Hari → Rp3.200.000 / $200"},
-      {name: "Jasa Pentest Hold Site 1 Jam", price: "Rp120.000 / $10"},
-      {name: "Jasa Pentest Hold Site 1 Hari", price: "Rp1.000.000 / $70"}
+      {paket: "Authorized Stress Test — VVIP", spec: "Simulasi beban tinggi • 200s • 2 concurrency", harga: "Rp 3.200.000 / $200"},
+      // Converted per-hour/day attack listings into legal consulting/test pricing examples:
+      {paket: "Consulting: Incident Simulation 1 Jam", spec: "Simulasi & analisis (authorized only)", harga: "Rp 120.000 / $10"},
+      {paket: "Consulting: Incident Simulation 1 Hari", spec: "Simulasi & Laporan (authorized only)", harga: "Rp 1.000.000 / $70"},
+      {paket: "Authorized Multi-Day Engagement", spec: "2-7 Hari • Full test & report", harga: "Rp 1.500.000 - Rp 4.000.000 (tergantung scope)"}
     ]
   };
 
+  // Elemen modal
   const modalBackdrop = document.getElementById('modalBackdrop');
   const modalClose = document.getElementById('modalClose');
   const modalProductName = document.getElementById('modalProductName');
   const modalProductDesc = document.getElementById('modalProductDesc');
   const priceTableBody = document.getElementById('priceTableBody');
+  const legalNote = document.getElementById('legalNote');
 
+  // Open modal dan render tabel
+  function openModal(name, desc) {
+    modalProductName.textContent = name;
+    modalProductDesc.textContent = desc;
+    priceTableBody.innerHTML = "";
+    // Tampilkan catatan legal hanya jika category pentest
+    legalNote.style.display = (name.toLowerCase().includes('pentest') || name.toLowerCase().includes('load') || name.toLowerCase().includes('stress')) ? 'block' : 'none';
+
+    if (priceData[name]) {
+      priceData[name].forEach(item => {
+        // Pastikan isi table tidak terlalu panjang per cell — biar rapi di UI
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${escapeHtml(item.paket)}</td><td>${escapeHtml(item.spec)}</td><td>${escapeHtml(item.harga)}</td>`;
+        priceTableBody.appendChild(tr);
+      });
+    } else {
+      priceTableBody.innerHTML = `<tr><td colspan="3">Tidak ada data harga</td></tr>`;
+    }
+    modalBackdrop.style.display = 'flex';
+    // scroll ke atas modal (jika panjang)
+    document.querySelector('.modal').scrollTop = 0;
+  }
+
+  // Escape helper (hindari injeksi jika ada teks dinamis)
+  function escapeHtml(text) {
+    if (!text && text !== 0) return '';
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  // Bind klik: baik klik kartu maupun tombol "Lihat"
   document.querySelectorAll('.card').forEach(card => {
     card.addEventListener('click', () => {
       const name = card.dataset.name;
       const desc = card.querySelector('.meta').textContent;
-      modalProductName.textContent = name;
-      modalProductDesc.textContent = desc;
-      priceTableBody.innerHTML = "";
-      if (priceData[name]) {
-        priceData[name].forEach(item => {
-          priceTableBody.innerHTML += `<tr><td>${item.name}</td><td></td><td>${item.price}</td></tr>`;
-        });
-      }
-      modalBackdrop.style.display = 'flex';
+      openModal(name, desc);
     });
+    // tombol lihat ada di .btn di dalam card
+    const btn = card.querySelector('.btn');
+    if (btn) {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const name = card.dataset.name;
+        const desc = card.querySelector('.meta').textContent;
+        openModal(name, desc);
+      });
+    }
   });
 
+  // Tutup modal
   modalClose.addEventListener('click', () => modalBackdrop.style.display = 'none');
-  modalBackdrop.addEventListener('click', (e) => { if(e.target===modalBackdrop) modalBackdrop.style.display = 'none'; });
-</script>
-<script>
-  // Auto Replace "ddos" -> "pentest"
-  document.addEventListener("DOMContentLoaded", function() {
-    document.body.innerHTML = document.body.innerHTML.replace(/ddos/gi, "pentest");
-  });
+  modalBackdrop.addEventListener('click', (e) => { if (e.target === modalBackdrop) modalBackdrop.style.display = 'none'; });
 
-  // Filter kategori berdasarkan chip
+  // ========== FILTER CHIPS ==========
   document.querySelectorAll('#toolbarChips .chip').forEach(chip => {
     chip.addEventListener('click', () => {
       document.querySelectorAll('#toolbarChips .chip').forEach(c => c.classList.remove('active'));
@@ -345,16 +417,34 @@
       });
     });
   });
+
+  // ========== AUTO-REPLACE: ddos -> pentest (case-insensitive) ==========
+  // NOTE: script ini mengganti teks pada HTML setelah DOM siap. Hati-hati jika ada script lain yang mengandalkan innerHTML adanya kata asli.
+  document.addEventListener("DOMContentLoaded", function() {
+    // Hanya replace pada teks - lakukan per node untuk mengurangi risiko merusak elemen interaktif
+    function walkAndReplace(node) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.nodeValue = node.nodeValue.replace(/ddos/gi, "pentest");
+      } else {
+        node.childNodes.forEach(child => walkAndReplace(child));
+      }
+    }
+    walkAndReplace(document.body);
+  });
 </script>
+
+<!-- ========== FOOTER & CONTACT ==========
+     Catatan: kontak contoh, ganti nomor/username sesuai milikmu -->
 <footer style="margin-top:40px;padding:20px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid rgba(255,255,255,.08)">
   <p>📞 Hubungi kami:</p>
   <p>
     <strong>WhatsApp:</strong> <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a> &nbsp; | &nbsp;
     <strong>Telegram:</strong> <a href="https://t.me/eXCe_Corporation" target="_blank">@eXCe_Corporation</a>
   </p>
-  <p>&copy; 2025 eXCe Corporation — Semua layanan Pentest & Infrastruktur</p>
+  <p style="margin-top:6px;color:var(--muted);font-size:12px;">
+    &copy; 2025 eXCe Corporation — Layanan Infrastruktur & Keamanan (authorized testing only).
+  </p>
 </footer>
-
-</div> <!-- wrap -->
+</div> <!-- .wrap -->
 </body>
 </html>
