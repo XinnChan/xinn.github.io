@@ -3,87 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog Layanan</title>
+    <title>Katalog & Pricelist</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Katalog Layanan</h1>
-        <p>Pilih layanan sesuai kebutuhan Anda</p>
-    </header>
 
-    <main class="catalog">
-        
-        <!-- VPS REGULER -->
-        <section class="category">
-            <h2>VPS Reguler</h2>
-            <div class="card">
-                <img src="img/vps.svg" alt="VPS Logo">
-                <ul>
-                    <li>1 Core - 2GB RAM - 20GB SSD → Rp 50.000</li>
-                    <li>2 Core - 4GB RAM - 40GB SSD → Rp 90.000</li>
-                    <li>4 Core - 8GB RAM - 80GB SSD → Rp 160.000</li>
-                </ul>
-                <button>Beli Sekarang</button>
-            </div>
-        </section>
+<header>
+    <h1>💻 Katalog Produk & Layanan</h1>
+    <p>By Xiin eXCe - CEO ( <a href="https://t.me/eXCe_Corporation">t.me/eXCe_Corporation</a> )</p>
+</header>
 
-        <!-- VDS -->
-        <section class="category">
-            <h2>VDS</h2>
-            <div class="card">
-                <img src="img/vds.svg" alt="VDS Logo">
-                <ul>
-                    <li>2 Core - 4GB RAM - 50GB SSD → Rp 120.000</li>
-                    <li>4 Core - 8GB RAM - 100GB SSD → Rp 200.000</li>
-                    <li>8 Core - 16GB RAM - 200GB SSD → Rp 350.000</li>
-                </ul>
-                <button>Beli Sekarang</button>
-            </div>
-        </section>
+<main>
 
-        <!-- RDP -->
-        <section class="category">
-            <h2>RDP</h2>
-            <div class="card">
-                <img src="img/rdp.svg" alt="RDP Logo">
-                <ul>
-                    <li>2 Core - 4GB RAM - 40GB SSD → Rp 80.000</li>
-                    <li>4 Core - 8GB RAM - 80GB SSD → Rp 150.000</li>
-                    <li>8 Core - 16GB RAM - 160GB SSD → Rp 280.000</li>
-                </ul>
-                <button>Beli Sekarang</button>
-            </div>
-        </section>
+    <!-- VPS REGULAR -->
+    <section class="catalog">
+        <img src="img/vps-regular.png" alt="VPS Regular Logo" class="catalog-logo">
+        <h2>VPS REGULAR</h2>
+        <div class="item">
+            <p>4 GB / 2 CPUs • 80 GB SSD Disk • 2 TB transfer</p>
+            <p class="price">Rp. 49k / $4</p>
+            <button onclick="copyAndRedirect('Buy VPS 4 GB / 2 CPUs • 80 GB SSD Disk • 2 TB transfer - Rp. 49k / $4')">Klik Beli</button>
+        </div>
+        <div class="item">
+            <p>8 GB / 4 CPUs • 160 GB SSD Disk • 3 TB transfer</p>
+            <p class="price">Rp. 69k / $7</p>
+        </div>
+    </section>
 
-        <!-- PANEL -->
-        <section class="category">
-            <h2>Panel Hosting</h2>
-            <div class="card">
-                <img src="img/panel.svg" alt="Panel Logo">
-                <ul>
-                    <li>1 GB RAM - 10 GB SSD → Rp 20.000</li>
-                    <li>2 GB RAM - 20 GB SSD → Rp 35.000</li>
-                    <li>4 GB RAM - 40 GB SSD → Rp 60.000</li>
-                </ul>
-                <button>Beli Sekarang</button>
-            </div>
-        </section>
+    <!-- VPS PREMIUM -->
+    <section class="catalog">
+        <img src="img/vps-premium.png" alt="VPS Premium Logo" class="catalog-logo">
+        <h2>VPS PREMIUM</h2>
+        <div class="item">
+            <p>4 GB / 2 AMD/INTEL CPUs • 80 GB NVMe SSDs • 4 TB transfer</p>
+            <p class="price">Rp. 79k / $8</p>
+            <button onclick="copyAndRedirect('Buy VPS 4 GB / 2 AMD CPUs • 80 GB NVMe SSDs • 4 TB transfer - Rp. 79k / $8')">Klik Beli</button>
+        </div>
+        <div class="item">
+            <p>8 GB / 4 AMD/INTEL CPUs • 160 GB NVMe SSDs • 5 TB transfer</p>
+            <p class="price">Rp. 129k / $15</p>
+        </div>
+    </section>
 
-        <!-- PENTEST -->
-        <section class="category">
-            <h2>Pentest</h2>
-            <div class="card">
-                <img src="img/pentest.svg" alt="Pentest Logo">
-                <ul>
-                    <li>Basic Test → Rp 150.000</li>
-                    <li>Advanced Test → Rp 300.000</li>
-                    <li>Full Security Audit → Rp 500.000</li>
-                </ul>
-                <button>Beli Sekarang</button>
-            </div>
-        </section>
+    <!-- VDS & RDP -->
+    <section class="catalog">
+        <img src="img/vds.png" alt="VDS Logo" class="catalog-logo">
+        <h2>VDS & RDP</h2>
+        <div class="item">
+            <p>8 CPU / 16 GB RAM / 200 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6</p>
+            <p class="price">Rp. 660k / $42</p>
+        </div>
+        <div class="item">
+            <p>12 CPU / 24 GB RAM / 300 GB NVMe • 4Gbit/s • 1 IPv4 + IPv6</p>
+            <p class="price">Rp. 800k / $55</p>
+        </div>
+        <!-- Tambah semua spesifikasi lain sesuai pricelist yang kamu tulis -->
+    </section>
 
-    </main>
+    <!-- RPS PLAN -->
+    <section class="catalog">
+        <img src="img/rps.png" alt="RPS Logo" class="catalog-logo">
+        <h2>Price List — Plan Big RPS</h2>
+        <pre class="price-list">
+🟡 REGULER PLAN (200s • 1 Concurrency)
+1 Days → $3 / Rp48.000
+7 Days → $6 / Rp96.000
+20 Days → $15 / Rp240.000
+30 Days → $25 / Rp400.000
+
+⭐️ VIP PLAN (200s • 2 Concurrency)
+50 Minutes → $3 / Rp48.000
+12 Hours → $6 / Rp96.000
+1 Days → $12 / Rp192.000
+3 Days → $20 / Rp320.000
+7 Days → $35 / Rp560.000
+14 Days → $60 / Rp960.000
+30 Days → $100 / Rp1.600.000
+
+💎 VVIP PLAN (200s • 2 Concurrency)
+7 Days → $200 / Rp3.200.000
+        </pre>
+    </section>
+
+    <!-- Pentest -->
+    <section class="catalog">
+        <img src="img/pentest.png" alt="Pentest Logo" class="catalog-logo">
+        <h2>🌐 JASA PENTEST WEBSITE</h2>
+        <pre class="price-list">
+Hold Site Per Jam:
+1 Jam → Rp120k / $10
+2 Jam → Rp180k / $15
+3 Jam → Rp240k / $20
+4 Jam → Rp300k / $25
+5 Jam → Rp390k / $30
+6 Jam → Rp500k / $35
+
+Harian:
+1 Day → Rp1jt / $70
+2 Day → Rp1.5jt / $110
+3 Day → Rp2jt / $125
+4 Day → Rp2.5jt / $170
+5 Day → Rp3jt / $200
+6 Day → Rp3.5jt / $230
+7 Day → Rp4jt / $270
+30 Day → Rp14jt / $900
+        </pre>
+    </section>
+
+</main>
+
+<script>
+function copyAndRedirect(text) {
+    navigator.clipboard.writeText(text);
+    alert("Detail pembelian tersalin!");
+    window.location.href = "https://t.me/eXCe_Corporation";
+}
+</script>
+
 </body>
 </html>
