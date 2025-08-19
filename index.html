@@ -133,23 +133,25 @@
   .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
 @media (max-width: 600px) {
   .modal {
-    width: 96vw;   /* lebih fleksibel di HP */
+    width: 96vw;   /* modal ikut lebar hp */
     padding: 12px;
   }
 
   .row {
-    grid-template-columns: 1fr; /* jadi stack */
+    grid-template-columns: 1fr; /* biar label & input stack */
   }
 
   table {
     font-size: 12px;
-    display: block;
+    width: 100%;
+    display: table;
     overflow-x: auto;
-    white-space: nowrap;
+    white-space: normal;   /* biar teks wrap */
   }
 
   th, td {
-    word-break: break-word;
+    word-break: break-word;   /* pecah kata panjang */
+    white-space: normal;      /* teks bisa turun ke bawah */
     font-size: 12px;
     padding: 6px;
   }
