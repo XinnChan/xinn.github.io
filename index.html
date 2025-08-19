@@ -168,6 +168,7 @@
       <li><strong>Jaminan:</strong> Jaminan/Garansi ada di Card/Invoice Pembelian.</li>
       <li><strong>Fitur:</strong> Semua VPS, VDS, RDP disini support Pentest/ddos Layer 7.</li>
       <li><strong>Catatan:</strong> DDOS / Pentest / Load Testing hanya dengan izin tertulis dengan pemilik website.</li>
+      <li><strong>Customers Service:</strong> Dukungan teknis t.me/Xin_Kenji atau Hubungi t.me/xcstat_bot tulis /cs (id telegram kamu) (messages)</li>
     </ul>
   </details>
 </main>
@@ -188,70 +189,51 @@
    =============================== */
 const rawProductMap = {
   /* VPS */
-  "VPS Reguler": {
+  "VPS": {
     type: "vps",
     img: "https://i.ibb.co/spvNjsjw/1003463186.png",
-    subtitle: "Paket ekonomis SSD — stabil & hemat.",
-    badge: "SSD",
+    subtitle: "Paket ekonomis SSD/NvMe — stabil & hemat + ipv4 Dedicated, Bergaransi.",
+    badge: "VPS SSD/NvMe",
+    node: "Semua catatan termasuk garansi ada di Card pembelian",
     regions: {
-      "Default": [
-        { name: "VPS 4/2 • 80GB SSD • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD • 2 TB transfer", price: "Rp 49k / $4" },
-        { name: "VPS 8/4 • 160GB SSD • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD • 3 TB transfer", price: "Rp 69k / $7" }
-      ]
-    }
-  },
-  "VPS Premium": {
-    type: "vps",
-    img: "https://i.ibb.co/spvNjsjw/1003463186.png",
-    subtitle: "NVMe + CPU AMD/Intel untuk ketahanan tinggi.",
-    badge: "NVMe",
-    regions: {
-      "Default": [
-        { name: "VPS 4/2 NVMe • 4TB", spec: "4 GB RAM / 2 AMD/Intel CPU • 80 GB NVMe SSD • 4 TB transfer", price: "Rp 79k / $8" },
-        { name: "VPS 8/4 NVMe • 5TB", spec: "8 GB RAM / 4 AMD/Intel CPU • 160 GB NVMe SSD • 5 TB transfer", price: "Rp 129k / $15" }
-      ]
+      "VPS 1 BULAN": [
+        { name: "VPS 4/2 • 80GB SSD NVMe • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • 2 TB transfer", price: "Rp 45k / $3" },
+        { name: "VPS 8/4 • 160GB SSD NVMe • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • 3 TB transfer", price: "Rp 75k / $5" }
+      ],
+      "VPS 2 BULAN": [
+        { name: "VPS 4/2 • 80GB SSD NVMe • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • 2 TB transfer", price: "Rp 90k / $6" },
+        { name: "VPS 8/4 • 160GB SSD NVMe • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • 3 TB transfer", price: "Rp 150k / $10" }
+      ],
     }
   },
 
-  /* VDS & RDP — SG & HK */
-  "VDS & RDP — SG & HK": {
+  /* VDS & RDP — SG & HK & US */
+  "VDS & RDP — SG / HK / US": {
     type: "vds rdp",
     img: "https://i.ibb.co/d46tCQz6/1003463210.png",
-    subtitle: "Intel Xeon e5v4 / EPYC (tergantung stok), speed data/port private 4Gbps.",
-    badge: "4Gbps",
-    note: "SINGAPORE (Intel Xeon e5v4) & HONGKONG (AMD EPYC/Intel XEON — tergantung stok). Private port 4 Gbps, 1 IPv4 + IPv6, AMD-V/VN-X: Active.",
+    subtitle: "Region: SG, HK, US | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated",
+    badge: "VDS/RDP",
+    note: "Region: SINGAPORE, HONGKONG, US | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi",
     regions: {
       "Singapore": [
-        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
-        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
-        { name: "14C / 28G / 350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
-        { name: "16C / 32G / 400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
-        { name: "20C / 40G / 500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" }
+        { name: "VDS SG 8 Cpu ", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 660k / USDT $42" },
+        { name: "VDS SG 12 Cpu ", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.100k / USDT $73" },
+        { name: "VDS SG 16 Cpu ", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.300k / USDT $85" },
+        { name: "VDS SG 20 Cpu ", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.900k / USDT $123" }
       ],
       "Hongkong": [
-        { name: "8C / 16G / 200 NVMe", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 660k / USDT $42" },
-        { name: "12C / 24G / 300 NVMe", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 800k / USDT $55" },
-        { name: "14C / 28G / 350 NVMe", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.100k / USDT $73" },
-        { name: "16C / 32G / 400 NVMe", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.300k / USDT $85" },
-        { name: "20C / 40G / 500 NVMe", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6", price: "IDR 1.900k / USDT $123" }
+        { name: "VDS HK 8 Cpu ", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 660k / USDT $42" },
+        { name: "VDS HK 12 Cpu ", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 800k / USDT $55" },
+        { name: "VDS HK 14 Cpu ", spec: "14 CPU / 28 GB RAM / 350 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.100k / USDT $73" },
+        { name: "VDS HK 16 Cpu ", spec: "16 CPU / 32 GB RAM / 400 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.300k / USDT $85" },
+        { name: "VDS HK 20 Cpu ", spec: "20 CPU / 40 GB RAM / 500 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 1.900k / USDT $123" }
       ],
-    }
-  },
-
-  /* VDS & RDP — US */
-  "VDS & RDP — US": {
-    type: "vds rdp",
-    img: "https://i.ibb.co/d46tCQz6/1003463210.png",
-    subtitle: "AMD EPYC, Unlimited BW, 2.5Gbps private port/data speed.",
-    badge: "2.5Gbps",
-    note: "REGION US / Europa — AMD EPYC, Unlimited Bandwidth, 2.5Gbps private port.",
-    regions: {
       "US": [
-        { name: "12vCPU / 32G / 1TB NVMe", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 800k / USD $50" },
-        { name: "16vCPU / 64G / 2TB NVMe", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.100k / USD $69" },
-        { name: "24vCPU / 96G / 3TB NVMe", spec: "24 vCPU AMD EPYC • 96 GB RAM • 3 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.500k / USD $94" },
-        { name: "28vCPU / 112G / 3.5TB NVMe", spec: "28 vCPU AMD EPYC • 112 GB RAM • 3.5 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.770k / USD $110" },
-        { name: "32vCPU / 128G / 4TB NVMe", spec: "32 vCPU AMD EPYC • 128 GB RAM • 4 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 2.100k / USD $135" }
+        { name: "VDS US 12 Cpu", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 800k / USD $50" },
+        { name: "VDS US 16 Cpu", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.100k / USD $69" },
+        { name: "VDS US 24 Cpu", spec: "24 vCPU AMD EPYC • 96 GB RAM • 3 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.500k / USD $94" },
+        { name: "VDS US 28 Cpu", spec: "28 vCPU AMD EPYC • 112 GB RAM • 3.5 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.770k / USD $110" },
+        { name: "VDS US 32 Cpu", spec: "32 vCPU AMD EPYC • 128 GB RAM • 4 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 2.100k / USD $135" }
       ]
     }
   },
@@ -274,12 +256,12 @@ const rawProductMap = {
   },
 
   /* Offshore VDS */
-  "VDS Free DMCA BULLET PROOF FREE ALL ABUSED (Bahrain/NL/Swiss)": {
+  "VDS Free DMCA BULLET PROOF": {
     type: "vds",
     img: "https://i.ibb.co/MxMvRdTK/1003463227.png",
     subtitle: "VDS Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
     badge: "VDS BULLET PROOF",
-    note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
+    note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4, FREE ALL ABUSED, Region: (Bahrain/NL/Swiss).",
     regions: {
       "Bahrain": [
         { name: "1C / 1G / 20GB", spec: "1 CPU / 1 GB RAM / 20 GB Disk • 1Gbps", price: "IDR 1.000k / USDT $60" },
@@ -314,10 +296,10 @@ const rawProductMap = {
   },
 
   /* Pentest & Load Testing (Authorized) */
-  "Plan DDOS/Pentest Bot Telegram / JASA HOLD DDOS / JASA DELETE ARTIKEL & WEBSITE DARI KW GOOGLE": {
+  "PLAN/HOLD DDOS & Service": {
     type: "service",
     img: "https://i.ibb.co/NRLhFbB/1003463233.png",
-    subtitle: "Legal & berizin — Layanan Pentest.",
+    subtitle: "Legal & berizin — Layanan Pentest & Jasa Firewall.",
     badge: "Security/Pentest",
     note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
     regions: {
@@ -335,7 +317,7 @@ const rawProductMap = {
         { name: "VIP — 30 hari", spec: "200s run • 2 concurrency", price: "$100 / Rp1.600.000" },
         { name: "VVIP — 7 hari", spec: "200s run • 2 concurrency API ACCESS", price: "$200 / Rp3.200.000" }
       ],
-      "JASA HOLD DDOS WEBSITE / JASA HOLD PENTEST WEBSITE": [
+      "Jasa Hold DDOS Website / Jasa Hold Pentest Website": [
         { name: "1 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "120k / 10$" },
         { name: "2 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "180k / 15$" },
         { name: "3 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "240k / 20$" },
@@ -351,12 +333,12 @@ const rawProductMap = {
         { name: "7 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "4 jt / 270$" },
         { name: "30 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "14 jt / 900$" },
       ],
-      "DELETE ARTIKEL PALSU atau SUSPEN WEBSITE PHISING PERMANENT / HAPUS PAGE DARI KW GOOGLE": [
+      "Delete Artikel / Suspen Website Phising Permanent / Hapus Page Dari KW Google": [
         { name: "Easy", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "1jt / 70$" },
         { name: "Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "3jt / 200$" },
         { name: "Super Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "15jt / 1000$" },
       ],
-      "PROTECT WEBSITE / INSTALL FIREWALL WEBSITE": [
+      "Protect Website / Install Firewall Website": [
         { name: "Basic", spec: "Basic Protect", price: "Harga Bisa Di Diskusikan" },
         { name: "Normal", spec: "Normal Protect", price: "1jt / 70$" },
         { name: "Medium", spec: "Medium Protect", price: "3jt / 200$" },
