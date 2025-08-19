@@ -131,6 +131,29 @@
     transition:.15s transform ease, .15s filter ease;
   }
   .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+@media (max-width: 600px) {
+  .modal {
+    width: 96vw;   /* lebih fleksibel di HP */
+    padding: 12px;
+  }
+
+  .row {
+    grid-template-columns: 1fr; /* jadi stack */
+  }
+
+  table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  th, td {
+    word-break: break-word;
+    font-size: 12px;
+    padding: 6px;
+  }
+}
 </style>
 </head>
 <body>
