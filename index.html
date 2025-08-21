@@ -156,12 +156,15 @@
     padding: 6px;
   }
 }
-/* Izinkan semua teks bisa di select */
-body, p, h1, h2, h3, h4, h5, h6, li, td, th, strong {
+/* Izinkan teks di tabel modal bisa dicopy di HP */
+.modal td, 
+.modal th {
   -webkit-user-select: text !important;
   -moz-user-select: text !important;
   -ms-user-select: text !important;
   user-select: text !important;
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
 }
 </style>
 </head>
