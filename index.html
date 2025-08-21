@@ -25,7 +25,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="eXCe Corporation — VPS, VDS, RDP" />
     <meta property="og:description" content="eXCe Corporation — Vps, Vds, Rdp Bullet Proof" />
-    <meta property="og:image" content="https://i.ibb.co/MkrnnPkj/1003455088.png">
+    <meta property="og:image" content="https://i.ibb.co/5hBNhp9x/1003455088.png">
     <meta property="og:url" content="https://xcddos.xyz/" />
     <meta name="supported-amp-formats" content="websites, stories, ads, email" />
     <script async custom-element="amp-anim" src="https://cdn.ampproject.org/v0/amp-anim-0.1.js"></script>
@@ -156,15 +156,18 @@
     padding: 6px;
   }
 }
-/* Izinkan teks di tabel modal bisa dicopy di HP */
-.modal td, 
-.modal th {
+/* Izinkan semua teks bisa di select */
+body, p, h1, h2, h3, h4, h5, h6, li, td, th, strong {
   -webkit-user-select: text !important;
   -moz-user-select: text !important;
   -ms-user-select: text !important;
   user-select: text !important;
-  white-space: normal !important;
-  overflow-wrap: break-word !important;
+}
+.modal table, 
+.modal th, 
+.modal td {
+  -webkit-user-select: text !important;
+  user-select: text !important;
 }
 </style>
 </head>
@@ -226,7 +229,7 @@ const rawProductMap = {
   /* VPS */
   "VPS": {
     type: "vps",
-    img: "https://i.ibb.co/spvNjsjw/1003463186.png",
+    img: "https://i.ibb.co/fzcHvGYv/1003473616.png",
     subtitle: "Paket ekonomis SSD/NvMe — stabil & hemat + ipv4 Dedicated, Bergaransi.",
     badge: "VPS SSD/NvMe",
     node: "Semua catatan termasuk garansi ada di Card pembelian",
@@ -245,7 +248,7 @@ const rawProductMap = {
   /* VDS & RDP — SG & HK & US */
   "VDS & RDP — SG / HK / US": {
     type: "vds rdp",
-    img: "https://i.ibb.co/d46tCQz6/1003463210.png",
+    img: "https://i.ibb.co/nNZKcYXk/1003463210.png",
     subtitle: "Region: SG, HK, US | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated",
     badge: "VDS/RDP",
     note: "Region: SINGAPORE, HONGKONG, US | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi",
@@ -277,7 +280,7 @@ const rawProductMap = {
   /* VPS/RDP — Indonesia */
   "VPS/RDP — Indonesia": {
     type: "vps rdp",
-    img: "https://i.ibb.co/mCw9YrBV/1003463225.png",
+    img: "https://i.ibb.co/G3v3n0fc/1003463225.png",
     subtitle: "Latency rendah untuk user Indonesia.",
     badge: "1Gbps",
     regions: {
@@ -294,7 +297,7 @@ const rawProductMap = {
   /* Offshore VDS */
   "VDS Free DMCA BULLET PROOF": {
     type: "vds",
-    img: "https://i.ibb.co/MxMvRdTK/1003463227.png",
+    img: "https://i.ibb.co/y9tRnN3/1003463227.png",
     subtitle: "VDS Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
     badge: "VDS BULLET PROOF",
     note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4, FREE ALL ABUSED, Region: (Bahrain/NL/Swiss).",
@@ -320,7 +323,7 @@ const rawProductMap = {
   /* Managed Cloud Panel Setup */
   "CLOUD PANEL AKUN DIGITAL OCHEAN": {
     type: "service",
-    img: "https://i.ibb.co/XZdKMXLC/1003463269.png",
+    img: "https://i.ibb.co/RG9q9ntr/1003463269.png",
     subtitle: "Akun Cloud Digital Ochean.",
     badge: "Account Cloud",
     regions: {
@@ -334,7 +337,7 @@ const rawProductMap = {
   /* Pentest & Load Testing (Authorized) */
   "PLAN/HOLD DDOS & Service": {
     type: "service",
-    img: "https://i.ibb.co/NRLhFbB/1003463233.png",
+    img: "https://i.ibb.co/PvZpYHRG/1003463233.png",
     subtitle: "Legal & berizin — Layanan Pentest & Jasa Firewall.",
     badge: "Security/Pentest",
     note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
@@ -508,12 +511,18 @@ function openModal(key){
         <select id="regionSelect">${regionOptions}</select>
       </div>
 
-      <div style="overflow:auto">
-        <table>
-          <thead><tr><th>Paket</th><th>Spesifikasi</th><th>Harga</th></tr></thead>
-          <tbody id="priceRows"></tbody>
-        </table>
-      </div>
+<div style="overflow-x:auto; -webkit-overflow-scrolling:touch;">
+  <table style="table-layout:auto; white-space:normal;">
+    <thead>
+      <tr>
+        <th>Paket</th>
+        <th>Spesifikasi</th>
+        <th>Harga</th>
+      </tr>
+    </thead>
+    <tbody id="priceRows"></tbody>
+  </table>
+</div>
 
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
         <a class="btn" id="orderBtn" href="https://t.me/Xin_Kenji" target="_blank" rel="noopener">Chat & Order via Telegram</a>
