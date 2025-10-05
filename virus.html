@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-<title>GPU Shader Stress — eXCe (Auto Start + Checkbox)</title>
+<title>GPU Shader Stress — eXCe (Auto Spike)</title>
 <style>
   html,body{margin:0;height:100%;background:#0b0b10;color:#cfd3ff;font-family:system-ui,Segoe UI,Roboto,Ubuntu,Arial}
   #wrap{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr}
@@ -13,6 +13,7 @@
   canvas{display:block;width:100%;height:100%}
   .toggle{display:flex;align-items:center;gap:8px;background:#0f1422;padding:6px 10px;border-radius:10px;border:1px solid #1d2842}
   #warn{position:absolute;left:8px;bottom:8px;background:#181c2a;border:1px solid #2e3552;color:#ffe1a8;padding:6px 8px;border-radius:8px;opacity:.9;display:none}
+  #badge{position:absolute;right:10px;top:10px;background:#7a2a59;border:1px solid #b93a76;color:#ffe5f5;padding:4px 8px;border-radius:8px;display:none}
 </style>
 </head>
 <body>
@@ -20,31 +21,37 @@
   <div id="topbar">
     <label class="toggle">
       <input id="stressToggle" type="checkbox" checked/>
-      <span>GPU Stress</span>
+      <span>GPU Stress (auto start — uncheck untuk berhenti)</span>
     </label>
     <div id="stats">FPS: <b id="fps">—</b> | Frame ms: <b id="ms">—</b></div>
   </div>
   <div id="canvas-wrap">
     <canvas id="c"></canvas>
+    <div id="badge">SPIKE</div>
     <div id="warn"></div>
   </div>
 </div>
 
 <script>
 (function(){
-  // ====== Setting “ekstrim” ======
-  const SUPER_SCALE = 1.25;   // 1.25–2.0 → makin berat (awas iPhone bisa context lost)
-  const MAX_ITER    = 1500.0; // Raymarch steps
-  const STEP_SCALE  = 0.75;   // Raymarch step
-  const SPP         = 8;      // Samples per pixel
-  const USE_FOG     = 1;      // 1 = ON
-  const DO_STALL    = 100;      // 1 = ON (ALU busy loop)
-
-  // ====== WebGL init ======
+  const SUPER_SCALE_BASE = 1.5; // 1.0–1.5 aman; >1.5 bisa berat banget
+  const MAX_ITER_BASE    = 1500.0;
+  const STEP_SCALE_BASE  = 0.75;
+  const TMAX_BASE        = 6.0;
+  const SPP              = 8;     // loop fixed (8x sample/pixel)
+  const SPIKE_SECONDS      = 3000;   // durasi spike awal (ms)
+  const SPIKE_SUPER_SCALE  = 1.9;    // internal res lebih besar saat spike
+  const MAX_ITER_SPIKE     = 2000.0; // lebih banyak langkah
+  const STEP_SCALE_SPIKE   = 0.70;   // langkah lebih rapat
+  const TMAX_SPIKE         = 9.0;    // ray lebih panjang
+  const SPIKE_EXTRA_DRAWS  = 3;      // draw beberapa kali per frame
+  const SPIKE_GL_FINISH    = true;   // paksa GPU sync per frame
+  const SPIKE_STALL_EXTRA  = 180000; // tambahan loop ALU saat spike
   const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 3));
   const canvas = document.getElementById('c');
   const toggle = document.getElementById('stressToggle');
   const warn = document.getElementById('warn');
+  const badge = document.getElementById('badge');
 
   const gl = canvas.getContext('webgl', {
     antialias:false, alpha:false, depth:false, stencil:false,
@@ -63,7 +70,7 @@
 
   canvas.addEventListener('webglcontextlost', (e)=>{
     e.preventDefault();
-    showWarn('Context Lost! Turunkan SUPER_SCALE atau pakai perangkat lebih kuat.');
+    showWarn('Context Lost! Turunkan SPIKE_SUPER_SCALE / SPIKE_EXTRA_DRAWS.');
     cancelAnimationFrame(rafId);
   }, false);
 
@@ -87,6 +94,10 @@
     uniform float uTime;
     uniform vec3 uCamPos;
     uniform mat3 uCamMat;
+    uniform float uMaxIter;
+    uniform float uStepScale;
+    uniform float uTMax;
+    uniform int   uSpike; // 0/1
 
     float hash11(float p){ p = fract(p*0.1031); p *= p + 33.33; p *= p + p; return fract(p); }
     vec2  hash21(float p){ return fract(sin(vec2(p,p+1.234))*vec2(43758.5453,22578.145912)); }
@@ -221,11 +232,11 @@
       float t = 0.0;
       float d = 1.0;
       float eps = 0.0008;
-      float tMax = 6.0;
+      float tMax = uTMax;
       vec3 bg = vec3(0.02,0.03,0.06) + 0.15*vec3(uv.y*0.5+0.5);
       vec3 fogCol = vec3(0.0);
 
-      #if ${USE_FOG}
+      // Pre-march volumetrik untuk kabut & mendekat cepat ke permukaan
       float ft = 0.0;
       for(int i=0;i<1024;i++){
         if(ft>tMax) break;
@@ -239,38 +250,33 @@
         vec3 col = bg + fogCol;
         return pow(col, vec3(0.85));
       }
-      #endif
 
-      int steps = int(${MAX_ITER}.0);
+      // Raymarch utama
+      int steps = int(uMaxIter);
       for(int i=0;i<5000;i++){
         if(i>=steps) break;
         vec3 pos = ro + rd*t;
         d = mapSDF(pos);
         if(d<eps){
           vec3 n = calcNormal(pos);
-          vec3 col = shade(pos, n, rd, ro);
-          #if ${USE_FOG}
-          col += fogCol;
-          #endif
+          vec3 col = shade(pos, n, rd, ro) + fogCol;
           return pow(col, vec3(0.85));
         }
-        t += d * (0.35 * ${STEP_SCALE});
+        t += d * (0.35 * uStepScale);
         if(t>tMax) break;
       }
-      vec3 col = bg;
-      #if ${USE_FOG}
-      col += fogCol;
-      #endif
+      vec3 col = bg + fogCol;
       return pow(col, vec3(0.85));
     }
 
-    void doStall(){
-      #if ${DO_STALL}
+    void doStall(int spike){
+      // Base stall
       float s=0.0;
-      for(int i=0;i<120000;i++){
-        s += sin(float(i))*0.0000001;
+      for(int i=0;i<120000;i++){ s += sin(float(i))*0.0000001; }
+      // Extra stall saat SPIKE
+      if(spike==1){
+        for(int j=0;j<${SPIKE_STALL_EXTRA};j++){ s += sin(float(j))*0.0000001; }
       }
-      #endif
     }
 
     void main(){
@@ -282,7 +288,7 @@
       }
       acc /= float(${SPP});
       gl_FragColor = vec4(acc,1.0);
-      doStall();
+      doStall(uSpike);
     }
   `;
 
@@ -309,11 +315,15 @@
   }
   gl.useProgram(prog);
 
-  const aPos   = gl.getAttribLocation(prog, 'aPos');
-  const uRes   = gl.getUniformLocation(prog, 'uRes');
-  const uTime  = gl.getUniformLocation(prog, 'uTime');
-  const uCamPos= gl.getUniformLocation(prog, 'uCamPos');
-  const uCamMat= gl.getUniformLocation(prog, 'uCamMat');
+  const aPos     = gl.getAttribLocation(prog, 'aPos');
+  const uRes     = gl.getUniformLocation(prog, 'uRes');
+  const uTime    = gl.getUniformLocation(prog, 'uTime');
+  const uCamPos  = gl.getUniformLocation(prog, 'uCamPos');
+  const uCamMat  = gl.getUniformLocation(prog, 'uCamMat');
+  const uMaxIter = gl.getUniformLocation(prog, 'uMaxIter');
+  const uStepSc  = gl.getUniformLocation(prog, 'uStepScale');
+  const uTMax    = gl.getUniformLocation(prog, 'uTMax');
+  const uSpike   = gl.getUniformLocation(prog, 'uSpike');
 
   const quad = gl.createBuffer();
   gl.bindBuffer(gl.ARRAY_BUFFER, quad);
@@ -327,12 +337,24 @@
   // Kamera orbit auto
   let angle = 0.0, camDist = 2.2;
 
-  // Resize dengan super scale
+  // Resolusi dinamis berdasarkan spike/normal
+  let spikeActive = true;
+  let spikeUntil = performance.now() + SPIKE_SECONDS;
+
+  function setUniformsForMode(){
+    gl.uniform1f(uMaxIter, spikeActive ? MAX_ITER_SPIKE : MAX_ITER_BASE);
+    gl.uniform1f(uStepSc , spikeActive ? STEP_SCALE_SPIKE : STEP_SCALE_BASE);
+    gl.uniform1f(uTMax   , spikeActive ? TMAX_SPIKE : TMAX_BASE);
+    gl.uniform1i(uSpike  , spikeActive ? 1 : 0);
+    badge.style.display = spikeActive ? 'inline-block' : 'none';
+  }
+
   function resize(){
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const targetW = Math.floor(w * dpr * SUPER_SCALE);
-    const targetH = Math.floor(h * dpr * SUPER_SCALE);
+    const scale = spikeActive ? SPIKE_SUPER_SCALE : SUPER_SCALE_BASE;
+    const targetW = Math.floor(w * dpr * scale);
+    const targetH = Math.floor(h * dpr * scale);
     canvas.width = targetW;
     canvas.height = targetH;
     canvas.style.width = w+'px';
@@ -341,7 +363,6 @@
     gl.uniform2f(uRes, targetW, targetH);
   }
   window.addEventListener('resize', resize);
-  resize();
 
   // FPS meter
   const fpsEl = document.getElementById('fps');
@@ -367,6 +388,13 @@
     if(!running) return;
     const dt = now - prev; prev = now; meter(dt);
 
+    // Atur transisi SPIKE -> NORMAL
+    if(spikeActive && now >= spikeUntil){
+      spikeActive = false;
+      setUniformsForMode();
+      resize();
+    }
+
     angle += 0.2 * (dt/1000);
     const yaw = angle + 0.3;
     const pitch = -0.25;
@@ -387,21 +415,34 @@
       right[2], up[2], forward[2],
     ]));
 
-    gl.drawArrays(gl.TRIANGLES, 0, 6);
+    // Draw — saat spike, lakukan beberapa draw + finish untuk memaksa puncak beban
+    if(spikeActive){
+      for(let i=0;i<SPIKE_EXTRA_DRAWS;i++){
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        if(SPIKE_GL_FINISH) gl.finish();
+      }
+    }else{
+      gl.drawArrays(gl.TRIANGLES, 0, 6);
+    }
+
     rafId = requestAnimationFrame(frame);
   }
 
-  // Checkbox logic: ON = jalan, OFF = berhenti
+  // Start/Stop via checkbox
   function startStress(){
     if(running) return;
     running = true;
     prev = performance.now();
+    spikeActive = true;                
+    spikeUntil = performance.now() + SPIKE_SECONDS;
+    setUniformsForMode();
     resize();
     rafId = requestAnimationFrame(frame);
   }
   function stopStress(){
     running = false;
     cancelAnimationFrame(rafId);
+    badge.style.display = 'none';
     gl.clearColor(0.05,0.06,0.09,1);
     gl.clear(gl.COLOR_BUFFER_BIT);
   }
@@ -409,9 +450,10 @@
     if(toggle.checked) startStress(); else stopStress();
   });
 
-  // Auto-start saat buka halaman
+  // Inisialisasi
+  setUniformsForMode();
+  resize();
   startStress();
-
 })();
 </script>
 </body>
