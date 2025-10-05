@@ -20,7 +20,7 @@
   <div id="topbar">
     <label class="toggle">
       <input id="stressToggle" type="checkbox" checked/>
-      <span>GPU Stress (jalan terus sampai dicentang OFF)</span>
+      <span>GPU Stress</span>
     </label>
     <div id="stats">FPS: <b id="fps">—</b> | Frame ms: <b id="ms">—</b></div>
   </div>
@@ -38,7 +38,7 @@
   const STEP_SCALE  = 0.75;   // Raymarch step
   const SPP         = 8;      // Samples per pixel
   const USE_FOG     = 1;      // 1 = ON
-  const DO_STALL    = 1;      // 1 = ON (ALU busy loop)
+  const DO_STALL    = 100;      // 1 = ON (ALU busy loop)
 
   // ====== WebGL init ======
   const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 3));
