@@ -1,499 +1,447 @@
-
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="user-scalable=no">
-    <!--<title>volumeshader_bm</title>-->
-    <title>VIRUS WEB HP KENTANK</title>
-    <style>
-        body {
-            background: #131115;
-        }
-        #c1 {
-            background: #fbf7fe;
-        }
-        #btn {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-        }
-        #c1 {
-            position: fixed;
-            left: 0px;
-            top: 0px;
-        }
-        #main {
-            transform-origin: 0px 0px;
-            position: fixed;
-            left: 0px;
-            top: 0px;
-        }
-        #config {
-            position: fixed;
-            left: 0px;
-            top: 30px;
-            display: none;
-        }
-    </style>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+<title>EXTREME GPU TEST — eXCe</title>
+<style>
+  html,body{margin:0;height:100%;background:#0b0b10;color:#cfd3ff;font-family:system-ui,Segoe UI,Roboto,Ubuntu,Arial}
+  #wrap{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr}
+  #topbar{display:flex;gap:12px;align-items:center;padding:8px 10px;background:#101218;border-bottom:1px solid #1e2233;flex-wrap:wrap}
+  #stats{margin-left:auto;font-variant-numeric:tabular-nums}
+  #canvas-wrap{position:relative}
+  canvas{display:block;width:100%;height:100%}
+  .group{display:flex;align-items:center;gap:6px;background:#0f1422;padding:6px 8px;border-radius:10px;border:1px solid #1d2842}
+  .btn{background:#26314e;border:1px solid #3b4b7a;color:#dfe6ff;padding:6px 10px;border-radius:8px;cursor:pointer}
+  .btn.active{background:#7a2a59;border-color:#b93a76}
+  .slider{width:120px}
+  #warn{position:absolute;left:8px;bottom:8px;background:#181c2a;border:1px solid #2e3552;color:#ffe1a8;padding:6px 8px;border-radius:8px;opacity:.9}
+  a{color:#8ad}
+  #hint{font-size:12px;opacity:.8}
+</style>
 </head>
-<body style="overflow-x:hidden;overflow-y:hidden">
-<div id="main">
-    <canvas id="c1" width="1024" height="1024">
-        <span>不支持canvas浏览器</span>
-    </canvas>
-</div>
-    <button id="btn">CONFIG</button>
-    <div id="config">
-        <textarea name="" id="kernel" cols="30" rows="10"></textarea>
-        <br />
-        <button id="apply">APPLY</button>
-        <button id="cancle">CANCLE</button>
+<body>
+<div id="wrap">
+  <div id="topbar">
+    <div class="group">
+      <label>Mode</label>
+      <button id="modeNormal" class="btn">Normal</button>
+      <button id="modeHeavy" class="btn">Heavy</button>
+      <button id="modeExtreme" class="btn">Extreme</button>
     </div>
-    <script>
-//alert("trigonometric and inverse trigonometric functions test.\ncreated by cznull@bilibili");
-    var cx, cy;
-    var glposition;
-    var glright;
-    var glforward;
-    var glup;
-    var glorigin;
-    var glx;
-    var gly;
-    var gllen;
-    var canvas;
-    var gl;
-    var date = new Date();
-    var md = 0,mx,my;
-    var t2,t1 = date.getTime();
-    var mx = 0, my = 0, mx1 = 0, my1 = 0, lasttimen = 0;
-    var ml = 0, mr = 0, mm = 0;
-    var len = 1.6;
-    var ang1 = 2.8;
-    var ang2 = 0.4;
-    var cenx = 0.0;
-    var ceny = 0.0;
-    var cenz = 0.0;
-        var KERNEL = "float kernal(vec3 ver){\n" +
-            "   vec3 a;\n" +
-            "float b,c,d,e;\n" +
-            "   a=ver;\n" +
-            "   for(int i=0;i<5;i++){\n" +
-            "       b=length(a);\n" +
-            "       c=atan(a.y,a.x)*8.0;\n" +
-            "       e=1.0/b;\n" +
-            "       d=acos(a.z/b)*8.0;\n" +
-            "       b=pow(b,8.0);\n" +
-            "       a=vec3(b*sin(d)*cos(c),b*sin(d)*sin(c),b*cos(d))+ver;\n" +
-            "       if(b>6.0){\n" +
-            "           break;\n" +
-            "       }\n" +
-            "   }" +
-            "   return 4.0-a.x*a.x-a.y*a.y-a.z*a.z;" +
-            "}";
-    var vertshade;
-    var fragshader;
-    var shaderProgram;
-    function ontimer() {
-        ang1+=0.01;
-        draw();
-        window.requestAnimationFrame(ontimer);
-    }
-    document.addEventListener("mousedown",
-        function (ev) {
-            var oEvent = ev || event;
-            if (oEvent.button == 0) {
-                ml = 1;
-                mm = 0;
-            }
-            if (oEvent.button == 2) {
-                mr = 1;
-                mm = 0;
-            }
-            mx = oEvent.clientX;
-            my = oEvent.clientY;
-        },
-        false);
-    document.addEventListener("mouseup",
-        function (ev) {
-            var oEvent = ev || event;
-            if (oEvent.button == 0) {
-                ml = 0;
-            }
-            if (oEvent.button == 2) {
-                mr = 0;
-            }
-        },
-        false);
-    document.addEventListener("mousemove",
-        function (ev) {
-        var oEvent = ev || event;
-        if (ml == 1) {
-            ang1 += (oEvent.clientX - mx) * 0.002;
-            ang2 += (oEvent.clientY - my) * 0.002;
-            if (oEvent.clientX != mx || oEvent.clientY != my) {
-                mm = 1;
-            }
-        }
-        if (mr == 1) {
-            var l = len * 4.0 / (cx + cy);
-            cenx += l * (-(oEvent.clientX - mx) * Math.sin(ang1) - (oEvent.clientY - my) * Math.sin(ang2) * Math.cos(ang1));
-            ceny += l * ((oEvent.clientY - my) * Math.cos(ang2));
-            cenz += l * ((oEvent.clientX - mx) * Math.cos(ang1) - (oEvent.clientY - my) * Math.sin(ang2) * Math.sin(ang1));
-            if (oEvent.clientX != mx || oEvent.clientY != my) {
-                mm = 1;
-            }
-        }
-        mx = oEvent.clientX;
-        my = oEvent.clientY;
-        },
-        false);
-    document.addEventListener("mousewheel",
-        function (ev) {
-            ev.preventDefault();
-            var oEvent = ev || event;
-            len *= Math.exp(-0.001 * oEvent.wheelDelta);
-        },
-        false);
-    document.addEventListener("touchstart",
-        function (ev) {
-            var n = ev.touches.length;
-            if (n == 1) {
-                var oEvent = ev.touches[0];
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-            }
-            else if (n == 2) {
-                var oEvent = ev.touches[0];
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-                oEvent = ev.touches[1];
-                mx1 = oEvent.clientX;
-                my1 = oEvent.clientY;
-            }
-            lasttimen = n;
-        },
-        false);
-    document.addEventListener("touchend",
-        function (ev) {
-            var n = ev.touches.length;
-            if (n == 1) {
-                var oEvent = ev.touches[0];
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-            }
-            else if (n == 2) {
-                var oEvent = ev.touches[0];
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-                oEvent = ev.touches[1];
-                mx1 = oEvent.clientX;
-                my1 = oEvent.clientY;
-            }
-            lasttimen = n;
-        },
-        false);
-    document.addEventListener("touchmove",
-        function (ev) {
-            ev.preventDefault();
-            var n = ev.touches.length;
-            if (n == 1&&lasttimen==1) {
-                var oEvent = ev.touches[0];
-                ang1 += (oEvent.clientX - mx) * 0.002;
-                ang2 += (oEvent.clientY - my) * 0.002;
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-            }
-            else if (n == 2) {
-                var oEvent = ev.touches[0];
-                var oEvent1 = ev.touches[1];
-                var l = len * 2.0 / (cx + cy), l1;
-                cenx += l * (-(oEvent.clientX + oEvent1.clientX - mx - mx1) * Math.sin(ang1) - (oEvent.clientY + oEvent1.clientY - my - my1) * Math.sin(ang2) * Math.cos(ang1));
-                ceny += l * ((oEvent.clientY + oEvent1.clientY - my - my1) * Math.cos(ang2));
-                cenz += l * ((oEvent.clientX + oEvent1.clientX - mx - mx1) * Math.cos(ang1) - (oEvent.clientY + oEvent1.clientY - my - my1) * Math.sin(ang2) * Math.sin(ang1));
-                l1 = Math.sqrt((mx - mx1) * (mx - mx1) + (my - my1) * (my - my1)+1.0);
-                mx = oEvent.clientX;
-                my = oEvent.clientY;
-                mx1 = oEvent1.clientX;
-                my1 = oEvent1.clientY;
-                l = Math.sqrt((mx - mx1) * (mx - mx1) + (my - my1) * (my - my1) + 1.0);
-                len *= l1 / l;
-            }
-            lasttimen = n;
-        },
-        false);
-    document.oncontextmenu = function (event) {
-        if (mm == 1) {
-            event.preventDefault();
-        }
-    };
-    function draw() {
-        date = new Date();
-        var t2 = date.getTime();
-        //ang1 += (t2 - t1)*0.001;
-        t1 = t2;
-        //ang1 += 0.1;
-        gl.uniform1f(glx, cx * 2.0 / (cx + cy));
-        gl.uniform1f(gly, cy * 2.0 / (cx + cy));
-        gl.uniform1f(gllen, len);
-        gl.uniform3f(glorigin, len * Math.cos(ang1) * Math.cos(ang2) + cenx, len * Math.sin(ang2) + ceny, len * Math.sin(ang1) * Math.cos(ang2) + cenz);
-        gl.uniform3f(glright, Math.sin(ang1), 0, -Math.cos(ang1));
-        gl.uniform3f(glup, -Math.sin(ang2) * Math.cos(ang1), Math.cos(ang2), -Math.sin(ang2) * Math.sin(ang1));
-        gl.uniform3f(glforward, -Math.cos(ang1) * Math.cos(ang2), -Math.sin(ang2), -Math.sin(ang1) * Math.cos(ang2));
-        gl.drawArrays(gl.TRIANGLES, 0, 6);
-        gl.finish();
-    }
-    window.onresize = function () {
-        cx = document.body.clientWidth;
-        cy = document.body.clientHeight;
-        if(cx>cy){
-            cx=cy;
-        }
-        else{
-            cy=cx;
-        }
-        document.getElementById("main").style.width=1024+"px";
-        document.getElementById("main").style.height=1024+"px";
-        document.getElementById("main").style.transform="scale("+cx/1024+","+cy/1024+")";
-    }
-    window.onload = function () {
-        cx = document.body.clientWidth;
-        cy = document.body.clientHeight;
-        if(cx>cy){
-            cx=cy;
-        }
-        else{
-            cy=cx;
-        }
-        document.getElementById("main").style.width=1024+"px";
-        document.getElementById("main").style.height=1024+"px";
-        document.getElementById("main").style.transform="scale("+cx/1024+","+cy/1024+")";
-        var positions = [-1.0, -1.0, 0.0, 1.0, -1.0, 0.0, 1.0, 1.0, 0.0, -1.0, -1.0, 0.0, 1.0, 1.0, 0.0, -1.0, 1.0, 0.0];
-        var VSHADER_SOURCE =
-            "#version 100 \n"+
-            "precision highp float;\n" +
-            "attribute vec4 position;" +
-            "varying vec3 dir, localdir;" +
-            "uniform vec3 right, forward, up, origin;" +
-            "uniform float x,y;" +
-            "void main() {" +
-            "   gl_Position = position; " +
-            "   dir = forward + right * position.x*x + up * position.y*y;" +
-            "   localdir.x = position.x*x;" +
-            "   localdir.y = position.y*y;" +
-            "   localdir.z = -1.0;" +
-            "} ";
-        var FSHADER_SOURCE =
-            "#version 100 \n" +
-            "#define PI 3.14159265358979324\n" +
-            "#define M_L 0.3819660113\n" +
-            "#define M_R 0.6180339887\n" +
-            "#define MAXR 8\n" +
-            "#define SOLVER 8\n" +
-            "precision highp float;\n" +
-            "float kernal(vec3 ver)\n;" +
-            "uniform vec3 right, forward, up, origin;\n" +
-            "varying vec3 dir, localdir;\n" +
-            "uniform float len;\n" +
-            "vec3 ver;\n" +
-            "int sign;"+
-            "float v, v1, v2;\n" +
-            "float r1, r2, r3, r4, m1, m2, m3, m4;\n" +
-            "vec3 n, reflect;\n" +
-            "const float step = 0.002;\n" +
-            "vec3 color;\n" +
-            "void main() {\n" +
-            "   color.r=0.0;\n" +
-            "   color.g=0.0;\n" +
-            "   color.b=0.0;\n" +
-            "   sign=0;"+
-            "   v1 = kernal(origin + dir * (step*len));\n" +
-            "   v2 = kernal(origin);\n" +
-            "   for (int k = 2; k < 90002; k++) {\n" +
-            "      ver = origin + dir * (step*len*float(k));\n" +
-            "      v = kernal(ver);\n" +
-            "      if (v > 0.0 && v1 < 0.0) {\n" +
-            "         r1 = step * len*float(k - 1);\n" +
-            "         r2 = step * len*float(k);\n" +
-            "         m1 = kernal(origin + dir * r1);\n" +
-            "         m2 = kernal(origin + dir * r2);\n" +
-            "         for (int l = 0; l < SOLVER; l++) {\n" +
-            "            r3 = r1 * 0.5 + r2 * 0.5;\n" +
-            "            m3 = kernal(origin + dir * r3);\n" +
-            "            if (m3 > 0.0) {\n" +
-            "               r2 = r3;\n" +
-            "               m2 = m3;\n" +
-            "            }\n" +
-            "            else {\n" +
-            "               r1 = r3;\n" +
-            "               m1 = m3;\n" +
-            "            }\n" +
-            "         }\n" +
-            "         if (r3 < 2.0 * len) {\n" +
-            "               sign=1;" +
-            "            break;\n" +
-            "         }\n" +
-            "      }\n" +
-            "      if (v < v1&&v1>v2&&v1 < 0.0 && (v1*2.0 > v || v1 * 2.0 > v2)) {\n" +
-            "         r1 = step * len*float(k - 2);\n" +
-            "         r2 = step * len*(float(k) - 2.0 + 2.0*M_L);\n" +
-            "         r3 = step * len*(float(k) - 2.0 + 2.0*M_R);\n" +
-            "         r4 = step * len*float(k);\n" +
-            "         m2 = kernal(origin + dir * r2);\n" +
-            "         m3 = kernal(origin + dir * r3);\n" +
-            "         for (int l = 0; l < MAXR; l++) {\n" +
-            "            if (m2 > m3) {\n" +
-            "               r4 = r3;\n" +
-            "               r3 = r2;\n" +
-            "               r2 = r4 * M_L + r1 * M_R;\n" +
-            "               m3 = m2;\n" +
-            "               m2 = kernal(origin + dir * r2);\n" +
-            "            }\n" +
-            "            else {\n" +
-            "               r1 = r2;\n" +
-            "               r2 = r3;\n" +
-            "               r3 = r4 * M_R + r1 * M_L;\n" +
-            "               m2 = m3;\n" +
-            "               m3 = kernal(origin + dir * r3);\n" +
-            "            }\n" +
-            "         }\n" +
-            "         if (m2 > 0.0) {\n" +
-            "            r1 = step * len*float(k - 2);\n" +
-            "            r2 = r2;\n" +
-            "            m1 = kernal(origin + dir * r1);\n" +
-            "            m2 = kernal(origin + dir * r2);\n" +
-            "            for (int l = 0; l < SOLVER; l++) {\n" +
-            "               r3 = r1 * 0.5 + r2 * 0.5;\n" +
-            "               m3 = kernal(origin + dir * r3);\n" +
-            "               if (m3 > 0.0) {\n" +
-            "                  r2 = r3;\n" +
-            "                  m2 = m3;\n" +
-            "               }\n" +
-            "               else {\n" +
-            "                  r1 = r3;\n" +
-            "                  m1 = m3;\n" +
-            "               }\n" +
-            "            }\n" +
-            "            if (r3 < 2.0 * len&&r3> step*len) {\n" +
-            "                   sign=1;" +
-            "               break;\n" +
-            "            }\n" +
-            "         }\n" +
-            "         else if (m3 > 0.0) {\n" +
-            "            r1 = step * len*float(k - 2);\n" +
-            "            r2 = r3;\n" +
-            "            m1 = kernal(origin + dir * r1);\n" +
-            "            m2 = kernal(origin + dir * r2);\n" +
-            "            for (int l = 0; l < SOLVER; l++) {\n" +
-            "               r3 = r1 * 0.5 + r2 * 0.5;\n" +
-            "               m3 = kernal(origin + dir * r3);\n" +
-            "               if (m3 > 0.0) {\n" +
-            "                  r2 = r3;\n" +
-            "                  m2 = m3;\n" +
-            "               }\n" +
-            "               else {\n" +
-            "                  r1 = r3;\n" +
-            "                  m1 = m3;\n" +
-            "               }\n" +
-            "            }\n" +
-            "            if (r3 < 2.0 * len&&r3> step*len) {\n" +
-            "                   sign=1;" +
-            "               break;\n" +
-            "            }\n" +
-            "         }\n" +
-            "      }\n" +
-            "      v2 = v1;\n" +
-            "      v1 = v;\n" +
-            "   }\n" +
-            "   if (sign==1) {\n" +
-            "      ver = origin + dir*r3 ;\n" +
-                "       r1=ver.x*ver.x+ver.y*ver.y+ver.z*ver.z;" +
-            "      n.x = kernal(ver - right * (r3*0.00025)) - kernal(ver + right * (r3*0.00025));\n" +
-            "      n.y = kernal(ver - up * (r3*0.00025)) - kernal(ver + up * (r3*0.00025));\n" +
-            "      n.z = kernal(ver + forward * (r3*0.00025)) - kernal(ver - forward * (r3*0.00025));\n" +
-            "      r3 = n.x*n.x+n.y*n.y+n.z*n.z;\n" +
-            "      n = n * (1.0 / sqrt(r3));\n" +
-            "      ver = localdir;\n" +
-            "      r3 = ver.x*ver.x+ver.y*ver.y+ver.z*ver.z;\n" +
-            "      ver = ver * (1.0 / sqrt(r3));\n" +
-            "      reflect = n * (-2.0*dot(ver, n)) + ver;\n" +
-            "      r3 = reflect.x*0.276+reflect.y*0.920+reflect.z*0.276;\n" +
-            "      r4 = n.x*0.276+n.y*0.920+n.z*0.276;\n" +
-            "      r3 = max(0.0,r3);\n" +
-            "      r3 = r3 * r3*r3*r3;\n" +
-            "      r3 = r3 * 0.45 + r4 * 0.25 + 0.3;\n" +
-                "      n.x = sin(r1*10.0)*0.5+0.5;\n" +
-                "      n.y = sin(r1*10.0+2.05)*0.5+0.5;\n" +
-                "      n.z = sin(r1*10.0-2.05)*0.5+0.5;\n" +
-            "      color = n*r3;\n" +
-            "   }\n" +
-            "   gl_FragColor = vec4(color.x, color.y, color.z, 1.0);" +
-            "}";
-        canvas = document.getElementById('c1');
-        gl = canvas.getContext('webgl');
-        vertshader = gl.createShader(gl.VERTEX_SHADER);
-        fragshader = gl.createShader(gl.FRAGMENT_SHADER);
-        shaderProgram = gl.createProgram();
-        gl.shaderSource(vertshader, VSHADER_SOURCE);
-        gl.compileShader(vertshader);
-        var infov = gl.getShaderInfoLog(vertshader);
-        gl.shaderSource(fragshader, FSHADER_SOURCE + KERNEL);
-        gl.compileShader(fragshader);
-        var infof = gl.getShaderInfoLog(fragshader);
-        gl.attachShader(shaderProgram, vertshader);
-        gl.attachShader(shaderProgram, fragshader);
-        gl.linkProgram(shaderProgram);
-        gl.useProgram(shaderProgram);
-        if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-            var info = gl.getProgramInfoLog(shaderProgram);
-            throw 'Could not compile WebGL program. \n\n' + infov + infof + info;
-        }
-        glposition = gl.getAttribLocation(shaderProgram, 'position');
-        glright = gl.getUniformLocation(shaderProgram, 'right');
-        glforward = gl.getUniformLocation(shaderProgram, 'forward');
-        glup = gl.getUniformLocation(shaderProgram, 'up');
-        glorigin = gl.getUniformLocation(shaderProgram, 'origin');
-        glx = gl.getUniformLocation(shaderProgram, 'x');
-        gly = gl.getUniformLocation(shaderProgram, 'y');
-        gllen = gl.getUniformLocation(shaderProgram, 'len');
-        var buffer = gl.createBuffer();
-        gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(positions), gl.STATIC_DRAW);
-        gl.vertexAttribPointer(glposition, 3, gl.FLOAT, false, 0, 0);
-        gl.enableVertexAttribArray(glposition);
 
-        gl.viewport(0, 0, 1024, 1024);
-        draw();
-        window.requestAnimationFrame(ontimer);
-        document.getElementById("kernel").value = KERNEL;
-        document.getElementById("btn").addEventListener("click", function() {
-            var state = this.innerText == "CONFIG";
-            this.innerText = state ? "HIDE" : "CONFIG";
-            document.getElementById("config").style.display = state ? "inline" : "none";
-        });
-        document.getElementById("apply").addEventListener("click", function() {
-            KERNEL = document.getElementById("kernel").value;
-            gl.shaderSource(fragshader, FSHADER_SOURCE + KERNEL);
-            gl.compileShader(fragshader);
-            var infof = gl.getShaderInfoLog(fragshader);
-            gl.linkProgram(shaderProgram);
-            gl.useProgram(shaderProgram);
-            if (!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)) {
-                var info = gl.getProgramInfoLog(shaderProgram);
-                alert(infof + info);
-            }
-            glposition = gl.getAttribLocation(shaderProgram, 'position');
-            glright = gl.getUniformLocation(shaderProgram, 'right');
-            glforward = gl.getUniformLocation(shaderProgram, 'forward');
-            glup = gl.getUniformLocation(shaderProgram, 'up');
-            glorigin = gl.getUniformLocation(shaderProgram, 'origin');
-            glx = gl.getUniformLocation(shaderProgram, 'x');
-            gly = gl.getUniformLocation(shaderProgram, 'y');
-            gllen = gl.getUniformLocation(shaderProgram, 'len');
-        });
-        document.getElementById("cancle").addEventListener("click", function() {
-            document.getElementById("kernel").value = KERNEL;
-        });
+    <div class="group">
+      <label>Iterations</label>
+      <input id="iter" class="slider" type="range" min="64" max="1500" step="1" value="350"/>
+      <span id="iterVal">350</span>
+    </div>
+
+    <div class="group">
+      <label>Step</label>
+      <input id="step" class="slider" type="range" min="0.2" max="2.5" step="0.01" value="1.0"/>
+      <span id="stepVal">1.00</span>
+    </div>
+
+    <div class="group">
+      <label>Resolution Scale</label>
+      <input id="scale" class="slider" type="range" min="0.25" max="1.0" step="0.01" value="0.75"/>
+      <span id="scaleVal">0.75×</span>
+    </div>
+
+    <div class="group">
+      <label>Stall GPU</label>
+      <input id="stall" type="checkbox"/>
+    </div>
+
+    <div id="stats">FPS: <b id="fps">—</b> | Frame ms: <b id="ms">—</b></div>
+  </div>
+
+  <div id="canvas-wrap">
+    <canvas id="c"></canvas>
+    <div id="warn" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // ====== Context init (high-performance + iOS safe) ======
+  const dpr = Math.max(1, Math.min(window.devicePixelRatio || 1, 3)); // batasi dpr max 3 agar iPhone aman
+  const canvas = document.getElementById('c');
+  const warn = document.getElementById('warn');
+
+  const gl = canvas.getContext('webgl', {
+    antialias: false,
+    alpha: false,
+    depth: false,
+    stencil: false,
+    preserveDrawingBuffer: false,
+    powerPreference: 'high-performance',
+    desynchronized: true,
+    failIfMajorPerformanceCaveat: false
+  }) || canvas.getContext('experimental-webgl');
+
+  if(!gl){ alert('WebGL tidak tersedia'); return; }
+
+  // Context-lost safety
+  canvas.addEventListener('webglcontextlost', (e)=>{ e.preventDefault(); showWarn('Context Lost! Menurunkan kualitas…'); cancelAnimationFrame(rafId); setTimeout(()=>window.location.reload(), 300); }, false);
+
+  // ====== Extensions (opsional tapi membantu shading) ======
+  const exts = [
+    'OES_standard_derivatives',
+    'OES_element_index_uint',
+    'EXT_shader_texture_lod',
+    'EXT_color_buffer_half_float'
+  ];
+  const got = {};
+  exts.forEach(x=>{ const e=gl.getExtension(x); if(e) got[x]=true; });
+
+  // ====== UI ======
+  const qs = id => document.getElementById(id);
+  const iterEl = qs('iter'), iterVal = qs('iterVal');
+  const stepEl = qs('step'), stepVal = qs('stepVal');
+  const scaleEl = qs('scale'), scaleVal = qs('scaleVal');
+  const stallEl = qs('stall');
+  const fpsEl = qs('fps'), msEl = qs('ms');
+
+  const modes = {
+    Normal : { iter: 250, step: 1.2, scale: 0.66 },
+    Heavy  : { iter: 600, step: 0.9, scale: 0.8  },
+    Extreme: { iter: 1200, step: 0.75, scale: 1.0 }
+  };
+  const modeBtns = { Normal: qs('modeNormal'), Heavy: qs('modeHeavy'), Extreme: qs('modeExtreme') };
+  Object.keys(modeBtns).forEach(k=>{
+    modeBtns[k].onclick = ()=>{
+      Object.values(modeBtns).forEach(b=>b.classList.remove('active'));
+      modeBtns[k].classList.add('active');
+      const m = modes[k];
+      iterEl.value = m.iter; stepEl.value = m.step; scaleEl.value = m.scale;
+      syncUI();
+      resize();
+    };
+  });
+  modeBtns.Heavy.classList.add('active');
+
+  function syncUI(){
+    iterVal.textContent = iterEl.value;
+    stepVal.textContent = (+stepEl.value).toFixed(2);
+    scaleVal.textContent = (Math.round(+scaleEl.value*100)/100).toFixed(2)+'×';
+  }
+  iterEl.oninput = stepEl.oninput = scaleEl.oninput = syncUI;
+  syncUI();
+
+  function showWarn(msg){
+    warn.style.display='block';
+    warn.textContent = msg;
+    clearTimeout(showWarn._t);
+    showWarn._t = setTimeout(()=> warn.style.display='none', 4000);
+  }
+
+  // ====== Shaders (Mandelbulb Raymarch EXTREME) ======
+  // Catatan: precision fallback untuk iPhone (mediump) jika perlu
+  const precisionHeader = got['OES_standard_derivatives'] ? 'precision highp float;' : 'precision mediump float;';
+
+  const vert = `
+    attribute vec2 aPos;
+    varying vec2 vUv;
+    void main(){
+      vUv = aPos*0.5 + 0.5;
+      gl_Position = vec4(aPos,0.0,1.0);
     }
-    </script>
+  `;
+
+  const frag = `
+    ${precisionHeader}
+    #define PI 3.141592653589793
+    varying vec2 vUv;
+    uniform vec2 uRes;       // pixel resolution
+    uniform float uTime;
+    uniform vec2 uMouse;     // 0..1
+    uniform float uIter;     // max iterations
+    uniform float uStep;     // march step scale
+    uniform vec3 uCamPos;
+    uniform mat3 uCamMat;
+    uniform bool uDoStall;
+
+    // hash/noise
+    float hash11(float p){ p = fract(p*0.1031); p *= p + 33.33; p *= p + p; return fract(p); }
+    vec3 hash31(float p){ vec3 h = vec3(p, p+1.0, p+2.0); return fract(sin(h)*43758.5453123); }
+    float n2(vec2 p){ vec3 a = vec3(p, p.x + p.y); return fract(sin(dot(a, vec3(127.1,311.7,74.7)))*43758.5453123); }
+    float noise(vec3 x){
+      vec3 p=floor(x), f=fract(x);
+      f=f*f*(3.0-2.0*f);
+      float n = p.x+p.y*57.0+p.z*113.0;
+      float res = mix(mix(mix(hash11(n+0.0), hash11(n+1.0), f.x),
+                          mix(hash11(n+57.0),hash11(n+58.0),f.x), f.y),
+                      mix(mix(hash11(n+113.0),hash11(n+114.0),f.x),
+                          mix(hash11(n+170.0),hash11(n+171.0),f.x), f.y), f.z);
+      return res;
+    }
+
+    // Mandelbulb distance estimator
+    float deMandelbulb(vec3 p){
+      vec3 z = p;
+      float dr = 1.0;
+      float r = 0.0;
+      const float Power = 8.0;
+      for (int i=0; i<64; i++){
+        r = length(z);
+        if (r>2.5) break;
+        float theta = acos(z.z/r);
+        float phi   = atan(z.y, z.x);
+        dr = pow(r, Power-1.0)*Power*dr + 1.0;
+        float zr = pow(r, Power);
+        theta *= Power; phi *= Power;
+        z = zr*vec3(sin(theta)*cos(phi), sin(theta)*sin(phi), cos(theta)) + p;
+      }
+      return 0.5*log(r)*r/dr;
+    }
+
+    // Scene SDF (mandelbulb + domain warp)
+    float map(vec3 p){
+      float t = uTime*0.2;
+      // domain warp
+      p += 0.25*vec3(
+        noise(p*1.2 + vec3(0.0, t, 4.2)),
+        noise(p*1.1 + vec3(2.4, 1.7+t, 0.3)),
+        noise(p*1.3 + vec3(1.1, 0.2, t))
+      );
+      return deMandelbulb(p);
+    }
+
+    vec3 calcNormal(vec3 p){
+      float eps = 0.0008;
+      vec2 k = vec2(1.0, -1.0)*0.5773;
+      return normalize( k.xyy*map(p + k.xyy*eps) +
+                        k.yyx*map(p + k.yyx*eps) +
+                        k.yxy*map(p + k.yxy*eps) +
+                        k.xxx*map(p + k.xxx*eps) );
+    }
+
+    float softShadow(vec3 ro, vec3 rd, float k){
+      float res = 1.0;
+      float t = 0.02;
+      for(int i=0;i<48;i++){
+        float h = map(ro + rd*t);
+        res = min(res, k*h/t);
+        t += clamp(h, 0.01, 0.2);
+        if(res<0.001||t>3.0) break;
+      }
+      return clamp(res,0.0,1.0);
+    }
+
+    float ao(vec3 p, vec3 n){
+      float occ = 0.0;
+      float sc = 0.02;
+      for(int i=1;i<=6;i++){
+        float hr = float(i)*sc;
+        float d = map(p + n*hr);
+        occ += (hr - d);
+      }
+      return clamp(1.0 - occ*1.2, 0.0, 1.0);
+    }
+
+    // Camera ray
+    vec3 getRay(vec2 uv){
+      // FOV & camera basis
+      vec3 rd = normalize(uCamMat * normalize(vec3(uv, -1.3)));
+      return rd;
+    }
+
+    // Optional GPU stall (untuk benar2 push GPU/driver)
+    void doStall(){
+      if(!uDoStall) return;
+      float s=0.0;
+      for(int i=0;i<60000;i++){ // hati2: ini berat
+        s += sin(float(i))*0.0000001;
+      }
+    }
+
+    void main(){
+      vec2 uv = (vUv*2.0 - 1.0);
+      uv.x *= uRes.x/uRes.y;
+
+      vec3 ro = uCamPos;
+      vec3 rd = getRay(uv);
+
+      float t = 0.0;
+      float d = 1.0;
+      float total = 0.0;
+      int steps = int(uIter);
+      float eps = 0.0008;
+
+      // Raymarch
+      for(int i=0;i<5000;i++){
+        if(i>=steps) break;
+        vec3 pos = ro + rd*t;
+        d = map(pos);
+        if(d<eps){ // hit
+          // shading
+          vec3 n = calcNormal(pos);
+          vec3 lp = ro + uCamMat * vec3(0.4,0.8,-0.2); // light pos relatif
+          vec3 l = normalize(lp - pos);
+          float diff = max(dot(n,l),0.0);
+          float sh = softShadow(pos + n*eps*2.0, l, 8.0);
+          float amb = ao(pos, n);
+          float spec = pow(max(dot(reflect(-l,n), -rd), 0.0), 32.0);
+
+          vec3 base = vec3(0.25,0.7,1.2 + 0.2*sin(uv.y*10.0+uTime*2.0));
+          vec3 col = (0.15 + 0.85*amb)*base*0.35 + diff*vec3(1.0,0.9,0.8)*0.9*sh + spec*0.5;
+          // tone map
+          col = col/(1.0+col);
+          gl_FragColor = vec4(pow(col, vec3(0.85)), 1.0);
+          doStall();
+          return;
+        }
+        t += d * (0.35 * uStep);
+        total += 1.0;
+        if(t>6.0) break;
+      }
+
+      // miss = background
+      vec3 bg = vec3(0.02,0.03,0.06) + 0.15*vec3(uv.y*0.5+0.5);
+      gl_FragColor = vec4(bg,1.0);
+      doStall();
+    }
+  `;
+
+  function makeShader(type, src){
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)){
+      console.error(gl.getShaderInfoLog(s));
+      throw new Error('Shader compile error');
+    }
+    return s;
+  }
+
+  const vs = makeShader(gl.VERTEX_SHADER, vert);
+  const fs = makeShader(gl.FRAGMENT_SHADER, frag);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  if(!gl.getProgramParameter(prog, gl.LINK_STATUS)){
+    console.error(gl.getProgramInfoLog(prog));
+    throw new Error('Link error');
+  }
+  gl.useProgram(prog);
+
+  const aPos = gl.getAttribLocation(prog, 'aPos');
+  const uRes = gl.getUniformLocation(prog, 'uRes');
+  const uTime = gl.getUniformLocation(prog, 'uTime');
+  const uMouse = gl.getUniformLocation(prog, 'uMouse');
+  const uIter = gl.getUniformLocation(prog, 'uIter');
+  const uStepU = gl.getUniformLocation(prog, 'uStep');
+  const uCamPos = gl.getUniformLocation(prog, 'uCamPos');
+  const uCamMat = gl.getUniformLocation(prog, 'uCamMat');
+  const uDoStall = gl.getUniformLocation(prog, 'uDoStall');
+
+  // Fullscreen quad
+  const quad = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, quad);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
+    -1,-1,  1,-1,  -1,1,
+     1,-1,  1, 1,  -1,1
+  ]), gl.STATIC_DRAW);
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  // Camera setup (orbit kecil biar dinamis)
+  let angle = 0.0;
+  let camDist = 2.2;
+
+  // Mouse
+  const mouse = {x:0.5, y:0.5};
+  window.addEventListener('pointermove', e=>{
+    const r = canvas.getBoundingClientRect();
+    mouse.x = (e.clientX - r.left) / r.width;
+    mouse.y = 1.0 - (e.clientY - r.top) / r.height;
+  }, {passive:true});
+
+  // Resize
+  function resize(){
+    const scale = +scaleEl.value;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    const minSide = Math.min(w, h);
+    // Batasin ukuran untuk iPhone (hindari context loss)
+    const targetW = Math.floor(w * dpr * scale);
+    const targetH = Math.floor(h * dpr * scale);
+
+    canvas.width = targetW;
+    canvas.height = targetH;
+    canvas.style.width = w+'px';
+    canvas.style.height = h+'px';
+    gl.viewport(0,0,targetW,targetH);
+    gl.uniform2f(uRes, targetW, targetH);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // Render loop + FPS
+  let prev = performance.now(), rafId = 0, acc=0, frames=0;
+  function frame(now){
+    const dt = now - prev; prev = now;
+    acc += dt; frames++;
+    if(acc>=500){ // update 2x/detik
+      const fps = Math.round(1000.0/(dt || 16.7));
+      document.getElementById('fps').textContent = fps;
+      document.getElementById('ms').textContent = dt.toFixed(1);
+      acc=0; frames=0;
+    }
+
+    angle += 0.2 * (dt/1000);
+    const t = now*0.001;
+    const mx = mouse.x, my = mouse.y;
+
+    // Kamera orbit (tergantung mouse)
+    const yaw = angle + (mx-0.5)*1.8;
+    const pitch = -0.3 + (my-0.5)*0.8;
+    const cx = Math.cos(yaw)*Math.cos(pitch);
+    const cy = Math.sin(pitch);
+    const cz = Math.sin(yaw)*Math.cos(pitch);
+
+    const camPos = [cx*camDist, cy*camDist, cz*camDist];
+    const forward = normalize3(neg3(camPos)); // ke origin
+    const right = normalize3(cross(forward, [0,1,0]));
+    const up = normalize3(cross(right, forward));
+
+    // Uniforms
+    gl.uniform1f(uTime, t);
+    gl.uniform2f(uMouse, mx, my);
+    gl.uniform1f(uIter, +iterEl.value);
+    gl.uniform1f(uStepU, +stepEl.value);
+    gl.uniform3f(uCamPos, camPos[0], camPos[1], camPos[2]);
+    gl.uniformMatrix3fv(uCamMat, false, new Float32Array([
+      right[0], up[0], forward[0],
+      right[1], up[1], forward[1],
+      right[2], up[2], forward[2],
+    ]));
+    gl.uniform1i(uDoStall, stallEl.checked ? 1 : 0);
+
+    // Draw
+    gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+    // Jangan gl.finish() setiap frame (bikin stall total). Gunakan checkbox "Stall GPU" kalau mau keras.
+    // if(stallEl.checked){ gl.finish(); } // (opsional, tapi saya ganti dengan loop di shader biar “murni GPU”)
+
+    rafId = requestAnimationFrame(frame);
+  }
+  rafId = requestAnimationFrame(frame);
+
+  // Helpers
+  function normalize3(a){ const l = Math.hypot(a[0],a[1],a[2])||1; return [a[0]/l,a[1]/l,a[2]/l]; }
+  function cross(a,b){ return [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]]; }
+  function neg3(a){ return [-a[0],-a[1],-a[2]]; }
+
+})();
+</script>
+
+<div id="hint" style="position:fixed;right:10px;bottom:8px">
+  Tips: Naikkan <b>Resolution Scale</b>, set <b>Mode = Extreme</b>, <b>Iterations</b> &ge; 1200, dan centang <b>Stall GPU</b> untuk test paling berat. <br/>
+  Jika Safari iPhone jadi hitam/force refresh: turunkan scale ke 0.5 atau 0.33.
+</div>
 </body>
 </html>
