@@ -370,22 +370,27 @@ const rawProductMap = {
     subtitle: "Legal & berizin — Layanan Pentest & Jasa Firewall.",
     badge: "Security/Pentest",
     note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
-    regions: {
-      "Plan Bot Telegram DDOS / Pentest / Load/Stress Testing": [
-        { name: "REGULAR — 1 hari", spec: "200s run • 1 concurrency", price: "$3 / Rp48.000" },
-        { name: "REGULAR — 7 hari", spec: "200s run • 1 concurrency", price: "$6 / Rp96.000" },
-        { name: "REGULAR — 20 hari", spec: "200s run • 1 concurrency", price: "$15 / Rp240.000" },
-        { name: "REGULAR — 30 hari", spec: "200s run • 1 concurrency", price: "$25 / Rp400.000" },
-        { name: "VIP — 50 menit", spec: "200s run • 2 concurrency", price: "$3 / Rp48.000" },
-        { name: "VIP — 12 jam", spec: "200s run • 2 concurrency", price: "$6 / Rp96.000" },
-        { name: "VIP — 1 hari", spec: "200s run • 2 concurrency", price: "$12 / Rp192.000" },
-        { name: "VIP — 3 hari", spec: "200s run • 2 concurrency", price: "$20 / Rp320.000" },
-        { name: "VIP — 7 hari", spec: "200s run • 2 concurrency", price: "$35 / Rp560.000" },
-        { name: "VIP — 14 hari", spec: "200s run • 2 concurrency", price: "$60 / Rp960.000" },
-        { name: "VIP — 30 hari", spec: "200s run • 2 concurrency", price: "$100 / Rp1.600.000" },
-        { name: "VVIP L7 — 7 hari", spec: "300s run • 1 concurrency BIG BOTNET RPS", price: "$200 / Rp3.200.000" },
-        { name: "VVIP L4 — 7 hari", spec: "60s run • 50 Attack/Days BIG BOTNET GBps/PPS", price: "$500 / Rp8.000.000" }
-      ],
+    const regions = {
+  "Plan Bot Telegram DDOS / Pentest / Load/Stress Testing": [
+    // Hapus semua REGULAR & VIP lama, tapi pertahankan L4 di bawah.
+    { name: "REGULAR — Paket 1 (700s / 30 days)", spec: "700s run • 2 concurrency", price: "$6 / Rp96.000" },
+    { name: "REGULAR — Paket 2 (700s / 30 days)", spec: "700s run • 4 concurrency", price: "$10 / Rp160.000" },
+    { name: "REGULAR — Paket 3 (700s / 30 days)", spec: "700s run • 8 concurrency", price: "$16 / Rp256.000" },
+    { name: "REGULAR — Paket 4 (700s / 30 days)", spec: "700s run • 10 concurrency", price: "$22 / Rp352.000" },
+    { name: "REGULAR — Paket 5 (700s / 30 days)", spec: "700s run • 12 concurrency", price: "$28 / Rp448.000" },
+    { name: "REGULAR — Paket 6 (700s / 30 days)", spec: "700s run • 14 concurrency", price: "$34 / Rp544.000" },
+    { name: "REGULAR — Paket 7 (700s / 30 days)", spec: "700s run • 16 concurrency", price: "$40 / Rp640.000" },
+    { name: "REGULAR — Paket 8 (700s / 30 days)", spec: "700s run • 18 concurrency", price: "$46 / Rp736.000" },
+    { name: "REGULAR — Paket 9 (700s / 30 days)", spec: "700s run • 20 concurrency", price: "$52 / Rp832.000" },
+    { name: "REGULAR — Paket 10 (700s / 30 days)", spec: "700s run • 22 concurrency", price: "$58 / Rp928.000" },
+    { name: "REGULAR — Paket 11 (700s / 30 days)", spec: "700s run • 24 concurrency", price: "$65 / Rp1.040.000" },
+
+    { name: "VIP — Custom (Enterprise)", spec: "Custom duration & concurrency", price: "starting $300 / Rp4.800.000 (30 days)" },
+    { name: "VVIP — Custom (High Capacity)", spec: "Custom duration, concurrency & methods", price: "starting $800 / Rp12.800.000 (30 days)" },
+
+    // DARI LIST LAMA — jangan dihapus
+    { name: "VVIP — L4 ONLY", spec: "BIG BOTNET TBps/PPS", price: "$800 / Rp12.800.000" }
+     ],
       "Jasa Hold DDOS Website / Jasa Hold Pentest Website": [
         { name: "1 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "120k / 10$" },
         { name: "2 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "180k / 15$" },
