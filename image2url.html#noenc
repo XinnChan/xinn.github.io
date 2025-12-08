@@ -216,7 +216,7 @@
   </div>
 
   <script>
-    const imgbbApiKey = '02cdfa82d94696cb728b81002a3def9c'; // Your API Key
+    const imgbbApiKey = '52c73b9cd22cb73cd5be835a7beee811'; // Your API Key
     const uploadButton = document.getElementById('imageUpload');
     const previewDiv = document.getElementById('preview');
     const loader = document.getElementById('loader');
