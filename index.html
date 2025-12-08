@@ -235,7 +235,7 @@ const rawProductMap = {
   /* VPS */
   "VPS": {
     type: "vps",
-    img: "https://i.ibb.co/fzcHvGYv/1003473616.png",
+    img: "https://i.ibb.co/TD3qFt5P/1003473616.png",
     subtitle: "Paket ekonomis SSD/NvMe — stabil & hemat + ipv4 Dedicated, Bergaransi.",
     badge: "VPS EKONOMIS",
     node: "Semua catatan termasuk garansi ada di Card pembelian",
@@ -262,11 +262,14 @@ const rawProductMap = {
   /* VDS & RDP — SG & HK & US */
   "VDS & RDP — SG / HK / US": {
     type: "vds rdp",
-    img: "https://i.ibb.co/nNZKcYXk/1003463210.png",
+    img: "https://i.ibb.co/S4zRhMP4/1003473618.png",
     subtitle: "Region: SGP-1, SGP-2, HK, US-1, US-2, JP | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated",
     badge: "VDS/RDP | PROMO —50% OFF",
     note: "Region: SGP-1, SGP-2, HK, US-1, US-2, JP | Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi",
     regions: {
+      "USA-BARE-METAL": [
+        { name: "VDS USA-BARE-METAL 8 Cpu ", spec: "8 CPU / 16 GB RAM / 8 TB HDD SATA • Unlimited BW • 1Gb/s Avrr spike 20gb/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active + VM: Dedicated + MAC Spoof Option: On", price: "IDR 1.100k / USDT $73" },
+      ],
       "SGP-1": [
         { name: "VDS SGP-1 8 Cpu ", spec: "8 CPU / 16 GB RAM / 200 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 660k / USDT $42" },
         { name: "VDS SGP-1 12 Cpu ", spec: "12 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 4Gbit/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active", price: "IDR 800k / USDT $55" },
@@ -289,7 +292,7 @@ const rawProductMap = {
       ],
       "US-1": [
         { name: "VDS US-1 12 Cpu", spec: "12 vCPU AMD EPYC • 32 GB RAM • 1 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 800k / USD $50" },
-        { name: "VDS US-1 16 Cpu", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.100k / USD $69" },
+        { name: "VDS US-1 16 Cpu", spec: "16 vCPU AMD EPYC • 64 GB RAM • 2 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.100k / USD $73" },
         { name: "VDS US-1 24 Cpu", spec: "24 vCPU AMD EPYC • 96 GB RAM • 3 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.500k / USD $94" },
         { name: "VDS US-1 28 Cpu", spec: "28 vCPU AMD EPYC • 112 GB RAM • 3.5 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 1.770k / USD $114" },
         { name: "VDS US-1 32 Cpu", spec: "32 vCPU AMD EPYC • 128 GB RAM • 4 TB NVMe • Unlimited BW • 2.5Gbps", price: "IDR 2.100k / USD $135" }
@@ -309,7 +312,7 @@ const rawProductMap = {
   /* VPS/RDP — Indonesia */
   "VPS/RDP — Indonesia": {
     type: "vps rdp",
-    img: "https://i.ibb.co/G3v3n0fc/1003463225.png",
+    img: "https://i.ibb.co/PzsrkKpG/1003473619.png",
     subtitle: "Latency rendah untuk user Indonesia.",
     badge: "VPS/RDP | PROMO —50% OFF",
     regions: {
@@ -326,7 +329,7 @@ const rawProductMap = {
   /* Offshore VDS */
   "VDS Free DMCA BULLET PROOF": {
     type: "vds",
-    img: "https://i.ibb.co/y9tRnN3/1003463227.png",
+    img: "https://i.ibb.co/q3XLtzG6/1003473620.png",
     subtitle: "VDS Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
     badge: "VDS BULLET PROOF",
     note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4, FREE ALL ABUSED, Region: (Bahrain/NL/Swiss).",
@@ -352,7 +355,7 @@ const rawProductMap = {
   /* Managed Cloud Panel Setup */
   "CLOUD PANEL AKUN DIGITAL OCHEAN": {
     type: "service",
-    img: "https://i.ibb.co/RG9q9ntr/1003463269.png",
+    img: "https://i.ibb.co/mFShsvZM/1003473622.png",
     subtitle: "Akun Cloud Digital Ochean.",
     badge: "Account Cloud",
     regions: {
@@ -366,30 +369,25 @@ const rawProductMap = {
   /* Pentest & Load Testing (Authorized) */
   "PLAN/HOLD DDOS & Service": {
     type: "service",
-    img: "https://i.ibb.co/PvZpYHRG/1003463233.png",
+    img: "https://i.ibb.co/HTvCS4bx/1003473621.png",
     subtitle: "Legal & berizin — Layanan Pentest & Jasa Firewall.",
     badge: "Security/Pentest",
     note: "Semua pengujian dilakukan HANYA dengan izin tertulis dari pemilik sistem/website.",
     regions: {
         "Plan Bot Telegram DDOS / Pentest / Load/Stress Testing": [
-    // Hapus semua REGULAR & VIP lama, tapi pertahankan L4 di bawah.
-    { name: "REGULAR — Paket 1 (700s / 30 days)", spec: "700s run • 2 concurrency", price: "$6 / Rp96.000" },
-    { name: "REGULAR — Paket 2 (700s / 30 days)", spec: "700s run • 4 concurrency", price: "$10 / Rp160.000" },
-    { name: "REGULAR — Paket 3 (700s / 30 days)", spec: "700s run • 8 concurrency", price: "$16 / Rp256.000" },
-    { name: "REGULAR — Paket 4 (700s / 30 days)", spec: "700s run • 10 concurrency", price: "$22 / Rp352.000" },
-    { name: "REGULAR — Paket 5 (700s / 30 days)", spec: "700s run • 12 concurrency", price: "$28 / Rp448.000" },
-    { name: "REGULAR — Paket 6 (700s / 30 days)", spec: "700s run • 14 concurrency", price: "$34 / Rp544.000" },
-    { name: "REGULAR — Paket 7 (700s / 30 days)", spec: "700s run • 16 concurrency", price: "$40 / Rp640.000" },
-    { name: "REGULAR — Paket 8 (700s / 30 days)", spec: "700s run • 18 concurrency", price: "$46 / Rp736.000" },
-    { name: "REGULAR — Paket 9 (700s / 30 days)", spec: "700s run • 20 concurrency", price: "$52 / Rp832.000" },
-    { name: "REGULAR — Paket 10 (700s / 30 days)", spec: "700s run • 22 concurrency", price: "$58 / Rp928.000" },
-    { name: "REGULAR — Paket 11 (700s / 30 days)", spec: "700s run • 24 concurrency", price: "$65 / Rp1.040.000" },
-
-    { name: "VIP — Custom (Enterprise)", spec: "Custom duration & concurrency", price: "starting $300 / Rp4.800.000 (30 days)" },
-    { name: "VVIP — Custom (High Capacity)", spec: "Custom duration, concurrency & methods", price: "starting $800 / Rp12.800.000 (30 days)" },
-
+    // Hapus semua REGULAR & VIP lama, tapi pertahankan L4 di bawah
+    { name: "REGULAR — Paket 1 (700s / 30 days)", spec: "700s run • 1 concurrency", price: "$10 / Rp160.000" },
+    { name: "REGULAR — Paket 2 (700s / 30 days)", spec: "700s run • 2 concurrency", price: "$16 / Rp256.000" },
+    { name: "REGULAR — Paket 3 (700s / 30 days)", spec: "700s run • 4 concurrency", price: "$22 / Rp352.000" },
+    { name: "REGULAR — Paket 4 (700s / 30 days)", spec: "700s run • 6 concurrency", price: "$28 / Rp448.000" },
+    { name: "REGULAR — Paket 5 (700s / 30 days)", spec: "700s run • 8 concurrency", price: "$34 / Rp544.000" },
+    { name: "REGULAR — Paket 6 (700s / 30 days)", spec: "700s run • 10 concurrency", price: "$40 / Rp640.000" },
+    { name: "REGULAR — Paket 7 (700s / 30 days)", spec: "700s run • 12 concurrency", price: "$46 / Rp736.000" },
+    { name: "REGULAR — Paket 8 (700s / 30 days)", spec: "700s run • 14 concurrency", price: "$52 / Rp832.000" },
+    { name: "REGULAR — Paket 9 (700s / 30 days)", spec: "700s run • 16 concurrency", price: "$58 / Rp928.000" },
+    { name: "REGULAR — Paket 10 (700s / 30 days)", spec: "700s run • 18 concurrency", price: "$65 / Rp1.040.000" },
     // DARI LIST LAMA — jangan dihapus
-    { name: "VVIP — L4 ONLY", spec: "BIG BOTNET TBps/PPS", price: "$800 / Rp12.800.000" },
+    { name: "VIP / VVIP PLAN", spec: "BIG BOTNET/L7 SRV", price: "dm: t.me/Xin_Kenji" },
      ],
       "Jasa Hold DDOS Website / Jasa Hold Pentest Website": [
         { name: "1 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "120k / 10$" },
