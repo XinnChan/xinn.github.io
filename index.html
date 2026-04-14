@@ -356,6 +356,12 @@ const rawProductMap = {
     badge: "VDS/RDP | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
+      "US": [
+        { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
+        { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
+        { name: "VDS/RDP PAKET C", spec: "16 CPU / 64 GB RAM / 500 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.250k / USDT $90" },
+        { name: "VDS/RDP PAKET D", spec: "24 CPU / 96 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.750k / USDT $125" },
+      ],
       "WASHINGTON-DC": [
         { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
         { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
@@ -363,12 +369,6 @@ const rawProductMap = {
         { name: "VDS/RDP PAKET D", spec: "24 CPU / 96 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.750k / USDT $125" },
       ],
       "PHOENIX": [
-        { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
-        { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
-        { name: "VDS/RDP PAKET C", spec: "16 CPU / 64 GB RAM / 500 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.250k / USDT $90" },
-        { name: "VDS/RDP PAKET D", spec: "24 CPU / 96 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.750k / USDT $125" },
-      ],
-      "US": [
         { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
         { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
         { name: "VDS/RDP PAKET C", spec: "16 CPU / 64 GB RAM / 500 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.250k / USDT $90" },
@@ -386,23 +386,6 @@ const rawProductMap = {
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
       "MONTREAL": [
-        { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
-        { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
-        { name: "VDS/RDP PAKET C", spec: "16 CPU / 64 GB RAM / 500 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.250k / USDT $90" },
-        { name: "VDS/RDP PAKET D", spec: "24 CPU / 96 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.750k / USDT $125" },
-      ],
-    }
-  },
-
-  /* VDS & RDP — AUSTRALIA */
-  "VDS & RDP — AUSTRALIA": {
-    type: "vds rdp",
-    img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164304.png?raw=true",
-    subtitle: "OS: Linux/Windows",
-    badge: "VDS/RDP | PROMO —40% OFF",
-    note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
-    regions: {
-      "SYDNEY": [
         { name: "VDS/RDP PAKET A", spec: "8 CPU / 24 GB RAM / 300 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 805k / USDT $58" },
         { name: "VDS/RDP PAKET B", spec: "12 CPU / 48 GB RAM / 400 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.050k / USDT $75" },
         { name: "VDS/RDP PAKET C", spec: "16 CPU / 64 GB RAM / 500 GB NVMe • Unlimited BW • 10Gbit/s • 1 IPv4 + IPv6: Active", price: "IDR 1.250k / USDT $90" },
@@ -465,31 +448,13 @@ const rawProductMap = {
     { name: "PLAN DDOS C2/BOT-TELE REGULAR / VIP / VVIP", spec: "BIG BOTNET L4 / BIG RPS L7 SRV", price: "dm: t.me/Xin_Kenji or dm: t.me/xxiinn" },
      ],
       "Jasa Hold DDOS Website / Jasa Hold Pentest Website": [
-        { name: "1 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "120k / 10$" },
-        { name: "2 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "180k / 15$" },
-        { name: "3 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "240k / 20$" },
-        { name: "4 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "300k / 25$" },
-        { name: "5 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "390k / 30$" },
-        { name: "6 Jam ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "500k / 35$" },
-        { name: "1 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "1jt / 70$" },
-        { name: "2 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "1.5 jt / 110$" },
-        { name: "3 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "2 jt / 125$" },
-        { name: "4 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "2.5 jt / 170$" },
-        { name: "5 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "3 jt / 200$" },
-        { name: "6 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "3.5 jt / 230$" },
-        { name: "7 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "4 jt / 270$" },
-        { name: "30 Day ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "14 jt / 900$" },
+        { name: "HOLD DOWN WEBSITE ", spec: "🔩Konsep? Kirim Link Site Test ➡️ Site Down ➡️ Bayar ➡️ Hold(sampe waktu di tuju)", price: "dm: t.me/Xin_Kenji or dm: t.me/xxiinn" },
       ],
       "Delete Artikel / Suspen Website Phising Permanent / Hapus Page Dari KW Google": [
-        { name: "Easy", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "1jt / 70$" },
-        { name: "Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "3jt / 200$" },
-        { name: "Super Hard", spec: "Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "15jt / 1000$" },
+        { name: "LAYANAN PENGHAPUSAN WEBSITE", spec: "Proses Per Web Tergantung Kesulitan Bertahap 3-7 Hari", price: "dm: t.me/Xin_Kenji or dm: t.me/xxiinn" },
       ],
       "Protect Website / Install Firewall Website": [
-        { name: "Basic", spec: "Basic Protect", price: "Harga Bisa Di Diskusikan" },
-        { name: "Normal", spec: "Normal Protect", price: "1jt / 70$" },
-        { name: "Medium", spec: "Medium Protect", price: "3jt / 200$" },
-        { name: "Expert", spec: "Expert Protect + Free Pantau 24 Jam", price: "15jt / 1000$" },
+        { name: "SETUP FIREWALL WEBSITE", spec: "Basic Protect, Medium Protect, Expert PRotect, Bussiness Protect, Enterprise Protect", price: "dm: t.me/Xin_Kenji or dm: t.me/xxiinn" },
       ]
     }
   }
