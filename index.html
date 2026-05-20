@@ -237,24 +237,35 @@ const rawProductMap = {
     type: "vps",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164225.png?raw=true",
     subtitle: "Paket ekonomis SSD/NvMe — stabil & hemat + ipv4 Dedicated, Bergaransi.",
-    badge: "VPS EKONOMIS",
+    badge: "VPS PAKET EKONOMIS | OS: Linux",
     node: "Semua catatan termasuk garansi ada di Card pembelian",
     regions: {
-      "VPS 1 BULAN REGULAR": [
-        { name: "VPS 4/2 • 80GB SSD NVMe • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • 2 TB transfer", price: "Rp 45k / $4" },
-        { name: "VPS 8/4 • 160GB SSD NVMe • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • 3 TB transfer", price: "Rp 75k / $7" }
-      ],
-      "VPS 1 BULAN PREMIUM": [
-        { name: "VPS 4/2 • 80GB SSD NVMe • Unlimited BW", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • Unlimited transfer", price: "Rp 79k / $8" },
-        { name: "VPS 8/4 • 160GB SSD NVMe • Unlimited BW", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • Unlimited transfer", price: "Rp 129k / $12" }
-      ],
-      "VPS 2 BULAN REGULAR": [
-        { name: "VPS 4/2 • 80GB SSD NVMe • 2TB", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • 2 TB transfer", price: "Rp 90k / $9" },
-        { name: "VPS 8/4 • 160GB SSD NVMe • 3TB", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • 3 TB transfer", price: "Rp 150k / $15" }
-      ],
-      "VPS 2 BULAN PREMIUM": [
-        { name: "VPS 4/2 • 80GB SSD NVMe • Unlimited BW", spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • Unlimited transfer", price: "Rp 179k / $17" },
-        { name: "VPS 8/4 • 160GB SSD NVMe • Unlimited BW", spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • Unlimited transfer", price: "Rp 279k / $27" }
+      "VPS PAKET EKONOMIS": [
+ {
+    name: "1 BULAN VPS 4/2 #REGULAR• 80GB SSD NVMe • Unlimited BW",
+    spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • Unlimited transfer",
+    price: "Rp 45k / $4"
+  },
+  {
+    name: "1 BULAN VPS 8/4 #REGULAR• 160GB SSD NVMe • Unlimited BW",
+    spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • Unlimited transfer",
+    price: "Rp 75k / $7"
+  },
+  {
+    name: "2 BULAN VPS 4/2 #REGULAR• 80GB SSD NVMe • Unlimited BW",
+    spec: "4 GB RAM / 2 CPU • 80 GB SSD NVMe • Unlimited transfer",
+    price: "Rp 90k / $9"
+  },
+  {
+    name: "2 BULAN VPS 8/4 #REGULAR• 160GB SSD NVMe • Unlimited BW",
+    spec: "8 GB RAM / 4 CPU • 160 GB SSD NVMe • Unlimited transfer",
+    price: "Rp 150k / $15"
+  },
+  {
+    name: "3 BULAN VPS 2/2 #PREMIUM • 30GB SSD NVMe • Unlimited BW",
+    spec: "2 GB RAM / 2 CPU • 30 GB SSD NVMe • Unlimited transfer",
+    price: "Rp 250k / $20"
+  },
       ],
     }
   },
@@ -263,8 +274,8 @@ const rawProductMap = {
   "VPS/RDP — Indonesia": {
     type: "vps rdp",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164318.png?raw=true",
-    subtitle: "Latency rendah untuk user Indonesia | Bisa perpanjang.",
-    badge: "VPS/RDP | PROMO —50% OFF",
+    subtitle: "Latency rendah untuk user Indonesia | Bisa perpanjang | Normal Price Speed 1gb/s average | Upgrade Speed to 5gb/s tambah: Rp. 200k dari harga asli.",
+    badge: "VPS/RDP | OS: Linux/Windows | PROMO —50% OFF",
     note: "Latency rendah untuk user Indonesia | Bisa perpanjang | Normal Price Speed 1gb/s average | Upgrade Speed to 5gb/s tambah: Rp. 200k dari harga asli.",
     regions: {
       "Indonesia": [
@@ -281,12 +292,12 @@ const rawProductMap = {
   "Servers Dedicated / Bare Metal": {
     type: "vds",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20260215_173830.jpg?raw=true",
-    subtitle: "OS: Linux/Windows",
-    badge: "Dedicated | PROMO —40% OFF",
+    subtitle: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | VM: Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus! | For Additional GPU: 100$",
+    badge: "Dedicated | OS: Linux | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | VM: Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus! | For Additional GPU: 100$",
     regions: {
       "US/GERMAN/NETHERLAND (Random Tergantung stok)": [
-        { name: "Servers Dedicated / Bare Metal 8 Cpu ", spec: "4 Procecor / 8 Thread • Unlimited BW • 1Gb/s Avrr spike 20gb/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active + VM: Dedicated + MAC Spoof Option: On", price: "IDR 1.500k / USDT $107" },
+        { name: "Servers Dedicated / Bare Metal 8 Cpu ", spec: "4 Procecor / 8 Thread • Unlimited BW • 1Gb/s Avrr spike 20gb/s • 1 IPv4 + IPv6 + AMD-V/VM-X: Active + VM: Dedicated + MAC Spoof Option: On", price: "IDR 1.500k / USDT $115" },
       ],
     }
   },
@@ -295,7 +306,7 @@ const rawProductMap = {
   "VDS & RDP — ASIA": {
     type: "vds rdp",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164304.png?raw=true",
-    subtitle: "OS: Linux/Windows",
+    subtitle: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     badge: "VDS/RDP | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
@@ -324,8 +335,8 @@ const rawProductMap = {
   "VDS & RDP — EUROPE": {
     type: "vds rdp",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164304.png?raw=true",
-    subtitle: "OS: Linux/Windows",
-    badge: "VDS/RDP | PROMO —40% OFF",
+    subtitle: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
+    badge: "VDS/RDP | OS: Linux/Windows | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
       "NETHERLANDS": [
@@ -353,8 +364,8 @@ const rawProductMap = {
   "VDS & RDP — USA": {
     type: "vds rdp",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164304.png?raw=true",
-    subtitle: "OS: Linux/Windows",
-    badge: "VDS/RDP | PROMO —40% OFF",
+    subtitle: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
+    badge: "VDS/RDP | OS: Linux/Windows | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
       "US": [
@@ -382,8 +393,8 @@ const rawProductMap = {
   "VDS & RDP — CANADA": {
     type: "vds rdp",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164304.png?raw=true",
-    subtitle: "OS: Linux/Windows",
-    badge: "VDS/RDP | PROMO —40% OFF",
+    subtitle: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
+    badge: "VDS/RDP | OS: Linux/Windows | PROMO —40% OFF",
     note: "Vendor: (AMD EPYC/Intel XEON — tergantung stok) | Infrastruktur: Semua Dedicated | Private Port/Speed Data Sesuai Spesifikasi | Bisa Perpanjang Terus!",
     regions: {
       "MONTREAL": [
@@ -399,8 +410,8 @@ const rawProductMap = {
   "VDS Free DMCA BULLET PROOF": {
     type: "vds",
     img: "https://github.com/XinnChan/xinn.github.io/blob/main/IMG_20250821_164327.png?raw=true",
-    subtitle: "VDS Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4.",
-    badge: "VDS BULLET PROOF",
+    subtitle: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4, FREE ALL ABUSED, Region: (Bahrain/NL/Swiss).",
+    badge: "VDS BULLET PROOF | OS: Linux",
     note: "Unlimited Bandwidth • 1Gbps uplink • Basic DDoS Protection • Free DMCA, BULLET PROOF, SUPPORT NETSCAN, BRUTEFORCE, LAYER 4, FREE ALL ABUSED, Region: (Bahrain/NL/Swiss).",
     regions: {
       "Bahrain": [
