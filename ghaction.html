@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Actions — Global Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0a0e14;
+    --panel:#111722;
+    --panel2:#141a23;
+    --wire:#242b36;
+    --text:#e6edf3;
+    --text-dim:#8b949e;
+    --text-faint:#57606a;
+    --sig-blue:#58a6ff;
+    --sig-green:#3fb950;
+    --sig-red:#f85149;
+    --sig-violet:#bc8cff;
+    --sig-amber:#e3b341;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:radial-gradient(ellipse 100% 55% at 50% -10%, #131b2b 0%, var(--void) 55%);
+    color:var(--text);
+    font-family:'IBM Plex Sans',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; }
+  .dashboard{ max-width:1360px; margin:0 auto; padding:22px 18px 56px; }
+
+  /* ---------- Header ---------- */
+  .header{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:20px; }
+  .title-group{ display:flex; align-items:center; gap:11px; flex-wrap:wrap; }
+  .logo{
+    width:34px; height:34px; border-radius:8px; flex-shrink:0;
+    background:linear-gradient(135deg,#1f6feb,#8957e5);
+    display:flex; align-items:center; justify-content:center; font-size:16px;
+  }
+  h1{ font-size:17px; margin:0; font-weight:600; letter-spacing:0.1px; }
+  .subtitle{ font-size:12px; color:var(--text-dim); margin-top:2px; }
+  .badge{
+    font-size:10px; font-weight:700; letter-spacing:0.6px; color:#04120a;
+    background:var(--sig-green); padding:3px 8px; border-radius:20px; text-transform:uppercase;
+  }
+  .header-right{ display:flex; align-items:center; gap:16px; }
+  .live-indicator{ display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text-dim); }
+  .live-dot{ width:7px; height:7px; border-radius:50%; background:var(--sig-red); box-shadow:0 0 6px var(--sig-red); animation:blink 1.6s ease-in-out infinite; }
+  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+  .clock{ font-size:13px; color:var(--text); letter-spacing:0.4px; }
+
+  /* ---------- Stats ---------- */
+  .stats-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:16px; }
+  .stat-card{ background:var(--panel); border:1px solid var(--wire); border-radius:10px; padding:13px 15px; transition:border-color .3s, background .3s; }
+  .stat-card.flash{ border-color:var(--sig-blue); background:#141d2b; }
+  .stat-label{ font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.6px; margin-bottom:6px; }
+  .stat-value{ font-size:22px; font-weight:700; color:var(--text); font-variant-numeric:tabular-nums; font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace; }
+  .stat-sub{ font-size:10px; color:var(--text-faint); margin-top:3px; }
+  .stat-card.a-green .stat-value{ color:var(--sig-green); }
+  .stat-card.a-blue .stat-value{ color:var(--sig-blue); }
+  .stat-card.a-violet .stat-value{ color:var(--sig-violet); }
+
+  /* ---------- Main grid ---------- */
+  .main-grid{ display:grid; grid-template-columns:1.6fr 1fr; gap:14px; }
+  @media (max-width:880px){ .main-grid{ grid-template-columns:1fr; } }
+
+  .panel{ background:var(--panel2); border:1px solid var(--wire); border-radius:12px; overflow:hidden; }
+  .panel-head{ display:flex; align-items:center; justify-content:space-between; padding:11px 14px; border-bottom:1px solid var(--wire); }
+  .panel-title{ font-size:11px; font-weight:600; letter-spacing:0.7px; text-transform:uppercase; color:var(--text-dim); }
+  .panel-count{ font-size:11px; color:var(--text-faint); font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- Map (signature element) ---------- */
+  .map-panel{
+    position:relative; aspect-ratio:2.2/1; min-height:260px;
+    background-color:#0b1019;
+    background-image:
+      radial-gradient(ellipse 70% 65% at 50% 42%, rgba(56,86,150,0.32), transparent 70%),
+      linear-gradient(rgba(120,150,200,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,150,200,0.08) 1px, transparent 1px);
+    background-size:100% 100%, 42px 42px, 42px 42px;
+    overflow:hidden;
+  }
+  .arc-svg{ position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+  .arc-path{ fill:none; stroke:var(--sig-blue); stroke-width:1.3; opacity:0.85; vector-effect:non-scaling-stroke; }
+  .ping-ring{
+    position:absolute; width:7px; height:7px; margin:-3.5px 0 0 -3.5px; border-radius:50%;
+    border:1.6px solid var(--sig-blue); z-index:2; pointer-events:none;
+    animation:pingExpand 1s ease-out forwards;
+  }
+  @keyframes pingExpand{ from{ transform:scale(1); opacity:0.9; } to{ transform:scale(6.5); opacity:0; } }
+
+  .city-marker{ position:absolute; z-index:3; margin:-5px 0 0 -5px; width:10px; height:10px; }
+  .city-dot{
+    width:6px; height:6px; margin:2px; border-radius:50%; background:var(--sig-blue);
+    box-shadow:0 0 0 2px rgba(88,166,255,0.12), 0 0 7px rgba(88,166,255,0.55);
+    animation:idlePulse 3.2s ease-in-out infinite;
+  }
+  .city-dot.flash{ background:#fff; box-shadow:0 0 0 3px rgba(88,166,255,0.35), 0 0 14px rgba(88,166,255,0.95); }
+  @keyframes idlePulse{ 0%,100%{ opacity:0.55; } 50%{ opacity:1; } }
+  .city-label{ position:absolute; top:11px; left:50%; transform:translateX(-50%); font-size:8px; color:var(--text-dim); opacity:0.7; white-space:nowrap; pointer-events:none; }
+  @media (max-width:640px){ .city-label{ display:none; } }
+
+  /* ---------- Feed ---------- */
+  .feed-list{ max-height:322px; overflow-y:auto; padding:6px 0; }
+  .feed-list::-webkit-scrollbar{ width:6px; }
+  .feed-list::-webkit-scrollbar-thumb{ background:var(--wire); border-radius:4px; }
+  .feed-item{ display:flex; gap:9px; padding:8px 14px; border-bottom:1px solid rgba(255,255,255,0.03); transition:opacity .35s ease, transform .35s ease; opacity:1; transform:translateY(0); }
+  .feed-item.entering{ opacity:0; transform:translateY(-8px); }
+  .feed-icon{ width:16px; flex-shrink:0; text-align:center; font-size:12px; padding-top:1px; }
+  .status-running .feed-icon{ color:var(--sig-blue); display:inline-block; animation:spin 1.1s linear infinite; }
+  .status-success .feed-icon{ color:var(--sig-green); }
+  .status-failed .feed-icon{ color:var(--sig-red); }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  .feed-body{ flex:1; min-width:0; }
+  .feed-top{ display:flex; justify-content:space-between; gap:8px; font-size:12px; }
+  .feed-repo{ font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .feed-city{ color:var(--text-dim); flex-shrink:0; font-size:11px; }
+  .feed-bottom{ display:flex; justify-content:space-between; gap:8px; font-size:10.5px; color:var(--text-faint); margin-top:2px; }
+  .feed-wf-branch{ white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .status-success .feed-dur{ color:var(--sig-green); }
+  .status-failed .feed-dur{ color:var(--sig-red); }
+
+  /* ---------- Chart ---------- */
+  .chart-panel{ margin-top:14px; }
+  .chart-body{ padding:16px 14px 12px; }
+  .chart-bars{ display:flex; align-items:flex-end; gap:3px; height:108px; }
+  .chart-bar{ flex:1; background:linear-gradient(180deg,var(--sig-violet),var(--sig-blue)); border-radius:3px 3px 0 0; min-height:3px; opacity:0.85; transition:height .5s ease; }
+  .chart-bar.live{ background:linear-gradient(180deg,var(--sig-amber),var(--sig-blue)); opacity:1; }
+  .chart-foot{ display:flex; justify-content:space-between; font-size:10.5px; color:var(--text-faint); margin-top:8px; }
+
+  .footer-note{ text-align:center; font-size:11px; color:var(--text-faint); margin-top:18px; line-height:1.6; }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+  <div class="header">
+    <div class="title-group">
+      <div class="logo">⚡</div>
+      <div>
+        <h1>GitHub Actions — Global Workflow</h1>
+        <div class="subtitle">Visualisasi simulasi eksekusi workflow secara bersamaan di seluruh dunia</div>
+      </div>
+      <span class="badge">Simulation</span>
+    </div>
+    <div class="header-right">
+      <div class="live-indicator"><span class="live-dot"></span>LIVE</div>
+      <div class="clock mono" id="clock">--:--:-- UTC</div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card a-blue" id="cardTotal">
+      <div class="stat-label">Total Workflow Runs</div>
+      <div class="stat-value" id="statTotal">0</div>
+    </div>
+    <div class="stat-card a-violet" id="cardRPM">
+      <div class="stat-label">Runs / Minute</div>
+      <div class="stat-value" id="statRPM">0</div>
+      <div class="stat-sub">live rate, last 60s</div>
+    </div>
+    <div class="stat-card" id="cardActive">
+      <div class="stat-label">Active Runners</div>
+      <div class="stat-value" id="statActive">0</div>
+    </div>
+    <div class="stat-card a-green" id="cardMinutes">
+      <div class="stat-label">Actions Minutes Used</div>
+      <div class="stat-value" id="statMinutes">0.0</div>
+      <div class="stat-sub">billed per-minute, like real GitHub Actions</div>
+    </div>
+    <div class="stat-card" id="cardSuccess">
+      <div class="stat-label">Success Rate</div>
+      <div class="stat-value" id="statSuccess">—</div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Global Runner Network</div>
+        <div class="panel-count" id="cityCount">17 regions</div>
+      </div>
+      <div class="map-panel" id="mapPanel">
+        <svg class="arc-svg" id="arcSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-head">
+        <div class="panel-title">Live Workflow Feed</div>
+        <div class="panel-count" id="feedCount">0 events</div>
+      </div>
+      <div class="feed-list" id="feedList"></div>
+    </div>
+  </div>
+
+  <div class="panel chart-panel">
+    <div class="panel-head">
+      <div class="panel-title">Workflow Runs per Minute</div>
+      <div class="panel-count">last ~20 min</div>
+    </div>
+    <div class="chart-body">
+      <div class="chart-bars" id="chartBars"></div>
+      <div class="chart-foot"><span>20 min ago</span><span>now</span></div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    Seluruh data di halaman ini disimulasikan langsung di browser untuk ilustrasi — tidak terhubung ke GitHub API sungguhan.
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ============ City / region data (lat-lng projected to % position) ============ */
+  const CITIES = [
+    {name:"San Francisco", x:16.0,  y:29.2},
+    {name:"New York",      x:29.4,  y:27.0},
+    {name:"Toronto",       x:27.9,  y:24.9},
+    {name:"Mexico City",   x:22.5,  y:42.4},
+    {name:"São Paulo",     x:37.1,  y:73.6},
+    {name:"London",        x:50.0,  y:19.2},
+    {name:"Paris",         x:50.7,  y:21.1},
+    {name:"Frankfurt",     x:52.4,  y:20.2},
+    {name:"Cape Town",     x:55.1,  y:81.1},
+    {name:"Dubai",         x:65.4,  y:38.3},
+    {name:"Mumbai",        x:70.2,  y:42.7},
+    {name:"Singapore",     x:78.8,  y:55.5},
+    {name:"Jakarta",       x:79.7,  y:61.0},
+    {name:"Hong Kong",     x:81.7,  y:40.4},
+    {name:"Tokyo",         x:88.8,  y:30.7},
+    {name:"Seoul",         x:85.3,  y:29.3},
+    {name:"Sydney",        x:91.3,  y:81.1}
+  ];
+  CITIES.forEach(function(c,i){ c.idx=i; });
+
+  const ORGS=["acme-corp","octocat-labs","nimbus-io","vertex-dev","pulsewave","driftline",
+    "cloudforge","byteharbor","lumenforge","northstar-eng","kitefall-labs","haloframe",
+    "orbital-tech","fernpeak","glasswave","tidalcode"];
+  const REPOS=["web-app","api-gateway","mobile-app","payments-service","design-system",
+    "data-pipeline","auth-service","notification-svc","infra-terraform","ml-inference",
+    "docs-site","search-index","billing-core","admin-console","edge-cache"];
+  const WORKFLOWS=["ci.yml","build.yml","deploy.yml","test.yml","release.yml","lint.yml",
+    "docker-publish.yml","e2e-tests.yml","codeql.yml","pages-deploy.yml"];
+  const BRANCHES=["main","develop","staging","release/2.4","feature/onboarding",
+    "feature/dark-mode","hotfix/patch-3","chore/deps"];
+
+  function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+  function fakeSha(){
+    let s="", chars="0123456789abcdef";
+    for(let i=0;i<7;i++) s+=chars[Math.floor(Math.random()*16)];
+    return s;
+  }
+  function fmtDuration(sec){
+    sec=Math.round(sec);
+    if(sec<60) return sec+"s";
+    return Math.floor(sec/60)+"m "+(sec%60)+"s";
+  }
+
+  /* ============ Build map markers ============ */
+  const mapPanel=document.getElementById("mapPanel");
+  const arcSvg=document.getElementById("arcSvg");
+
+  CITIES.forEach(function(city){
+    const marker=document.createElement("div");
+    marker.className="city-marker";
+    marker.style.left=city.x+"%";
+    marker.style.top=city.y+"%";
+    marker.title=city.name;
+
+    const dot=document.createElement("div");
+    dot.className="city-dot";
+    dot.dataset.idx=city.idx;
+    dot.style.animationDelay=(Math.random()*3.2).toFixed(2)+"s";
+    marker.appendChild(dot);
+
+    const label=document.createElement("div");
+    label.className="city-label";
+    label.textContent=city.name;
+    marker.appendChild(label);
+
+    mapPanel.appendChild(marker);
+  });
+
+  function pingCity(city){
+    const ring=document.createElement("div");
+    ring.className="ping-ring";
+    ring.style.left=city.x+"%";
+    ring.style.top=city.y+"%";
+    mapPanel.appendChild(ring);
+    setTimeout(function(){ ring.remove(); },1000);
+
+    const dot=mapPanel.querySelector('.city-dot[data-idx="'+city.idx+'"]');
+    if(dot){
+      dot.classList.add("flash");
+      setTimeout(function(){ dot.classList.remove("flash"); },550);
+    }
+  }
+
+  function drawArc(a,b){
+    const midX=(a.x+b.x)/2;
+    const midY=Math.max(2, Math.min(a.y,b.y)-10-Math.random()*10);
+    const path=document.createElementNS("http://www.w3.org/2000/svg","path");
+    path.setAttribute("d","M "+a.x+" "+a.y+" Q "+midX+" "+midY+" "+b.x+" "+b.y);
+    path.setAttribute("class","arc-path");
+    arcSvg.appendChild(path);
+    const len=path.getTotalLength();
+    path.style.strokeDasharray=len;
+    path.style.strokeDashoffset=len;
+    path.getBoundingClientRect();
+    path.style.transition="stroke-dashoffset .9s ease-out";
+    path.style.strokeDashoffset="0";
+    setTimeout(function(){ path.style.transition="opacity 1s ease-in"; path.style.opacity="0"; },850);
+    setTimeout(function(){ path.remove(); },2000);
+  }
+
+  /* ============ Stats state ============ */
+  let totalRuns=0, successCount=0, failCount=0, activeRunners=0, minutesUsed=0, runCounter=0;
+  let recentTimestamps=[];
+  let currentMinuteCount=0;
+  let minuteHistory=[];
+  for(let i=0;i<14;i++) minuteHistory.push(Math.floor(14+Math.random()*38));
+
+  const statTotal=document.getElementById("statTotal");
+  const statRPM=document.getElementById("statRPM");
+  const statActive=document.getElementById("statActive");
+  const statMinutes=document.getElementById("statMinutes");
+  const statSuccess=document.getElementById("statSuccess");
+  const feedCount=document.getElementById("feedCount");
+
+  function flashCard(id){
+    const el=document.getElementById(id);
+    el.classList.add("flash");
+    setTimeout(function(){ el.classList.remove("flash"); },350);
+  }
+
+  function updateStats(){
+    statTotal.textContent=totalRuns.toLocaleString();
+    statActive.textContent=activeRunners.toLocaleString();
+    statMinutes.textContent=minutesUsed.toFixed(1);
+    if(successCount+failCount>0){
+      statSuccess.textContent=((successCount/(successCount+failCount))*100).toFixed(1)+"%";
+    }
+    feedCount.textContent=totalRuns.toLocaleString()+" events";
+  }
+
+  /* ============ Feed ============ */
+  const feedList=document.getElementById("feedList");
+
+  function addFeedItem(city,org,repo,wf,branch,sha){
+    const el=document.createElement("div");
+    el.className="feed-item status-running entering";
+
+    el.innerHTML=
+      '<div class="feed-icon">⟳</div>'+
+      '<div class="feed-body">'+
+        '<div class="feed-top">'+
+          '<span class="feed-repo mono">'+org+"/"+repo+'</span>'+
+          '<span class="feed-city">'+city.name+'</span>'+
+        '</div>'+
+        '<div class="feed-bottom">'+
+          '<span class="feed-wf-branch mono">'+wf+" · "+branch+"@"+sha+'</span>'+
+          '<span class="feed-dur">running…</span>'+
+        '</div>'+
+      '</div>';
+
+    feedList.prepend(el);
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ el.classList.remove("entering"); });
+    });
+    while(feedList.children.length>40){ feedList.lastElementChild.remove(); }
+    return el;
+  }
+
+  function resolveFeedItem(el,status,durationSec){
+    el.classList.remove("status-running");
+    el.classList.add(status==="success" ? "status-success" : "status-failed");
+    el.querySelector(".feed-icon").textContent = status==="success" ? "✓" : "✕";
+    el.querySelector(".feed-dur").textContent = fmtDuration(durationSec);
+  }
+
+  /* ============ Event simulation ============ */
+  function triggerWorkflowEvent(){
+    const city=pick(CITIES);
+    const org=pick(ORGS), repo=pick(REPOS), wf=pick(WORKFLOWS), branch=pick(BRANCHES), sha=fakeSha();
+
+    totalRuns++; activeRunners++; runCounter++;
+    recentTimestamps.push(Date.now());
+    currentMinuteCount++;
+    updateStats();
+    flashCard("cardTotal"); flashCard("cardActive");
+
+    pingCity(city);
+    if(Math.random()<0.32){
+      let other=pick(CITIES), guard=0;
+      while(other.idx===city.idx && guard<5){ other=pick(CITIES); guard++; }
+      if(other.idx!==city.idx) drawArc(city,other);
+    }
+
+    const feedEl=addFeedItem(city,org,repo,wf,branch,sha);
+
+    const reportedDurationSec=8+Math.random()*300;
+    const visualResolveMs=1200+Math.random()*3200;
+
+    setTimeout(function(){
+      activeRunners--;
+      const failed=Math.random()<0.06;
+      if(failed) failCount++; else successCount++;
+      minutesUsed+=reportedDurationSec/60;
+      resolveFeedItem(feedEl, failed?"failed":"success", reportedDurationSec);
+      updateStats();
+      flashCard("cardMinutes"); flashCard("cardSuccess"); flashCard("cardActive");
+    },visualResolveMs);
+  }
+
+  function scheduleNext(){
+    const delay=380+Math.random()*820;
+    setTimeout(function(){ triggerWorkflowEvent(); scheduleNext(); },delay);
+  }
+
+  /* ============ Chart ============ */
+  const chartBars=document.getElementById("chartBars");
+  function renderChart(){
+    const all=minuteHistory.concat([currentMinuteCount]);
+    const max=Math.max(10, Math.max.apply(null, all));
+    chartBars.innerHTML="";
+    all.forEach(function(v,i){
+      const bar=document.createElement("div");
+      bar.className="chart-bar"+(i===all.length-1 ? " live":"");
+      bar.style.height=Math.max(3,(v/max*100))+"%";
+      bar.title=v+" runs";
+      chartBars.appendChild(bar);
+    });
+  }
+  renderChart();
+
+  setInterval(function(){
+    minuteHistory.push(currentMinuteCount);
+    if(minuteHistory.length>20) minuteHistory.shift();
+    currentMinuteCount=0;
+  },60000);
+
+  /* ============ Ticking clock + rolling RPM ============ */
+  const clockEl=document.getElementById("clock");
+  function tick(){
+    const now=new Date();
+    const hh=String(now.getUTCHours()).padStart(2,"0");
+    const mm=String(now.getUTCMinutes()).padStart(2,"0");
+    const ss=String(now.getUTCSeconds()).padStart(2,"0");
+    clockEl.textContent=hh+":"+mm+":"+ss+" UTC";
+
+    const nowMs=Date.now();
+    recentTimestamps=recentTimestamps.filter(function(t){ return nowMs-t<60000; });
+    statRPM.textContent=recentTimestamps.length;
+
+    renderChart();
+  }
+  tick();
+  setInterval(tick,1000);
+
+  /* ============ Boot ============ */
+  updateStats();
+  scheduleNext();
+  for(let i=0;i<4;i++) setTimeout(triggerWorkflowEvent, i*220);
+
+})();
+</script>
+</body>
+</html>
