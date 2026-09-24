@@ -1,37 +1,220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>XCDDOS CLI</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
-    iframe { width: 100vw; height: 100vh; border: 0; display: block; }
-    .brand-overlay {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      color: #4ade80;
-      font-family: 'Courier New', monospace;
-      font-size: 13px;
-      font-weight: bold;
-      z-index: 999999;
-      pointer-events: none;
-      text-shadow: 0 0 6px #000, 0 0 3px #000;
-      background: rgba(0, 0, 0, 0.5);
-      padding: 4px 8px;
-      border-radius: 4px;
-      user-select: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>XCDDOS CLI</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* iframe full layar */
+  iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border: 0;
+    display: block;
+    z-index: 1;
+  }
+
+  /* Overlay branding — posisi & tinggi auto-adjust via JS */
+  .brand-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: #000;
+    color: #4ade80;
+    font-family: 'Courier New', monospace;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.6px;
+    z-index: 999999;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    padding-left: 18px;
+    user-select: none;
+    text-shadow: 0 0 4px #4ade80, 0 0 8px #22c55e;
+    /* Default — akan di-override oleh JS */
+    bottom: 55px;
+    height: 60px;
+    transition: bottom 0.1s ease-out, height 0.1s ease-out;
+  }
+
+  /* Marker — untuk debug, hapus kalau sudah final */
+  .debug-label {
+    position: fixed;
+    top: 6px;
+    right: 6px;
+    color: #ff0;
+    font-family: monospace;
+    font-size: 10px;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+    z-index: 9999999;
+    pointer-events: none;
+    display: none; /* ganti ke block untuk debug */
+  }
+</style>
 </head>
 <body>
+
   <iframe
     src="https://cli.h2.nexus"
     allow="clipboard-read; clipboard-write; fullscreen"
     referrerpolicy="no-referrer"
   ></iframe>
-  <div class="brand-overlay">POWERED BY xcddos.xyz</div>
+
+  <div class="brand-overlay" id="brandOverlay">POWERED BY xcddos.xyz</div>
+  <div class="debug-label" id="debugLabel">-</div>
+
+<script>
+(function() {
+  'use strict';
+
+  const overlay = document.getElementById('brandOverlay');
+  const debugLabel = document.getElementById('debugLabel');
+  const DEBUG = false; // ← ubah true kalau mau lihat info tuning di layar
+
+  /**
+   * Auto-adjust posisi overlay.
+   *
+   * Rumus: kita asumsikan h2.nexus footer selalu ~X% dari bawah viewport,
+   * karena memang design web-nya biasanya fixed-footer.
+   *
+   * Kalau habis test di banyak device, ternyata posisi h2.nexus konsisten
+   * di % yang sama → rumus ini work.
+   *
+   * Kalau posisi berbeda-beda → bisa di-tune dengan penambahan offset.
+   */
+  function adjustOverlay() {
+    // Ukuran viewport (support visualViewport untuk mobile Telegram WebApp)
+    const vh = (window.visualViewport && window.visualViewport.height)
+      || window.innerHeight
+      || document.documentElement.clientHeight;
+
+    const vw = (window.visualViewport && window.visualViewport.width)
+      || window.innerWidth
+      || document.documentElement.clientWidth;
+
+    const isPortrait = vh > vw;
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+    // ─────────────────────────────────────────────────────
+    // TUNING AREA — adjust angka di sini setelah test di HP
+    // ─────────────────────────────────────────────────────
+    // Nilai di bawah adalah ESTIMASI setelah melihat screenshot kamu:
+    //  - h2.nexus footer berada ~110-120px dari bottom viewport
+    //  - tombol stop server tingginya ~45px dari bottom
+    //
+    // Kita bikin overlay yang menutup dari bottom 52px sampai bottom 115px
+    // (height 63px) supaya:
+    //  ✓ Nutup area h2.nexus
+    //  ✓ Tombol stop server tetap kelihatan & bisa dipencet
+    //
+    // Kalau di HP kamu h2.nexus lebih ke atas → naikkan `bottom` & `height`
+    // Kalau h2.nexus masih keliatan sedikit → naikkan `height`
+
+    let bottomPx, heightPx, fontSize;
+
+    if (!isMobile) {
+      // Desktop / large screen
+      bottomPx = 60;
+      heightPx = 70;
+      fontSize = '17px';
+    } else if (isPortrait) {
+      // Mobile portrait (HP)
+      // ─────────────────────────────────────────
+      // Tuning tergantung tinggi HP:
+      if (vh < 700) {
+        // HP kecil (iPhone SE dll)
+        bottomPx = 50;
+        heightPx = 58;
+        fontSize = '14px';
+      } else if (vh < 900) {
+        // HP medium (iPhone 12-14, Android umum)
+        bottomPx = 55;
+        heightPx = 62;
+        fontSize = '15px';
+      } else {
+        // HP besar / tablet portrait
+        bottomPx = 60;
+        heightPx = 68;
+        fontSize = '16px';
+      }
+    } else {
+      // Mobile landscape
+      bottomPx = 45;
+      heightPx = 55;
+      fontSize = '14px';
+    }
+
+    // Apply ke overlay
+    overlay.style.bottom = bottomPx + 'px';
+    overlay.style.height = heightPx + 'px';
+    overlay.style.fontSize = fontSize;
+
+    // ─── Debug info (kalau DEBUG = true) ───
+    if (DEBUG) {
+      debugLabel.style.display = 'block';
+      debugLabel.textContent =
+        `vh=${Math.round(vh)} vw=${Math.round(vw)} ` +
+        `bottom=${bottomPx} height=${heightPx} ` +
+        `mobile=${isMobile} portrait=${isPortrait}`;
+    }
+  }
+
+  /**
+   * Deteksi perubahan viewport (misal: user putar HP, keyboard muncul, dll)
+   */
+  function setupListeners() {
+    window.addEventListener('resize', adjustOverlay, { passive: true });
+    window.addEventListener('orientationchange', () => {
+      // Jeda sedikit biar viewport settle dulu
+      setTimeout(adjustOverlay, 150);
+    });
+
+    // visualViewport support (mobile)
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', adjustOverlay, { passive: true });
+      window.visualViewport.addEventListener('scroll', adjustOverlay, { passive: true });
+    }
+
+    // Kalau dibuka dari Telegram WebApp → kadang viewport berubah setelah frame
+    if (window.Telegram && window.Telegram.WebApp) {
+      try {
+        window.Telegram.WebApp.onEvent('viewportChanged', adjustOverlay);
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+      } catch (e) { /* ignore */ }
+    }
+  }
+
+  // Jalankan
+  function boot() {
+    adjustOverlay();
+    setupListeners();
+    // Re-adjust setelah 500ms & 1.5s untuk handle late layout shift
+    setTimeout(adjustOverlay, 500);
+    setTimeout(adjustOverlay, 1500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+})();
+</script>
+
 </body>
 </html>
